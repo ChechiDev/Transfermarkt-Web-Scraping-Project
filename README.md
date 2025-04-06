@@ -11,6 +11,6 @@
 ---
 
 ## 1. <u>Conexión con la base de datos:
-- Para estructurar correctamente el proyecto, primero creamos una **clase** que gestiona la conexión con la base de datos de PostgreSQL de manera segura.
+- Para estructurar correctamente el proyecto, primero creamos una **clase** que gestiona la conexión con la base de datos de PostgreSQL de manera segura en *localhost*.
 
 **Archivo:** `database/db_connection.py`
