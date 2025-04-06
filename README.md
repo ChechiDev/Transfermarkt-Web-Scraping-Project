@@ -10,7 +10,7 @@
 
 ---
 
-## #1. <u>Conexión con la base de datos:</u>
+### 1. <u>Conexión con la base de datos:</u>
 
 - Para estructurar correctamente el proyecto, primero creamos una **clase** que gestiona la conexión con la base de datos de PostgreSQL de manera segura en *localhost*.
 
@@ -22,7 +22,20 @@ Este archivo contiene la clase `DatabaseConnection`, que permite conectar y desc
 
 ---
 
-## #2. <u>Prueba de conexión:</u>
+### 2. <u>Creación automática de la base de datos:</u>
+Cuando se instancia la clase `DatabaseConnection`, el script pregunta automáticamente al usuario el nombre de la base de datos que desea utilizar.
+Si la base de datos no existe en el servidor `PostgreSQL`, se creará automáticamente.
+Además, si el archivo `.env` no tiene el nombre de la base de datos actualizado, se modifica automáticamente para reflejar el nombre introducido y de esta manera se mantendrá activa la base de datos introducida para posteriores acciones.
+
+**Detalles del proceso automático**
+- Se conecta primero a la base de datos general `postgres`
+- Se verifica si la base de datos especificada ya existe.
+Si no existe:
+    - Se crea la nueva base de datos.
+    - Se actualiza el archivo `.env`
+Finalmente, se establece conexión a la base de datos seleccionada
+
+### 2.1. <u>Prueba de conexión:</u>
 
 Para probar que la clase funciona correctamente, ejecutamos el siguiente script básico:
 
@@ -33,3 +46,10 @@ if __name__ == "__main__":
     db = DatabaseConnection()
     db.connect()
     db.disconnect()
+```
+
+***Notas importantes en este punto***
+- A partir de este punto, todos los scripts del proyecto prodrán utilizar la base de datos creada o seleccionada automáticamente.
+- En caso de querer cambiar el nombre de la base de datos, simplemente se puede:
+    - Editar manualmente el archivo `.env`.
+    - Ejecutar de nuevo el script y proporcionar un nuevo nombre cuando se solicite.
