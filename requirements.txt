@@ -1,0 +1,59 @@
+# Para instalarlos desde terminal -> pip install -r requirements.txt
+
+# CONEXIÓN A BASE DE DATOS
+# -----------------------------------------------------------------------------------------------------------------------
+psycopg2-binary==2.9.9               # Cliente PostgreSQL para Python
+SQLAlchemy==2.0.29            # ORM para bases de datos SQL
+python-dotenv==1.0.1          # Carga de variables de entorno desde archivos .env
+
+# WEB SCRAPING
+# -----------------------------------------------------------------------------------------------------------------------
+requests==2.32.3              # Librería para hacer peticiones HTTP
+beautifulsoup4==4.12.3        # Parser de HTML/XML para web scraping
+lxml==5.2.1                   # Parser rápido de HTML/XML para BeautifulSoup
+html5lib==1.1                 # Otro parser alternativo de HTML
+
+#<!- Dependencias internas de Web Scraping:
+charset-normalizer==3.3.2     # Normaliza codificación de caracteres en requests
+idna==3.7                     # Codificación internacional de nombres de dominio (requests)
+urllib3==2.2.1                # Cliente HTTP utilizado internamente en requests
+certifi==2024.2.2             # Certificados SSL de confianza para HTTPS
+soupsieve==2.5                # Selectores CSS para BeautifulSoup
+
+# MANIPULACIÓN DE DATOS
+# -----------------------------------------------------------------------------------------------------------------------
+pandas==2.2.2                 # Análisis de datos estructurados
+numpy==1.26.4                 # Cálculo numérico y matrices
+
+# MACHINE LEARNING
+# -----------------------------------------------------------------------------------------------------------------------
+scikit-learn==1.5.0           # Algoritmos de Machine Learning (incluye Random Forest, SVM, Clustering)
+
+# VISUALIZACIÓN DE DATOS
+# -----------------------------------------------------------------------------------------------------------------------
+matplotlib==3.9.2             # Visualización de gráficos en 2D
+seaborn==0.13.2               # Visualización estadística avanzada basada en matplotlib
+
+# Dependencias internas de Visualización:
+contourpy==1.3.1              # Trazado de contornos en matplotlib
+cycler==0.12.1                # Estilo cíclico de líneas y colores en matplotlib
+fonttools==4.55.0             # Manipulación de fuentes para matplotlib
+kiwisolver==1.4.7             # Resolver layouts en gráficos matplotlib
+packaging==24.0               # Gestiona versiones y empaquetados (depende matplotlib)
+pyparsing==3.1.2              # Análisis sintáctico usado por matplotlib
+python-dateutil==2.9.0.post0  # Manipulación de fechas (depende matplotlib)
+six==1.16.0                   # Compatibilidad entre Python 2 y 3
+
+# GESTIÓN DE FECHAS Y TIEMPOS
+# -----------------------------------------------------------------------------------------------------------------------
+pytz==2024.1                  # Gestión de zonas horarias
+tzdata==2022.7                # Base de datos de zonas horarias (pandas lo usa)
+
+# ENTORNOS JUPYTER / NOTEBOOK
+# -----------------------------------------------------------------------------------------------------------------------
+jupyter==1.0.0                # Entorno de trabajo de Jupyter
+notebook==7.1.2               # Entorno de notebooks web
+
+# UTILIDADES DEL PROYECTO
+# -----------------------------------------------------------------------------------------------------------------------
+ipython==8.24.0               # Consola interactiva avanzada para Python

@@ -22,7 +22,7 @@ class DatabaseConnection:
         self.connection = None
 
     # Método para establecer conexión con la base de datos:
-    def conect(self):
+    def connect(self):
         try:
             # Comprobamos conexión usando psycopg2:
             self.connection = psycopg2.connect(
@@ -40,7 +40,7 @@ class DatabaseConnection:
 
     # Método para cerrar la conexión con la base de datos:
     def disconnect(self):
-        if self.connection():
+        if self.connection:
             # Si existe conexión activa, la cerramos:
             self.connection.close()
             print("Conexión cerrada")
