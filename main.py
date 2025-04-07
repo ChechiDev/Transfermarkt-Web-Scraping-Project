@@ -1,5 +1,5 @@
 from database.db_connection import DatabaseConnection
-from config.cfg_environment import EnvironmentConfig
+from config.config import EnvironmentConfig
 
 if __name__ == "__main__":
     env = EnvironmentConfig()

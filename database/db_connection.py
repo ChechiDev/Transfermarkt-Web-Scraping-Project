@@ -1,6 +1,6 @@
 import psycopg2
 from psycopg2 import OperationalError
-from config.cfg_environment import EnvironmentConfig
+from config.config import EnvironmentConfig
 
 # Clase que gestiona la conexión y desconexión a una base de datos PostgreSQL.
 # Utiliza la configuración almacenada en el archivo .env.
