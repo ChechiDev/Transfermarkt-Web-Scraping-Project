@@ -1,4 +1,3 @@
-# Librerías necesarias
 import psycopg2
 from psycopg2 import OperationalError
 from config.cfg_environment import EnvironmentConfig
@@ -8,7 +7,7 @@ from config.cfg_environment import EnvironmentConfig
 class DatabaseConnection:
     def __init__(self, env):
         # Constructor que inicializa las variables de entorno.
-        self.env = EnvironmentConfig()
+        self.env = env
         self.connection = None
 
     def connect(self, database_override=None):
@@ -23,6 +22,8 @@ class DatabaseConnection:
                 password=self.env.password,
                 dbname=db_to_use
             )
+
+            self.connection.autocommit = True
             print(f"✅ Conexión establecida con la base de datos: {db_to_use}")
 
         except OperationalError as e:

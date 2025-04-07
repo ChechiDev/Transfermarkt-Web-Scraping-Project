@@ -12,11 +12,11 @@ class DatabaseCreator:
         self.db_conn = DatabaseConnection(self.env)
 
         # Conexión temporal a 'postgres' para poder crear una nueva base
-        self.db_conn.connect(database_override="postgres")
+        self.db_conn.connect(database_override='postgres')
         self.connection = self.db_conn.connection
 
-        self.db = input("Introduce el nombre de la nueva base de datos: ")
-        self.sch = input("Introduce el nombre del nuevo schema: ")
+        self.db = input("Introduce el nombre de la nueva base de datos: ").strip().encode('ascii', 'ignore').decode()
+        self.sch = input("Introduce el nombre del nuevo schema: ").strip().encode('ascii', 'ignore').decode()
 
         # Procesamos creación
         self.check_and_create_db()

@@ -7,7 +7,7 @@ import os
 class EnvironmentConfig:
     def __init__(self):
         # Constructor que cargará las variables de entorno automáticamente al insertar la clase.
-        load_dotenv()
+        load_dotenv(dotenv_path=".env")
 
         # Asignamos las varibles a atributos de instancia:
         self.user = os.getenv("DB_USER")
@@ -16,7 +16,7 @@ class EnvironmentConfig:
         self.port = os.getenv("DB_PORT")
         self.db = os.getenv("DB_NAME")
         self.sch = os.getenv("SCH_NAME")
-        self.tbl = os.getenv("SCH_NAME")
+        self.tbl = os.getenv("TB__NAME")
 
     def __str__(self):
         # Devolvemos la configuración actual de las variables de entorno
