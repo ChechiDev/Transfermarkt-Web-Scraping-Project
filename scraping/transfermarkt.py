@@ -75,25 +75,3 @@ class TransfermarktScraper:
         df_leagues = pd.DataFrame(leagues_list)
 
         return df_leagues
-
-
-
-
-
-# Comprobamos:
-# ----------------------------------------------------------------------------------------------
-if __name__ == "__main__":
-    scraper = TransfermarktScraper()
-    url = "https://www.transfermarkt.com/wettbewerbe/europa/wettbewerbe?plus=1"
-    soup = scraper.get_req_to_soup(url)
-
-    if soup:
-        print("✅ Página cargada correctamente.")
-        leagues = scraper.get_all_leagues(soup)
-
-        # Mostramos con pandas:
-        df = pd.DataFrame(leagues)
-        print(df)
-
-    else:
-        print("❌ Error al cargar la página.")

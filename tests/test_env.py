@@ -4,7 +4,7 @@ import os
 # Cargamos el archivo .env
 load_dotenv(dotenv_path=".env")
 
-# TEST: mostramos las variables por que está dando problemas con UTF-8 al cargar las variables:
+# TEST: mostramos las variables por que está dando problemas con UTF-8:
 print("DB_USER:", os.getenv("DB_USER"))
 print("DB_PASSWORD:", os.getenv("DB_PASSWORD"))
 print("DB_HOST:", os.getenv("DB_HOST"))
