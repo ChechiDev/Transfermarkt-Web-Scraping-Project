@@ -15,15 +15,16 @@ class EnvironmentConfig:
         self.host = os.getenv("DB_HOST")
         self.port = os.getenv("DB_PORT")
         self.db = os.getenv("DB_NAME")
-        self.sch = os.getenv("SCH_NAME")
-        self.tbl = os.getenv("TB__NAME")
+        self.schema = os.getenv("SCH_NAME")
+        self.table = os.getenv("TB__NAME")
 
     def __str__(self):
-        # Devolvemos la configuración actual de las variables de entorno
-        return str({
+        return (
             f"User: {self.user}\n"
             f"Password: {self.password}\n"
             f"Host: {self.host}\n"
             f"Port: {self.port}\n"
-            f"Database: {self.db}"
-        })
+            f"Database: {self.db}\n"
+            f"Schema: {self.schema}\n"
+            f"Table: {self.table}"
+        )
