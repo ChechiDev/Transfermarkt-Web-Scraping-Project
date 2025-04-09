@@ -1,58 +1,162 @@
 ![Work in Progress](https://img.shields.io/badge/Status-Work%20in%20Progress-yellow)
-# <u>Transfermarkt Web Scrapping Project:</u>
+# <u>Transfermarkt Web Scraping Project</u>
 
 ## <u>*Descripción general*</u>
-*Este proyecto es totalmente personal y educacional, sin ninguna intención lucrativa sobre los datos que se puedan extraer.*
+Este proyecto tiene un propósito **educativo y personal**, sin fines lucrativos. Su objetivo principal es realizar un proceso completo de scraping de datos desde la web de [Transfermarkt](https://www.transfermarkt.es/), seguido de un almacenamiento estructurado en una base de datos PostgreSQL y un análisis posterior utilizando Python.
 
-- Se realizará un web scrapping de datos sobre la web <url>[Transfermarket](https://www.transfermarkt.es/), almacenamiento en base de datos y finalmente se realizará un ejercicio de Machine Learning sobre la data extraída.
-- Éste se estructurará de manera profesional, utilizando programación orientada a objetos (POO) con **Python**, **Jupyter Notebooks** y **PostgreSQL**.
-
-*Este README irá documentando paso a paso el desarrollo del proyecto, detallando cada decisión técnica y bloque de código implementado.*
-
----
-
-### 1. <u>Conexión con la base de datos:</u>
-
-- Para estructurar correctamente el proyecto, primero creamos una **clase** que gestiona la conexión con la base de datos de PostgreSQL de manera segura en *localhost*.
-
-**Archivo:** `database/db_connection.py`
-
-[Ver archivo db_connection.py](https://github.com/ChechiDev/wscrapping_Transfermarkt/blob/main/database/db_connection.py)
-
-Este archivo contiene la clase `DatabaseConnection`, que permite conectar y desconectar de forma segura a la base de datos PostgreSQL utilizando variables de entorno almacenadas en `.env`.
+El proyecto está diseñado con una estructura profesional, utilizando:
+- **Programación Orientada a Objetos (POO) con Python**
+- **Jupyter Notebooks** para la documentación y ejecución interactiva
+- **PostgreSQL** para la persistencia de datos
 
 ---
 
-### 2. <u>Creación automática de la base de datos:</u>
-Cuando se instancia la clase `DatabaseConnection`, el script pregunta automáticamente al usuario el nombre de la base de datos que desea utilizar.
-Si la base de datos no existe en el servidor `PostgreSQL`, se creará automáticamente.
-Además, si el archivo `.env` no tiene el nombre de la base de datos actualizado, se modifica automáticamente para reflejar el nombre introducido y de esta manera se mantendrá activa la base de datos introducida para posteriores acciones.
+## <u>*Flujo de trabajo*</u>
+El flujo principal del proyecto sigue los siguientes pasos:
 
-**Detalles del proceso automático**
-- Se conecta primero a la base de datos general `postgres`
-- Se verifica si la base de datos especificada ya existe.
-Si no existe:
-    - Se crea la nueva base de datos.
-    - Se actualiza el archivo `.env`
-Finalmente, se establece conexión a la base de datos seleccionada
+1. **Configuración del entorno**:
+   - Carga de variables de entorno desde un archivo `.env` utilizando la clase `EnvironmentConfig`.
+   - Configuración de parámetros como usuario, contraseña, host, puerto y base de datos.
 
-### 2.1. <u>Prueba de conexión:</u>
+2. **Conexión y validación de la base de datos**:
+   - Uso de la clase `DatabaseCreator` para verificar si la base de datos existe.
+   - Si no existe, se crea automáticamente y se actualiza el archivo `.env` con el nuevo nombre.
 
-Para probar que la clase funciona correctamente, ejecutamos el siguiente script básico:
+3. **Scraping de datos**:
+   - Uso de la clase `HttpClient` para realizar solicitudes HTTP.
+   - Uso de la clase `ScrapeBase` para construir URLs dinámicas y realizar el scraping.
+   - Ejecución del scraping mediante `run_scraper`, que permite seleccionar dinámicamente las URLs a scrapear.
 
-```python
-from database.db_connection import DatabaseConnection
-from config.cfg_environment import EnvironmentConfig
+4. **Almacenamiento en PostgreSQL**:
+   - Inserción de los datos obtenidos en tablas normalizadas dentro de la base de datos PostgreSQL.
 
-if __name__ == "__main__":
-    env = EnvironmentConfig()
-    db = DatabaseConnection()
-    db.connect()
-    db.disconnect()
+5. **Preparación para análisis**:
+   - Los datos almacenados están listos para ser utilizados en análisis exploratorios o ejercicios de Machine Learning.
+
+---
+
+## <u>*Estructura del proyecto*</u>
+El proyecto está organizado de la siguiente manera:
+
+```bash
+├── config/
+│   ├── [config.py](http://_vscodecontentref_/1)          # Gestión de variables de entorno
+│   ├── [headers.py](http://_vscodecontentref_/2)         # Headers para las solicitudes HTTP
+│   ├── [run_scraper.py](http://_vscodecontentref_/3)     # Lógica principal para ejecutar el scraping
+├── database/
+│   ├── db_connection.py   # Clase para gestionar la conexión a PostgreSQL
+│   ├── db_creator.py      # Clase para crear y validar la base de datos
+├── scraping/
+│   ├── [scrapping_engine.py](http://_vscodecontentref_/4) # Motor base para realizar scraping
+│   ├── league_scraper.py   # (En desarrollo) Scraper para ligas
+│   ├── team_scraper.py     # (En desarrollo) Scraper para equipos
+│   ├── player_scraper.py   # (En desarrollo) Scraper para jugadores
+├── tests/
+ │   ├── test_env.py        # Pruebas para verificar la carga de variables de entorno
+├── [transfermarkt_project.ipynb](http://_vscodecontentref_/5) # Notebook principal con el flujo del proyecto
+├── [main.py](http://_vscodecontentref_/6)                # Script principal para ejecutar el flujo completo
+├── [requirements.txt](http://_vscodecontentref_/7)       # Dependencias del proyecto
+├── .env                   # Variables de entorno (no incluido en el repositorio)
 ```
 
-***Notas importantes en este punto***
-- A partir de este punto, todos los scripts del proyecto prodrán utilizar la base de datos creada o seleccionada automáticamente.
-- En caso de querer cambiar el nombre de la base de datos, simplemente se puede:
-    - Editar manualmente el archivo `.env`.
-    - Ejecutar de nuevo el script y proporcionar un nuevo nombre cuando se solicite.
+---
+
+## <u>*Clases y funciones principales*</u>
+
+### 1. **`EnvironmentConfig`** (Archivo: `config/config.py`)
+Clase encargada de cargar y gestionar las variables de entorno desde el archivo `.env`.
+
+- **Atributos principales**:
+  - `user`, `password`, `host`, `port`, `db`, `schema`, `table`
+- **Métodos**:
+  - `__str__`: Devuelve una representación legible de las variables cargadas.
+
+---
+
+### 2. **`DatabaseConnection`** (Archivo: `database/db_connection.py`)
+Clase para gestionar la conexión y desconexión a una base de datos PostgreSQL.
+
+- **Métodos principales**:
+  - `connect`: Establece la conexión con la base de datos.
+  - `disconnect`: Cierra la conexión.
+
+---
+
+### 3. **`DatabaseCreator`** (Archivo: `database/db_creator.py`)
+Clase para verificar y crear la base de datos y el esquema si no existen.
+
+- **Métodos principales**:
+  - `check_and_create_db`: Verifica si la base de datos existe; si no, la crea.
+  - `check_and_create_sch`: Verifica si el esquema existe; si no, lo crea.
+  - `update_env_file`: Actualiza el archivo `.env` con los nuevos valores.
+
+---
+
+### 4. **`HttpClient`** (Archivo: `scraping/scrapping_engine.py`)
+Clase para manejar las solicitudes HTTP.
+
+- **Métodos principales**:
+  - `get_html`: Realiza una solicitud HTTP y devuelve el contenido HTML parseado con BeautifulSoup.
+
+---
+
+### 5. **`ScrapeBase`** (Archivo: `scraping/scrapping_engine.py`)
+Clase base para manejar el scraping.
+
+- **Métodos principales**:
+  - `add_url`: Añade una URL al diccionario base.
+  - `get_url_from_env`: Carga automáticamente las URLs desde el archivo `.env`.
+  - `build_url`: Construye una URL dinámica reemplazando variables.
+  - `scrape`: Realiza el scraping para una URL específica.
+
+---
+
+### 6. **`run_scraper`** (Archivo: `config/run_scraper.py`)
+Función principal para ejecutar el scraping.
+
+- **Flujo**:
+  1. Carga las URLs disponibles desde las variables de entorno.
+  2. Permite al usuario seleccionar una URL para scrapear.
+  3. Determina el número total de páginas y realiza el scraping de cada una.
+  4. Procesa y almacena los datos obtenidos.
+
+---
+
+## <u>*Cómo ejecutar el proyecto*</u>
+
+### 1. Instalación de dependencias
+Ejecuta el siguiente comando para instalar todas las dependencias necesarias:
+```bash
+pip install -r requirements.txt
+```
+
+### 2. Configuración del entorno
+Crea un archivo `.env` en la raíz del proyecto con las siguientes variables:
+```env
+DB_USER=tu_usuario
+DB_PASSWORD=tu_contraseña
+DB_HOST=localhost
+DB_PORT=5432
+DB_NAME=nombre_base_datos
+SCH_NAME=nombre_schema
+TB__NAME=nombre_tabla
+```
+
+### 3. Ejecución del flujo principal
+Ejecuta el script principal para iniciar el flujo completo del proyecto:
+```bash
+python main.py
+```
+
+### 4. Uso del Notebook
+Abre el archivo `transfermarkt_project.ipynb` en Jupyter Notebook para ejecutar y documentar el flujo de trabajo de manera interactiva.
+
+---
+
+## <u>*Notas importantes*</u>
+- Este proyecto está en desarrollo, y algunas funcionalidades como los scrapers específicos (`league_scraper.py`, `team_scraper.py`, `player_scraper.py`) están en progreso.
+
+---
+
+## <u>*Licencia*</u>
+Este proyecto está licenciado bajo la [GNU General Public License v3.0](LICENSE).
