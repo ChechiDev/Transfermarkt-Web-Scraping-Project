@@ -40,85 +40,58 @@ El proyecto está organizado de la siguiente manera:
 
 ```bash
 ├── config/
-│   ├── [config.py](http://_vscodecontentref_/1)          # Gestión de variables de entorno
-│   ├── [headers.py](http://_vscodecontentref_/2)         # Headers para las solicitudes HTTP
-│   ├── [run_scraper.py](http://_vscodecontentref_/3)     # Lógica principal para ejecutar el scraping
+│   ├── [config.py]                                # Gestión de variables de entorno
+│   ├── [headers.py]                             # Headers para las solicitudes HTTP
+│   ├── [run_scraper.py]                      # Lógica principal para ejecutar el scraping
 ├── database/
-│   ├── db_connection.py   # Clase para gestionar la conexión a PostgreSQL
-│   ├── db_creator.py      # Clase para crear y validar la base de datos
+│   ├── db_connection.py                   # Clase para gestionar la conexión a PostgreSQL
+│   ├── db_creator.py                           # Clase para crear y validar la base de datos
 ├── scraping/
-│   ├── [scrapping_engine.py](http://_vscodecontentref_/4) # Motor base para realizar scraping
-│   ├── league_scraper.py   # (En desarrollo) Scraper para ligas
-│   ├── team_scraper.py     # (En desarrollo) Scraper para equipos
-│   ├── player_scraper.py   # (En desarrollo) Scraper para jugadores
+│   ├── [scrapping_engine.py]          # Motor base para realizar scraping
+│   ├── league_scraper.py                  # (En desarrollo) Scraper para ligas
+│   ├── team_scraper.py                     # (En desarrollo) Scraper para equipos
+│   ├── player_scraper.py                   # (En desarrollo) Scraper para jugadores
 ├── tests/
- │   ├── test_env.py        # Pruebas para verificar la carga de variables de entorno
-├── [transfermarkt_project.ipynb](http://_vscodecontentref_/5) # Notebook principal con el flujo del proyecto
-├── [main.py](http://_vscodecontentref_/6)                # Script principal para ejecutar el flujo completo
-├── [requirements.txt](http://_vscodecontentref_/7)       # Dependencias del proyecto
-├── .env                   # Variables de entorno (no incluido en el repositorio)
+│   ├── test_env.py                               # Pruebas para verificar la carga de variables de entorno
+├── [transfermarkt_project.ipynb]  # Notebook principal con el flujo del proyecto
+├── [main.py]                                       # Script principal para ejecutar el flujo completo
+├── [requirements.txt]                       # Dependencias del proyecto
+├── .env                                                 # Variables de entorno (no incluido en el repositorio)
 ```
 
 ---
 
-## <u>*Clases y funciones principales*</u>
+## <u>*Actualización: Depuración y Ajustes en el Scraper de Ligas*</u>
 
-### 1. **`EnvironmentConfig`** (Archivo: `config/config.py`)
-Clase encargada de cargar y gestionar las variables de entorno desde el archivo `.env`.
+### **Problema Detectado**
+Durante el desarrollo del scraper de ligas (`LeagueScraper`), se identificó un problema en la construcción de URLs. El método `build_url` estaba recibiendo una URL completa en lugar de la clave definida en el archivo `.env`, lo que provocaba un error al intentar encontrar la clave en el diccionario `self.urls`.
 
-- **Atributos principales**:
-  - `user`, `password`, `host`, `port`, `db`, `schema`, `table`
-- **Métodos**:
-  - `__str__`: Devuelve una representación legible de las variables cargadas.
+### **Solución Implementada**
+1. **Depuración del Método `build_url`**:
+   - Se agregó impresión de las claves disponibles y la clave recibida para identificar inconsistencias.
+   - Se corrigió el manejo de espacios en blanco y caracteres invisibles al cargar las claves desde el archivo `.env`.
 
----
+2. **Ajuste en el Método `get_data`**:
+   - Se aseguró que `get_data` reciba la clave `url_key` en lugar de una URL completa.
 
-### 2. **`DatabaseConnection`** (Archivo: `database/db_connection.py`)
-Clase para gestionar la conexión y desconexión a una base de datos PostgreSQL.
+3. **Ajuste en el Método `get_leagues`**:
+   - Se corrigió para que pase correctamente la clave `url_tmkt_eur_leagues` al método `get_data`.
 
-- **Métodos principales**:
-  - `connect`: Establece la conexión con la base de datos.
-  - `disconnect`: Cierra la conexión.
+4. **Pruebas Realizadas**:
+   - Se ejecutaron pruebas unitarias en `testing.py` para verificar:
+     - La correcta construcción de URLs.
+     - La carga de claves desde el archivo `.env`.
+     - La extracción de datos de ligas desde la tabla HTML.
 
----
+### **Notas para Depuración Futura**
+- Si el método `build_url` falla, verifica:
+  1. Las claves cargadas desde el archivo `.env` (`self.urls`).
+  2. La clave pasada al método (`url_key`).
+  3. La plantilla de la URL en el archivo `.env`.
 
-### 3. **`DatabaseCreator`** (Archivo: `database/db_creator.py`)
-Clase para verificar y crear la base de datos y el esquema si no existen.
-
-- **Métodos principales**:
-  - `check_and_create_db`: Verifica si la base de datos existe; si no, la crea.
-  - `check_and_create_sch`: Verifica si el esquema existe; si no, lo crea.
-  - `update_env_file`: Actualiza el archivo `.env` con los nuevos valores.
-
----
-
-### 4. **`HttpClient`** (Archivo: `scraping/scrapping_engine.py`)
-Clase para manejar las solicitudes HTTP.
-
-- **Métodos principales**:
-  - `get_html`: Realiza una solicitud HTTP y devuelve el contenido HTML parseado con BeautifulSoup.
-
----
-
-### 5. **`ScrapeBase`** (Archivo: `scraping/scrapping_engine.py`)
-Clase base para manejar el scraping.
-
-- **Métodos principales**:
-  - `add_url`: Añade una URL al diccionario base.
-  - `get_url_from_env`: Carga automáticamente las URLs desde el archivo `.env`.
-  - `build_url`: Construye una URL dinámica reemplazando variables.
-  - `scrape`: Realiza el scraping para una URL específica.
-
----
-
-### 6. **`run_scraper`** (Archivo: `config/run_scraper.py`)
-Función principal para ejecutar el scraping.
-
-- **Flujo**:
-  1. Carga las URLs disponibles desde las variables de entorno.
-  2. Permite al usuario seleccionar una URL para scrapear.
-  3. Determina el número total de páginas y realiza el scraping de cada una.
-  4. Procesa y almacena los datos obtenidos.
+- Si el método `get_data` no extrae datos, verifica:
+  1. Que la tabla HTML exista en la página.
+  2. Que el `row_parser` esté procesando correctamente las filas de la tabla.
 
 ---
 
@@ -139,7 +112,7 @@ DB_HOST=localhost
 DB_PORT=5432
 DB_NAME=nombre_base_datos
 SCH_NAME=nombre_schema
-TB__NAME=nombre_tabla
+TBL_NAME=nombre_tabla
 ```
 
 ### 3. Ejecución del flujo principal
