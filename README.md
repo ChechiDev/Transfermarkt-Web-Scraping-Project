@@ -24,7 +24,7 @@ El flujo principal del proyecto sigue los siguientes pasos:
 
 3. **Scraping de datos**:
    - Uso de la clase `HttpClient` para realizar solicitudes HTTP.
-   - Uso de la clase `ScrapeBase` para construir URLs dinámicas y realizar el scraping.
+   - Uso de la clase `Scraper` para construir URLs dinámicas y realizar el scraping.
    - Ejecución del scraping mediante `run_scraper`, que permite seleccionar dinámicamente las URLs a scrapear.
 
 4. **Almacenamiento en PostgreSQL**:
@@ -40,24 +40,24 @@ El proyecto está organizado de la siguiente manera:
 
 ```bash
 ├── config/
-│   ├── [config.py]                                # Gestión de variables de entorno
-│   ├── [headers.py]                             # Headers para las solicitudes HTTP
-│   ├── [run_scraper.py]                      # Lógica principal para ejecutar el scraping
+│   ├── config.py          # Gestión de variables de entorno
+│   ├── headers.py         # Headers para las solicitudes HTTP
+│   ├── run_scraper.py     # Lógica principal para ejecutar el scraping
 ├── database/
-│   ├── db_connection.py                   # Clase para gestionar la conexión a PostgreSQL
-│   ├── db_creator.py                           # Clase para crear y validar la base de datos
+│   ├── db_connection.py   # Clase para gestionar la conexión a PostgreSQL
+│   ├── db_creator.py      # Clase para crear y validar la base de datos
 ├── scraping/
-│   ├── [scrapping_engine.py]          # Motor base para realizar scraping
-│   ├── league_scraper.py                  # (En desarrollo) Scraper para ligas
-│   ├── team_scraper.py                     # (En desarrollo) Scraper para equipos
-│   ├── player_scraper.py                   # (En desarrollo) Scraper para jugadores
+│   ├── wscrap_engine.py   # Motor base para realizar scraping
+│   ├── wscrap_league.py   # Scraper para ligas
+│   ├── wscrap_teams.py    # (En desarrollo) Scraper para equipos
+│   ├── [wscrap_players.py]  # (En desarrollo) Scraper para jugadores
 ├── tests/
-│   ├── test_env.py                               # Pruebas para verificar la carga de variables de entorno
-├── [transfermarkt_project.ipynb]  # Notebook principal con el flujo del proyecto
-├── [main.py]                                       # Script principal para ejecutar el flujo completo
-├── [requirements.txt]                       # Dependencias del proyecto
-├── .env                                                 # Variables de entorno (no incluido en el repositorio)
-```
+│   ├── testing.py         # Pruebas para verificar el funcionamiento del scraping
+├── [transfermarkt_project.ipynb] # Notebook principal con el flujo del proyecto
+├── [main.py]             # (En desarrollo) Script principal para ejecutar el flujo completo
+├── [requirements.txt]       # Dependencias del proyecto
+├── .env                   # Variables de entorno (no incluido en el repositorio)
+````
 
 ---
 
@@ -127,7 +127,7 @@ Abre el archivo `transfermarkt_project.ipynb` en Jupyter Notebook para ejecutar 
 ---
 
 ## <u>*Notas importantes*</u>
-- Este proyecto está en desarrollo, y algunas funcionalidades como los scrapers específicos (`league_scraper.py`, `team_scraper.py`, `player_scraper.py`) están en progreso.
+- Este proyecto está en desarrollo, y algunas funcionalidades como los scrapers específicos (`wscrap_leagues.py`, `wscrap_teams.py`, `wscrap_players.py`) están en progreso.
 
 ---
 

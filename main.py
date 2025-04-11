@@ -2,7 +2,7 @@ from config.config import EnvironmentConfig
 from database.db_connection import DatabaseConnection
 from database.db_creator import DatabaseCreator
 from scraping.wscrap_engine import HttpClient
-from scraping.wscrap_league import LeagueScraper
+from scraping.wscrap_leagues import LeagueScraper
 from config.headers import headers
 
 def main():
