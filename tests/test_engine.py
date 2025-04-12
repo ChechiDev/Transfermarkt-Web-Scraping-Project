@@ -1,5 +1,5 @@
 from scraping.wscrap_engine import HttpClient, Scraper
-from scraping.wscrap_league import LeagueScraper
+from scraping.wscrap_leagues import LeagueScraper
 from config.headers import headers
 
 # Crear instancia del cliente HTTP
