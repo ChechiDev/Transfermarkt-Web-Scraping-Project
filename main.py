@@ -1,62 +1,60 @@
-from config.config import EnvironmentConfig
-from database.db_connection import DatabaseConnection
-from database.db_creator import DatabaseCreator
-from scraping.wscrap_engine import HttpClient
-from scraping.wscrap_leagues import LeagueScraper
-from config.headers import headers
+from scraping.ws_httpClient import HttpClient
+from scraping.ws_engine import ScrapingEngine
+from scraping.ws_leagues import LeagueScraper
+from src.ws_urls import TransferMarktURLManager
 
 def main():
-    """
-    Función principal que ejecuta todo el flujo del proyecto:
-    1. Configuración del entorno.
-    2. Conexión a la base de datos.
-    3. Ejecución del scraping.
-    4. Inserción de datos en la base de datos.
-    """
+    # Inicializar HttpClient
+    http_client = HttpClient()
+    print("HttpClient inicializado.")
+
+    # Inicializar ScrapingEngine
+    scraping_engine = ScrapingEngine(http_client)
+    print("ScrapingEngine inicializado.")
+
+    # Inicializar TransferMarktURLManager
+    url_manager = TransferMarktURLManager(scraping_engine, http_client)
+    print("TransferMarktURLManager inicializado.")
+
+    # Inicializar LeagueScraper
+    league_scraper = LeagueScraper(http_client)
+    print("LeagueScraper inicializado.")
+
+    # Configurar la región para scraping
+    region = "europe"  # Cambiar a "america", "africa", "asia" según sea necesario
     try:
-        # 1. Configuración del entorno
-        print("Cargando configuración del entorno...")
-        env = EnvironmentConfig()
-        print(env)
+        # Actualizar los datos de la región (end_page y table_header)
+        print(f"Actualizando datos para la región: {region}")
+        url_manager.update_region_data(region)
+        print(f"Datos actualizados para la región '{region}':")
+        print(f"Total de páginas: {url_manager.urls[region]['end_page']}")
+        print(f"Encabezados de la tabla: {url_manager.urls[region]['table_header']}")
 
-        # 2. Conexión a la base de datos
-        print("Estableciendo conexión con la base de datos...")
-        db_creator = DatabaseCreator(env)
-        db_creator.create_database_if_not_exists()
+        # Obtener HTML de la primera página
+        url = url_manager.urls[region]["url"].format(page=1)
+        html = http_client.get_html(url)
 
-        db = DatabaseConnection(env)
-        db.connect()
+        if html:
+            # Extraer tabla y encabezados
+            table = html.find("table")
+            league_scraper.extract_headers_from_table(table)
 
-        # 3. Ejecución del scraping
-        print("Iniciando scraping de ligas...")
-        http_client = HttpClient(headers=headers)
-        league_scraper = LeagueScraper(http_client)
-        league_scraper.get_url_from_env()
-
-        # Descargar y parsear las ligas
-        leagues = league_scraper.get_leagues("url_tmkt_eur_leagues", page=1)
-        if not leagues:
-            print("No se encontraron ligas para insertar.")
+            # Verificar los atributos asignados
+            print("Atributos asignados en LeagueScraper:")
+            print(f"Competition index: {league_scraper.competition}")
+            print(f"Country index: {league_scraper.country}")
+            print(f"Clubs index: {league_scraper.clubs}")
+            print(f"Players index: {league_scraper.player}")
+            print(f"Avg Age index: {league_scraper.avg_age}")
+            print(f"Foreigners index: {league_scraper.foreigners}")
+            print(f"Goals per Match index: {league_scraper.goals_per_match}")
+            print(f"Average Market Value index: {league_scraper.average_market_value}")
+            print(f"Total Value index: {league_scraper.total_value}")
         else:
-            print(f"{len(leagues)} ligas encontradas. Insertando en la base de datos...")
-
-            # 4. Inserción de datos en la base de datos
-            for league in leagues:
-                db.insert_data(
-                    table_name=env.table,
-                    data={
-                        "name": league["name"],
-                        "url": league["url"]
-                    }
-                )
-            print("Inserción completada.")
-
-        # Cerrar la conexión a la base de datos
-        db.disconnect()
-        print("Conexión cerrada correctamente.")
+            print(f"No se pudo obtener el HTML para la región '{region}'.")
 
     except Exception as e:
-        print(f"Error en el flujo principal: {e}")
+        print(f"Error durante el scraping de la región '{region}': {e}")
 
 if __name__ == "__main__":
     main()

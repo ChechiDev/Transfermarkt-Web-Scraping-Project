@@ -1,0 +1,279 @@
+{
+    "id_region": "AFR1",
+    "region_name": "Africa",
+    "url": "https://transfermarkt.com/wettbewerbe/afrika/wettbewerbe?ajax=yw1&plus=22&page={page}",
+    "stats": {
+        "fk_region": "AFR1",
+        "avg_age": 0,
+        "avg_height": 0,
+        "avg_weight": 0,
+        "avg_salary": 0,
+        "avg_market_value": 0
+    },
+    "leagues": {
+        "SFA1": {
+            "id_league": "SFA1",
+            "competition": "Betway Premiership",
+            "country": "Unknown",
+            "url": "https://www.transfermarkt.com/startseite/wettbewerb/SFA1",
+            "stats": {
+                "fk_league": "SFA1",
+                "fk_region": "AFR1"
+            },
+            "teams": {}
+        },
+        "EGY1": {
+            "id_league": "EGY1",
+            "competition": "Egyptian Premier League",
+            "country": "Unknown",
+            "url": "https://www.transfermarkt.com/startseite/wettbewerb/EGY1",
+            "stats": {
+                "fk_league": "EGY1",
+                "fk_region": "AFR1"
+            },
+            "teams": {}
+        },
+        "MAR1": {
+            "id_league": "MAR1",
+            "competition": "Botola Pro Inwi",
+            "country": "Unknown",
+            "url": "https://www.transfermarkt.com/startseite/wettbewerb/MAR1",
+            "stats": {
+                "fk_league": "MAR1",
+                "fk_region": "AFR1"
+            },
+            "teams": {}
+        },
+        "ALG1": {
+            "id_league": "ALG1",
+            "competition": "Ligue Professionnelle 1",
+            "country": "Unknown",
+            "url": "https://www.transfermarkt.com/startseite/wettbewerb/ALG1",
+            "stats": {
+                "fk_league": "ALG1",
+                "fk_region": "AFR1"
+            },
+            "teams": {}
+        },
+        "TUN1": {
+            "id_league": "TUN1",
+            "competition": "Ligue Professionnelle 1",
+            "country": "Unknown",
+            "url": "https://www.transfermarkt.com/startseite/wettbewerb/TUN1",
+            "stats": {
+                "fk_league": "TUN1",
+                "fk_region": "AFR1"
+            },
+            "teams": {}
+        },
+        "GHPL": {
+            "id_league": "GHPL",
+            "competition": "Ghana Premier League",
+            "country": "Unknown",
+            "url": "https://www.transfermarkt.com/startseite/wettbewerb/GHPL",
+            "stats": {
+                "fk_league": "GHPL",
+                "fk_region": "AFR1"
+            },
+            "teams": {}
+        },
+        "LPL": {
+            "id_league": "LPL",
+            "competition": "Libyan Premier League",
+            "country": "Unknown",
+            "url": "https://www.transfermarkt.com/startseite/wettbewerb/LPL",
+            "stats": {
+                "fk_league": "LPL",
+                "fk_region": "AFR1"
+            },
+            "teams": {}
+        },
+        "NPFL": {
+            "id_league": "NPFL",
+            "competition": "Nigeria Professional Football League",
+            "country": "Unknown",
+            "url": "https://www.transfermarkt.com/startseite/wettbewerb/NPFL",
+            "stats": {
+                "fk_league": "NPFL",
+                "fk_region": "AFR1"
+            },
+            "teams": {}
+        },
+        "ETP1": {
+            "id_league": "ETP1",
+            "competition": "Ethiopian Premier League",
+            "country": "Unknown",
+            "url": "https://www.transfermarkt.com/startseite/wettbewerb/ETP1",
+            "stats": {
+                "fk_league": "ETP1",
+                "fk_region": "AFR1"
+            },
+            "teams": {}
+        },
+        "UGL1": {
+            "id_league": "UGL1",
+            "competition": "Uganda Premier League",
+            "country": "Unknown",
+            "url": "https://www.transfermarkt.com/startseite/wettbewerb/UGL1",
+            "stats": {
+                "fk_league": "UGL1",
+                "fk_region": "AFR1"
+            },
+            "teams": {}
+        },
+        "NEDC": {
+            "id_league": "NEDC",
+            "competition": "Nedbank Cup",
+            "country": "Unknown",
+            "url": "https://www.transfermarkt.com/startseite/wettbewerb/NEDC",
+            "stats": {
+                "fk_league": "NEDC",
+                "fk_region": "AFR1"
+            },
+            "teams": {}
+        },
+        "TELK": {
+            "id_league": "TELK",
+            "competition": "Carling Knockout",
+            "country": "Unknown",
+            "url": "https://www.transfermarkt.com/startseite/wettbewerb/TELK",
+            "stats": {
+                "fk_league": "TELK",
+                "fk_region": "AFR1"
+            },
+            "teams": {}
+        },
+        "EGYP": {
+            "id_league": "EGYP",
+            "competition": "Egypt Cup",
+            "country": "Unknown",
+            "url": "https://www.transfermarkt.com/startseite/wettbewerb/EGYP",
+            "stats": {
+                "fk_league": "EGYP",
+                "fk_region": "AFR1"
+            },
+            "teams": {}
+        },
+        "MARP": {
+            "id_league": "MARP",
+            "competition": "Coupe du Trône Marocaine",
+            "country": "Unknown",
+            "url": "https://www.transfermarkt.com/startseite/wettbewerb/MARP",
+            "stats": {
+                "fk_league": "MARP",
+                "fk_region": "AFR1"
+            },
+            "teams": {}
+        },
+        "SFAL": {
+            "id_league": "SFAL",
+            "competition": "MTN8",
+            "country": "Unknown",
+            "url": "https://www.transfermarkt.com/startseite/wettbewerb/SFAL",
+            "stats": {
+                "fk_league": "SFAL",
+                "fk_region": "AFR1"
+            },
+            "teams": {}
+        },
+        "ALGP": {
+            "id_league": "ALGP",
+            "competition": "Coupe d'Algerie",
+            "country": "Unknown",
+            "url": "https://www.transfermarkt.com/startseite/wettbewerb/ALGP",
+            "stats": {
+                "fk_league": "ALGP",
+                "fk_region": "AFR1"
+            },
+            "teams": {}
+        },
+        "TUNP": {
+            "id_league": "TUNP",
+            "competition": "Tunisian Cup",
+            "country": "Unknown",
+            "url": "https://www.transfermarkt.com/startseite/wettbewerb/TUNP",
+            "stats": {
+                "fk_league": "TUNP",
+                "fk_region": "AFR1"
+            },
+            "teams": {}
+        },
+        "ESCU": {
+            "id_league": "ESCU",
+            "competition": "Egyptian Super Cup",
+            "country": "Unknown",
+            "url": "https://www.transfermarkt.com/startseite/wettbewerb/ESCU",
+            "stats": {
+                "fk_league": "ESCU",
+                "fk_region": "AFR1"
+            },
+            "teams": {}
+        },
+        "AGSC": {
+            "id_league": "AGSC",
+            "competition": "Supercoupe d'Algérie",
+            "country": "Unknown",
+            "url": "https://www.transfermarkt.com/startseite/wettbewerb/AGSC",
+            "stats": {
+                "fk_league": "AGSC",
+                "fk_region": "AFR1"
+            },
+            "teams": {}
+        },
+        "EGCP": {
+            "id_league": "EGCP",
+            "competition": "Championship Playoff",
+            "country": "Unknown",
+            "url": "https://www.transfermarkt.com/startseite/wettbewerb/EGCP",
+            "stats": {
+                "fk_league": "EGCP",
+                "fk_region": "AFR1"
+            },
+            "teams": {}
+        },
+        "EGRP": {
+            "id_league": "EGRP",
+            "competition": "Relegation Playoff",
+            "country": "Unknown",
+            "url": "https://www.transfermarkt.com/startseite/wettbewerb/EGRP",
+            "stats": {
+                "fk_league": "EGRP",
+                "fk_region": "AFR1"
+            },
+            "teams": {}
+        },
+        "EGLC": {
+            "id_league": "EGLC",
+            "competition": "Egyptian League Cup",
+            "country": "Unknown",
+            "url": "https://www.transfermarkt.com/startseite/wettbewerb/EGLC",
+            "stats": {
+                "fk_league": "EGLC",
+                "fk_region": "AFR1"
+            },
+            "teams": {}
+        },
+        "MEC1": {
+            "id_league": "MEC1",
+            "competition": "Moroccan Excellence Cup",
+            "country": "Unknown",
+            "url": "https://www.transfermarkt.com/startseite/wettbewerb/MEC1",
+            "stats": {
+                "fk_league": "MEC1",
+                "fk_region": "AFR1"
+            },
+            "teams": {}
+        },
+        "AGS2": {
+            "id_league": "AGS2",
+            "competition": "Supercoupe d'Algérie U21",
+            "country": "Unknown",
+            "url": "https://www.transfermarkt.com/startseite/wettbewerb/AGS2",
+            "stats": {
+                "fk_league": "AGS2",
+                "fk_region": "AFR1"
+            },
+            "teams": {}
+        }
+    }
+}
