@@ -28,5 +28,3 @@ class EnvironmentConfig:
             f"Schema: {self.schema}\n"
             f"Table: {self.table}"
         )
-
-    "hola!"

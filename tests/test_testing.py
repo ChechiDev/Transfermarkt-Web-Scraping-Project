@@ -2,8 +2,8 @@ import unittest
 from scraping.ws_httpClient import HttpClient
 from scraping.ws_engine import ScrapingEngine
 from scraping.ws_leagues import LeagueScraper
-from src.ws_urls import TransferMarktURLManager
-from src.ws_entities import Region
+from scraping.ws_urls import TransferMarktURLManager
+from scraping.ws_entities import Region
 
 class TestProcessRowWithRealHTML(unittest.TestCase):
     def setUp(self):

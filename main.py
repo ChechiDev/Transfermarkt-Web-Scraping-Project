@@ -1,7 +1,7 @@
 from scraping.ws_httpClient import HttpClient
 from scraping.ws_engine import ScrapingEngine
 from scraping.ws_leagues import LeagueScraper
-from src.ws_urls import TransferMarktURLManager
+from scraping.ws_urls import TransferMarktURLManager
 
 def main():
     # Inicializar HttpClient
