@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field, asdict
-from typing import List, Optional, Dict, Any
+from typing import List, Optional, Dict
 
 @dataclass
 class Region:
@@ -17,5 +17,11 @@ class Transfermarkt:
     Clase raíz del proyecto.
     Contiene toda la información de las regiones.
     """
-    def __init__(self):
-        pass
+    # Creamos el diccionario con las regiones:
+    regions: Dict[str, Region] = field(default_factory=dict)
+
+
+    def __post_init__(self):
+        for region_id, region in self.regions.items():
+            if isinstance(region, Dict):
+                self.regions[region_id] = Region(**region)

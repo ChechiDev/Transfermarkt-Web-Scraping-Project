@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 from time import sleep
-from config import headers
+from config.headers import headers
 
 
 class HTTPClient:
@@ -15,6 +15,18 @@ class HTTPClient:
         self.delay = delay # Segundos entre reintentos
         self.url_manager = None
 
+    def start_url_manager(self):
+        """
+        Inicializa el gestor de URL con la config de scraping
+        """
+         # Instancia al gestor de URL:
+        from scraping.ws_urls import URLManager
+        from scraping.ws_engine import ScrapingEngine
+
+        scraping_engine = ScrapingEngine(self)
+        self.url_manager
+
+
     def get_html(self, url: str) -> BeautifulSoup:
         """
         Realiza una solicitud GET y devuelve el contenido HTML cómo un objeto BeautifulSoup.
@@ -26,6 +38,7 @@ class HTTPClient:
         for attempt in range(self.retries):
             try:
                 response = requests.get(
+                    url,
                     headers=self.headers,
                     timeout=self.timeout,
                 )
@@ -33,6 +46,7 @@ class HTTPClient:
                     return BeautifulSoup(response.content, 'html.parser')
                 else:
                     print(f"HTTP: {response.status_code} para {url}")
+
             except requests.RequestException as e:
                 print(f"Error: Fallo en intento {attempt + 1}/{self.retries} para la url: {url}")
 
