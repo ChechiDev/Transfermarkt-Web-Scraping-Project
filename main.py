@@ -1,33 +1,46 @@
 from scraping.ws_httpClient import HTTPClient
 from scraping.ws_engine import ScrapingEngine
 from scraping.ws_urls import TransfermarktURLManager
-import logging
+from scraping.ws_dataManager import DataManager
+from scraping.ws_entities import Region, RegionStats
 
-def main():
+def generate_json_with_all_regions():
+    # Inicializar las clases principales del proyecto
     http_client = HTTPClient()
     scraping_engine = ScrapingEngine(http_client)
     url_manager = TransfermarktURLManager(http_client, scraping_engine)
+    data_manager = DataManager()
 
-    # Procesar todas las regiones configuradas
+    # Procesar todas las regiones configuradas en el URL Manager
     for region_key, region_data in url_manager.urls.items():
-        print(f"\n=== Región: {region_key} ===")
-        print(f"Nombre de la región: {region_data.get('region_name', 'No disponible')}")
-        print(f"Total de páginas: {region_data.get('end_page', 'No disponible')}")
-        print(f"Encabezados de tabla: {region_data.get('table_header', 'No disponible')}")
+        print(f"\n=== Procesando región: {region_key} ===")
 
-        # Verificar si hay URLs generadas para esta región
-        urls = region_data.get('url', [])
-        if urls:
-            print(f"URLs generadas ({len(urls)}):")
-            for url in urls[:5]:  # Mostrar solo las primeras 5 URLs
-                print(f"  - {url}")
-            if len(urls) > 5:
-                print(f"  ... y {len(urls) - 5} más.")
-        else:
-            print("No se generaron URLs para esta región.")
+        # Crear estadísticas ficticias para la región
+        region_stats = RegionStats(
+            fk_region=region_key,
+            avg_age=0,  # Valor ficticio
+            avg_height=0,  # Valor ficticio
+            avg_weight=0,  # Valor ficticio
+            avg_salary=0,  # Valor ficticio
+            avg_market_value=0  # Valor ficticio
+        )
+
+        # Crear la región
+        region = Region(
+            id_region=region_key,
+            region_name=region_data["region_name"],
+            url=region_data["url"][0],  # Usar la primera URL como referencia
+            stats=region_stats
+        )
+
+        # Añadir la región al DataManager
+        data_manager.add_region(region)
+
+    # Exportar los datos generados a un archivo JSON
+    output_file = "all_regions_data.json"
+    data_manager.to_json(output_file)
+
+    print(f"Archivo JSON generado correctamente: {output_file}")
 
 if __name__ == "__main__":
-    try:
-        main()
-    except Exception as e:
-        logging.error(f"Error al ejecutar el programa principal: {e}")
+    generate_json_with_all_regions()

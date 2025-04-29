@@ -1,0 +1,60 @@
+{
+    "regions": {
+        "EUR1": {
+            "id_region": "EUR1",
+            "region_name": "Europa",
+            "url": "https://www.transfermarkt.com/wettbewerbe/europa/wettbewerbe?ajax=yw1&plus=22&page=1",
+            "stats": {
+                "fk_region": "EUR1",
+                "avg_age": 0,
+                "avg_height": 0,
+                "avg_weight": 0,
+                "avg_salary": 0,
+                "avg_market_value": 0
+            },
+            "leagues": {}
+        },
+        "AME1": {
+            "id_region": "AME1",
+            "region_name": "America",
+            "url": "https://www.transfermarkt.com/wettbewerbe/amerika/wettbewerbe?ajax=yw1&plus=22&page=1",
+            "stats": {
+                "fk_region": "AME1",
+                "avg_age": 0,
+                "avg_height": 0,
+                "avg_weight": 0,
+                "avg_salary": 0,
+                "avg_market_value": 0
+            },
+            "leagues": {}
+        },
+        "ASI1": {
+            "id_region": "ASI1",
+            "region_name": "Asien",
+            "url": "https://www.transfermarkt.com/wettbewerbe/asien/wettbewerbe?ajax=yw1&plus=22&page=1",
+            "stats": {
+                "fk_region": "ASI1",
+                "avg_age": 0,
+                "avg_height": 0,
+                "avg_weight": 0,
+                "avg_salary": 0,
+                "avg_market_value": 0
+            },
+            "leagues": {}
+        },
+        "AFR1": {
+            "id_region": "AFR1",
+            "region_name": "Africa",
+            "url": "https://www.transfermarkt.com/wettbewerbe/afrika/wettbewerbe?ajax=yw1&plus=22&page=1",
+            "stats": {
+                "fk_region": "AFR1",
+                "avg_age": 0,
+                "avg_height": 0,
+                "avg_weight": 0,
+                "avg_salary": 0,
+                "avg_market_value": 0
+            },
+            "leagues": {}
+        }
+    }
+}
