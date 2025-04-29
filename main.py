@@ -1,32 +1,33 @@
 from scraping.ws_httpClient import HTTPClient
-from scraping.ws_urls import TransfermarktURLManager
 from scraping.ws_engine import ScrapingEngine
+from scraping.ws_urls import TransfermarktURLManager
+import logging
 
 def main():
-    # Inicializar el cliente HTTP
     http_client = HTTPClient()
-    # Inicializar el motor de scraping
     scraping_engine = ScrapingEngine(http_client)
-    # Inicializar el gestor de URLs
     url_manager = TransfermarktURLManager(http_client, scraping_engine)
 
-    # Obtener la URL de la región 'EUR1' desde el gestor de URLs
-    region_id = "EUR1"
-    test_url = url_manager.url[region_id]["url"].format(page=1)
+    # Procesar todas las regiones configuradas
+    for region_key, region_data in url_manager.urls.items():
+        print(f"\n=== Región: {region_key} ===")
+        print(f"Nombre de la región: {region_data.get('region_name', 'No disponible')}")
+        print(f"Total de páginas: {region_data.get('end_page', 'No disponible')}")
+        print(f"Encabezados de tabla: {region_data.get('table_header', 'No disponible')}")
 
-    print(f"Conectando a la URL: {test_url}")
-
-    # Realizar la solicitud HTTP
-    html = http_client.get_html(test_url)
-
-    # Verificar si se obtuvo el HTML
-    if html:
-        print("Conexión exitosa. HTML obtenido.")
-        # Mostrar el título de la página si está disponible
-        title = html.title.string if html.title else "No disponible"
-        print(f"Título de la página: {title}")
-    else:
-        print("No se pudo obtener el HTML de la URL.")
+        # Verificar si hay URLs generadas para esta región
+        urls = region_data.get('url', [])
+        if urls:
+            print(f"URLs generadas ({len(urls)}):")
+            for url in urls[:5]:  # Mostrar solo las primeras 5 URLs
+                print(f"  - {url}")
+            if len(urls) > 5:
+                print(f"  ... y {len(urls) - 5} más.")
+        else:
+            print("No se generaron URLs para esta región.")
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except Exception as e:
+        logging.error(f"Error al ejecutar el programa principal: {e}")
