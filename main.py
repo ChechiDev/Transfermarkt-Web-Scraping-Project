@@ -1,25 +1,32 @@
 from scraping.ws_httpClient import HTTPClient
+from scraping.ws_urls import TransfermarktURLManager
+from scraping.ws_engine import ScrapingEngine
 
 def main():
-    """
-    Punto de entrada principal del proyecto.
-    """
-
-    # Instancia al client HTTP:
+    # Inicializar el cliente HTTP
     http_client = HTTPClient()
-    test_url = "https://www.transfermarkt.com/wettbewerbe/europa/wettbewerbe?ajax=yw1&plus=22&page=1"
+    # Inicializar el motor de scraping
+    scraping_engine = ScrapingEngine(http_client)
+    # Inicializar el gestor de URLs
+    url_manager = TransfermarktURLManager(http_client, scraping_engine)
 
-    try:
-        html = http_client.get(test_url)
-        if html:
-            print("HTML descargado correctamente.")
-            print(f"Titulo de la página {html.title.string}")
-        else:
-            print(f"No se ha podido obtener el HTML de {test_url}")
+    # Obtener la URL de la región 'EUR1' desde el gestor de URLs
+    region_id = "EUR1"
+    test_url = url_manager.url[region_id]["url"].format(page=1)
 
-    except Exception as e:
-        print(f"Error: {e}")
+    print(f"Conectando a la URL: {test_url}")
 
+    # Realizar la solicitud HTTP
+    html = http_client.get_html(test_url)
 
-if __name__=="__main__":
+    # Verificar si se obtuvo el HTML
+    if html:
+        print("Conexión exitosa. HTML obtenido.")
+        # Mostrar el título de la página si está disponible
+        title = html.title.string if html.title else "No disponible"
+        print(f"Título de la página: {title}")
+    else:
+        print("No se pudo obtener el HTML de la URL.")
+
+if __name__ == "__main__":
     main()

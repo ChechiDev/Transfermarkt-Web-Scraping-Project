@@ -6,7 +6,11 @@ class URLManager:
     Gestor principal de URL para scraping en múltiples páginas web.
     """
     def __init__(self, http_client: HTTPClient, scraping_engine: ScrapingEngine):
-        pass
+        if not isinstance(http_client, HTTPClient):
+            raise ValueError("El cliente HTTP debe ser una instancia de HTTPClient.")
+
+        self.http_client = http_client
+        self.scraping_engine = scraping_engine
 
 
 class TransfermarktURLManager(URLManager):
