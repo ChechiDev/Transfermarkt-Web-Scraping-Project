@@ -165,3 +165,46 @@ class ScrapingEngine:
         except Exception as e:
             logging.error(f"Error al medir las longitudes de las filas: {e}")
             return {}, 0
+
+
+    @staticmethod
+    def parse_currency_to_float(value: str) -> float:
+        """
+        Convierte un texto de moneda como '592,92 mill. €' o '11,86 mil mill. €' a float.
+
+        Args:
+            value (str): Texto de moneda a convertir.
+
+        Returns:
+            float: Valor numérico convertido.
+        """
+        try:
+            value = value.replace("€", "").replace(" ", "").strip().lower()
+
+            if value.endswith("bn"):
+                value = value.replace("bn", "")
+                multiplier = 1e9  # Un billón
+
+            elif value.endswith("m"):
+                value = value.replace("m", "")
+                multiplier = 1e6  # Un millón
+
+            elif value.endswith("k"):
+                value = value.replace("k", "")
+                multiplier = 1e3  # Mil
+
+            elif value == "-":
+                return 0.0
+
+            # Si no hay unidades, el multiplicador es 1
+            else:
+                multiplier = 1
+
+            value = value.replace(".", "").replace(",", ".")
+
+            return float(value) * multiplier
+
+        except ValueError:
+            # Si no se puede convertir, devolver 0.0 como valor predeterminado
+            logging.warning(f"No se pudo convertir el valor: {value}")
+            return 0.0

@@ -30,6 +30,11 @@ class LeagueStats:
     fk_region: str
     total_clubs: float
     total_players: float
+    avg_age: float
+    foreigners: float
+    game_ratio_of_foreign_players: float
+    goals_per_match: float
+    average_market_value: float
 
     def to_dict(self) -> Dict:
         return asdict(self)

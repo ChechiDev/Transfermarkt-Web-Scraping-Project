@@ -48,8 +48,8 @@ class TransfermarktURLManager(URLManager):
         # Configuración inicial de las URLs para Transfermarkt:
         self.base_url = "https://www.transfermarkt.com/wettbewerbe/{region}/wettbewerbe?ajax=yw1&plus=22&page={page}"
         self.regions = {
-            # "EUR1": "europa",
-            "AME1": "amerika",
+            "EUR1": "europa",
+            # "AME1": "amerika",
             # "ASI1": "asien",
             # "AFR1": "afrika",
         }

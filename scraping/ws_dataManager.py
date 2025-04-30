@@ -17,7 +17,7 @@ class DataManager:
         self.scraping_engine = ScrapingEngine(http_client)
 
 
-    def extract_league_table_data(self, table: BeautifulSoup, min_columns: int) -> list:
+    def extract_league_table_data(self, table: BeautifulSoup, min_columns: int, region_id: str) -> list:
         """
         Extrae todos los datos válidos de una tabla HTML y devuelve una lista de diccionarios.
         Solo incluye filas que tienen al menos `min_columns` columnas.
@@ -53,7 +53,6 @@ class DataManager:
 
                 # Filtrar filas que tienen menos columnas
                 if len(col) < min_columns:
-                    # logging.info(f"Fila omitida porque tiene {len(col)} columnas (menos que {min_columns}).")
                     continue
 
                 try:
@@ -71,6 +70,16 @@ class DataManager:
                     if competition_url:
                         id_league = competition_url.split("/")[-1]
 
+
+                    # Creamos un método para validar los valores númericos/float:
+                    def float_validation(value: str) -> float:
+                        try:
+                            return float(value.replace(",", ".").replace(" %", ""))
+
+                        except ValueError:
+                            return 0.0
+
+
                     # Extraer el país desde la celda correspondiente
                     country_cell = col[headers["country"] + 2]
                     country_name = country_cell.find("img", {"class": "flaggenrahmen"})["title"] if country_cell.find("img", {"class": "flaggenrahmen"}) else None
@@ -78,20 +87,49 @@ class DataManager:
 
                     # Extraemos el total de clubes desde la celda correspondiente
                     clubs_cell = col[headers["clubs"] + 2]
-                    total_clubs = float(clubs_cell.get_text(strip=True) if clubs_cell else 0)
+                    total_clubs = int(clubs_cell.get_text(strip=True).replace(".", "").replace("-", "")) if clubs_cell else 0
 
                     # Extraemos el total de players desde la celda correspondiente
                     player_cell = col[headers["player"] + 2]
-                    total_players = float(player_cell.get_text(strip=True) if player_cell else 0)
+                    total_players = int(player_cell.get_text(strip=True).replace(".", "").replace("-", "")) if player_cell else 0
+
+                    # Extraemos la media de edad jugadores:
+                    avg_cell = col[headers["avg_age"] + 2]
+                    avg_age = float_validation(avg_cell.get_text(strip=True).replace(",", ".")) if avg_cell else 0.0
+
+                    # Extraemos los jugadores extranjeros
+                    foreign_cell = col[headers["foreigners"] + 2] if headers.get("foreigners") is not None else 0.0
+                    foreigners = float_validation(foreign_cell.get_text(strip=True).replace(",", ".").replace(" %", "")) if foreign_cell else 0.0
+
+                    # Extraemos el average de partidos de jugadores extrangeros
+                    game_ratio_of_foreign_players_cell = col[headers["game_ratio_of_foreign_players"] + 2] if headers.get("game_ratio_of_foreign_players") is not None else 0.0
+                    game_ratio_of_foreign_players = float_validation(game_ratio_of_foreign_players_cell.get_text(strip=True).replace(",", ".").replace(" %", "")) if game_ratio_of_foreign_players_cell else 0.0
+
+                    # Extraemos el average de goles por encuentro
+                    goals_per_match_cell = col[headers["goals_per_match"] + 2] if headers.get("goals_per_match") is not None else 0.0
+                    goals_per_match = float_validation(goals_per_match_cell.get_text(strip=True).replace(",", ".")) if goals_per_match_cell else 0.0
+
+                    # Extraemos el average de mercado
+                    average_market_value_cell = col[headers["average_market_value"] + 2] if headers.get("average_market_value") is not None else 0.0
+                    # Convertimos el texto a float:
+                    if average_market_value_cell:
+                        avg_mrkt_text = average_market_value_cell.get_text(strip=True)
+                        average_market_value = self.scraping_engine.parse_currency_to_float(avg_mrkt_text)
+                    else:
+                        average_market_value = 0.0
 
 
                     # Creamos instancia con LeagueStats:
                     league_stats = LeagueStats(
                         fk_league = id_league,
-                        fk_region = None,
+                        fk_region = region_id,
                         total_clubs = total_clubs,
-                        total_players = total_players
-
+                        total_players = total_players,
+                        avg_age = avg_age,
+                        foreigners = foreigners,
+                        game_ratio_of_foreign_players = game_ratio_of_foreign_players,
+                        goals_per_match = goals_per_match,
+                        average_market_value = average_market_value
                     )
 
                     # Creamos instancia con League:
