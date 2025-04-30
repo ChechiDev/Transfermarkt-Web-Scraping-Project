@@ -62,6 +62,9 @@ class HTTPClient:
 
         for attempt in range(self.retries):
             try:
+                # Combinar los headers predeterminados con los headers de kwargs
+                request_headers = kwargs.pop("headers", self.headers)
+
                 # Realizamos la solicitud GET a la URL con el método especificado:
                 response = requests.request(
                     method = method, # Agregamos method para más flexibilidad.
@@ -126,19 +129,15 @@ class HTTPClient:
             BeautifulSoup: Objeto BeautifulSoup con el contenido HTML si la solicitud es exitosa.
             None: Si la solicitud falla o la URL es inválida.
         """
-
-        # Validamos la URL antes de realizar la solicitud:
         if not validators.url(url):
             logging.error(f"URL no válida: {url}")
             return None
 
-        # Controlamos el tiempo de espera y los reintentos:
-        # Si la URL no es válida, lanzamos una excepción:
         try:
+            # Realizar la solicitud HTTP
             response = self.make_request(url, **kwargs)
             return BeautifulSoup(response.content, "html.parser")
 
-        # Manejo de excepciones para errores de conexión o tiempo de espera:
         except requests.RequestException as e:
             logging.error(f"Error de conexión al obtener el HTML de la URL: {url}. \nDetalle: {e}")
 

@@ -1,0 +1,7 @@
+[
+  "test.py::test_static_total_pages[transfermarkt-None]",
+  "test.py::test_static_total_pages[transfermarkt-region0]",
+  "test.py::test_static_total_pages[transfermarkt-region1]",
+  "test.py::test_static_total_pages[transfermarkt-region2]",
+  "test.py::test_static_total_pages[transfermarkt-region3]"
+]

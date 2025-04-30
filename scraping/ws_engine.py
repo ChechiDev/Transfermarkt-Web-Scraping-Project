@@ -3,6 +3,7 @@ import logging
 from bs4 import BeautifulSoup
 from scraping.ws_httpClient import HTTPClient
 from config.exceptions import HTTPClientError
+from scraping.ws_entities import League, LeagueStats, RegionStats, TransferMarket
 
 class ScrapingEngine:
     """
@@ -127,3 +128,40 @@ class ScrapingEngine:
         except Exception as e:
             logging.error(f"Error al extraer encabezados de la tabla: {e}")
             return {}
+
+
+    def measure_row_lengths(self, table: BeautifulSoup) -> tuple:
+        """
+        Mide la longitud de cada fila en una tabla HTML y devuelve un resumen y el valor más alto.
+
+        Args:
+            table (BeautifulSoup): Tabla HTML parseada.
+
+        Returns:
+            tuple: Un diccionario con las longitudes de las filas y su frecuencia, y el valor más alto.
+        """
+        try:
+            # Extraer las filas de la tabla
+            rows = table.find("tbody").find_all("tr")
+            if not rows:
+                logging.warning("No se encontraron filas en la tabla.")
+                return {}, 0
+
+            # Calculamos la longitud de cada fila
+            row_lengths = [len(row.find_all("td")) for row in rows]
+
+            # Count de la frecuencia de cada longitud
+            length_summary = {}
+            for length in row_lengths:
+                length_summary[length] = length_summary.get(length, 0) + 1
+
+            # Obtener el valor más alto
+            max_length = max(row_lengths) if row_lengths else 0
+
+            logging.info(f"Resumen de longitudes de filas: {length_summary}")
+            logging.info(f"Valor más alto de longitud de fila: {max_length}")
+            return length_summary, max_length
+
+        except Exception as e:
+            logging.error(f"Error al medir las longitudes de las filas: {e}")
+            return {}, 0

@@ -4,7 +4,7 @@ from scraping.ws_urls import TransfermarktURLManager
 from scraping.ws_dataManager import DataManager
 from scraping.ws_entities import Region, RegionStats
 
-def generate_json_with_all_regions():
+def generate_json_with_all_regions_and_leagues():
     # Inicializar las clases principales del proyecto
     http_client = HTTPClient()
     scraping_engine = ScrapingEngine(http_client)
@@ -33,14 +33,19 @@ def generate_json_with_all_regions():
             stats=region_stats
         )
 
+        # Extraer ligas de la región
+        leagues = scraping_engine.extract_leagues_from_region(region_data["url"], region_key)
+        for league in leagues:
+            region.add_league(league)
+
         # Añadir la región al DataManager
         data_manager.add_region(region)
 
     # Exportar los datos generados a un archivo JSON
-    output_file = "all_regions_data.json"
+    output_file = "all_regions_with_leagues.json"
     data_manager.to_json(output_file)
 
     print(f"Archivo JSON generado correctamente: {output_file}")
 
 if __name__ == "__main__":
-    generate_json_with_all_regions()
+    generate_json_with_all_regions_and_leagues()

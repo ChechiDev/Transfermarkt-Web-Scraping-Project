@@ -49,9 +49,9 @@ class TransfermarktURLManager(URLManager):
         self.base_url = "https://www.transfermarkt.com/wettbewerbe/{region}/wettbewerbe?ajax=yw1&plus=22&page={page}"
         self.regions = {
             "EUR1": "europa",
-            "AME1": "amerika",
-            "ASI1": "asien",
-            "AFR1": "afrika",
+            # "AME1": "amerika",
+            # "ASI1": "asien",
+            # "AFR1": "afrika",
         }
 
 

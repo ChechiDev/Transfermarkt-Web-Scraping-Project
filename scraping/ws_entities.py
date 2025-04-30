@@ -28,6 +28,8 @@ class LeagueStats:
     """
     fk_league: str
     fk_region: str
+    total_clubs: int
+    total_players: int
 
     def to_dict(self) -> Dict:
         return asdict(self)
