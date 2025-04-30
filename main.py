@@ -57,7 +57,7 @@ def initialize_scraping():
                     continue
 
                 # Usar el método extract_league_table_data para extraer las ligas
-                leagues = data_manager.extract_league_table_data(table, min_columns=5)
+                leagues = data_manager.extract_league_table_data(table, min_columns=5, region_id=region_key)
                 for league in leagues:
                     region.add_league(league)
 
