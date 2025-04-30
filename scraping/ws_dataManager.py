@@ -3,7 +3,7 @@ import json
 from bs4 import BeautifulSoup
 from config.exceptions import HTTPClientError, logging
 from scraping.ws_engine import ScrapingEngine
-from scraping.ws_entities import Region, League, TransferMarket
+from scraping.ws_entities import Region, League, LeagueStats, TransferMarket
 from typing import Dict
 
 class DataManager:
@@ -43,14 +43,15 @@ class DataManager:
                 return []
 
             # Procesamos las filas y extraemos los datos:
-            table_data = []
+            leagues = []
+            base_url = "https://www.transfermarkt.com"
             for row in rows:
                 col = row.find_all("td")
                 if not col:
                     logging.warning("Fila vacía o sin datos.")
                     continue
 
-                # Filtrar filas que tienen menos columnas que `min_columns`
+                # Filtrar filas que tienen menos columnas
                 if len(col) < min_columns:
                     # logging.info(f"Fila omitida porque tiene {len(col)} columnas (menos que {min_columns}).")
                     continue
@@ -61,46 +62,56 @@ class DataManager:
                     competition_name = competition_cell.get_text(strip=True)
                     competition_url = competition_cell.find("a")["href"] if competition_cell.find("a") else None
 
+                    # Completamos URL:
+                    if competition_url and not competition_url.startswith("http"):
+                        competition_url = base_url + competition_url
+
+                    # Extraemos el id_league de la URL:
+                    id_league = None
+                    if competition_url:
+                        id_league = competition_url.split("/")[-1]
+
                     # Extraer el país desde la celda correspondiente
-                    country_cell = col[headers["country"]+2]
+                    country_cell = col[headers["country"] + 2]
                     country_name = country_cell.find("img", {"class": "flaggenrahmen"})["title"] if country_cell.find("img", {"class": "flaggenrahmen"}) else None
                     country_flag = country_cell.find("img")["src"] if country_cell.find("img") else None
 
                     # Extraemos el total de clubes desde la celda correspondiente
-                    clubs_cell = col[headers["clubs"]+2]
-                    total_clubs = int(clubs_cell.get_text(strip=True) if clubs_cell else 0)
+                    clubs_cell = col[headers["clubs"] + 2]
+                    total_clubs = float(clubs_cell.get_text(strip=True) if clubs_cell else 0)
 
                     # Extraemos el total de players desde la celda correspondiente
-                    player_cell = col[headers["player"]+2]
-                    total_players = int(player_cell.get_text(strip=True) if player_cell else 0)
+                    player_cell = col[headers["player"] + 2]
+                    total_players = float(player_cell.get_text(strip=True) if player_cell else 0)
 
-                    # Guardar los datos en un diccionario
-                    row_data = {
-                        "competition": {
-                            "competition": competition_name,
-                            "url": competition_url
-                        },
-                        "country": {
-                            "country": country_name,
-                            "flag_id": None,
-                            "flag": country_flag
-                        },
-                        "clubs": {
-                            "total_clubs": total_clubs
-                        },
-                        "player": {
-                            "total_players": total_players
-                        },
-                    }
 
-                    table_data.append(row_data)
+                    # Creamos instancia con LeagueStats:
+                    league_stats = LeagueStats(
+                        fk_league = id_league,
+                        fk_region = None,
+                        total_clubs = total_clubs,
+                        total_players = total_players
+
+                    )
+
+                    # Creamos instancia con League:
+                    league = League(
+                        id_league = id_league,
+                        competition= competition_name,
+                        country= country_name,
+                        url= competition_url,
+                        stats= league_stats,
+                        teams= {} # Equipos vacío por ahora.
+                    )
+
+                    leagues.append(league)
 
                 except IndexError:
                     logging.warning("No se pudo extraer los campos de la fila.")
                     continue
 
-            logging.info(f"Datos extraídos de la tabla: {len(table_data)} filas.")
-            return table_data
+            logging.info(f"Datos extraídos de la tabla: {len(leagues)} filas.")
+            return leagues
 
         except Exception as e:
             logging.error(f"Error al extraer datos de la tabla: {e}")
