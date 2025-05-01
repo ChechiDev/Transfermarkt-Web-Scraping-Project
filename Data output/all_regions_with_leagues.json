@@ -254,8 +254,8 @@
                         "total_players": 435,
                         "avg_age": 25.2,
                         "foreigners": 23.7,
-                        "game_ratio_of_foreign_players": 22.7,
-                        "goals_per_match": 2.3,
+                        "game_ratio_of_foreign_players": 22.8,
+                        "goals_per_match": 2.29,
                         "average_market_value": 2534000000.0,
                         "total_value": 40550000000.0
                     },
@@ -5479,7 +5479,7 @@
                         "total_players": 493,
                         "avg_age": 18.6,
                         "foreigners": 11.6,
-                        "game_ratio_of_foreign_players": 11.3,
+                        "game_ratio_of_foreign_players": 11.4,
                         "goals_per_match": 3.08,
                         "average_market_value": 369000.0,
                         "total_value": 591000000.0
@@ -5594,7 +5594,7 @@
                         "avg_age": 17.5,
                         "foreigners": 16.8,
                         "game_ratio_of_foreign_players": 13.1,
-                        "goals_per_match": 3.86,
+                        "goals_per_match": 3.85,
                         "average_market_value": 223000.0,
                         "total_value": 268000000.0
                     },
@@ -5840,7 +5840,7 @@
                         "total_players": 1307,
                         "avg_age": 18.4,
                         "foreigners": 14.8,
-                        "game_ratio_of_foreign_players": 13.1,
+                        "game_ratio_of_foreign_players": 13.3,
                         "goals_per_match": 3.95,
                         "average_market_value": 39000.0,
                         "total_value": 198000000.0
@@ -6999,8 +6999,8 @@
                         "total_players": 1632,
                         "avg_age": 24.7,
                         "foreigners": 30.3,
-                        "game_ratio_of_foreign_players": 33.4,
-                        "goals_per_match": 4.94,
+                        "game_ratio_of_foreign_players": 33.5,
+                        "goals_per_match": 4.87,
                         "average_market_value": 722000000.0,
                         "total_value": 46216000000.0
                     },
@@ -8576,7 +8576,7 @@
                         "total_players": 202,
                         "avg_age": 26.3,
                         "foreigners": 58.9,
-                        "game_ratio_of_foreign_players": 63.2,
+                        "game_ratio_of_foreign_players": 28.0,
                         "goals_per_match": 1.75,
                         "average_market_value": 1683000000.0,
                         "total_value": 13464000000.0
@@ -9317,8 +9317,8 @@
                         "total_players": 311,
                         "avg_age": 19.9,
                         "foreigners": 34.7,
-                        "game_ratio_of_foreign_players": 35.8,
-                        "goals_per_match": 2.79,
+                        "game_ratio_of_foreign_players": 36.0,
+                        "goals_per_match": 2.77,
                         "average_market_value": 944000.0,
                         "total_value": 755000000.0
                     },
@@ -9375,7 +9375,7 @@
                         "avg_age": 20.4,
                         "foreigners": 39.2,
                         "game_ratio_of_foreign_players": 39.2,
-                        "goals_per_match": 2.54,
+                        "goals_per_match": 2.61,
                         "average_market_value": 633000.0,
                         "total_value": 506000000.0
                     },
@@ -9659,7 +9659,7 @@
                         "total_players": 145,
                         "avg_age": 26.7,
                         "foreigners": 23.4,
-                        "game_ratio_of_foreign_players": 22.5,
+                        "game_ratio_of_foreign_players": 0.0,
                         "goals_per_match": 4.5,
                         "average_market_value": 46000.0,
                         "total_value": 275000.0
