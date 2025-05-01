@@ -35,6 +35,7 @@ class LeagueStats:
     game_ratio_of_foreign_players: float
     goals_per_match: float
     average_market_value: float
+    total_value: float
 
     def to_dict(self) -> Dict:
         return asdict(self)

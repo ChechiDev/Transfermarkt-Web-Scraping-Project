@@ -36,6 +36,7 @@ class ScrapingEngine:
             raise ValueError(f"Error al expandir celdas colapsadas en la tabla. \nDetalle: {e}")
 
 
+
     def get_total_pages(self, url: str) -> int:
         """
         Obtiene el número total de páginas (end_page) para una región específica.
@@ -92,6 +93,7 @@ class ScrapingEngine:
             raise HTTPClientError(f"Error al calcular el número de páginas para la URL: {url}. \nDetalle: {e}")
 
 
+
     def get_table_headers(self, table: BeautifulSoup) -> dict:
         """
         Extrae los encabezados de una tabla HTML y los convierte en un diccionario.
@@ -130,6 +132,7 @@ class ScrapingEngine:
             return {}
 
 
+
     def measure_row_lengths(self, table: BeautifulSoup) -> tuple:
         """
         Mide la longitud de cada fila en una tabla HTML y devuelve un resumen y el valor más alto.
@@ -165,6 +168,22 @@ class ScrapingEngine:
         except Exception as e:
             logging.error(f"Error al medir las longitudes de las filas: {e}")
             return {}, 0
+
+
+    @staticmethod
+    def float_validation(value: str) -> float:
+        """
+        Convierte un valor de texto a un número flotante.
+        Args:
+            value (str): El valor en formato de texto.
+        Returns:
+            float: El valor convertido a flotante, o 0.0 si no es válido.
+        """
+        try:
+            return float(value.replace(",", ".").replace(" %", ""))
+
+        except ValueError:
+            return 0.0
 
 
     @staticmethod

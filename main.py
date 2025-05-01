@@ -2,6 +2,7 @@ from scraping.ws_httpClient import HTTPClient
 from scraping.ws_engine import ScrapingEngine
 from scraping.ws_urls import TransfermarktURLManager
 from scraping.ws_dataManager import DataManager
+from scraping.ws_leagues import LeagueManager
 from scraping.ws_entities import Region, RegionStats
 import logging
 from bs4 import BeautifulSoup
@@ -20,6 +21,7 @@ def initialize_scraping():
         scraping_engine = ScrapingEngine(http_client)
         url_manager = TransfermarktURLManager(http_client, scraping_engine)
         data_manager = DataManager(http_client)
+        league_manager = LeagueManager(scraping_engine, data_manager)
 
         # Procesar todas las regiones configuradas en el URL Manager
         for region_key, region_data in url_manager.urls.items():
@@ -39,7 +41,7 @@ def initialize_scraping():
             region = Region(
                 id_region=region_key,
                 region_name=region_data["region_name"],
-                url=region_data["url"][0],  # Usar la primera URL como referencia
+                url=region_data["url"][0],
                 stats=region_stats
             )
 
@@ -51,13 +53,13 @@ def initialize_scraping():
                     continue
 
                 soup = BeautifulSoup(response.content, "html.parser")
-                table = soup.find("table", {"class": "items"})  # Ajusta la clase según el HTML
+                table = soup.find("table", {"class": "items"})
                 if not table:
                     logging.warning(f"No se encontró la tabla de ligas en la URL: {url}")
                     continue
 
-                # Usar el método extract_league_table_data para extraer las ligas
-                leagues = data_manager.extract_league_table_data(table, min_columns=5, region_id=region_key)
+                # Usar LeagueManager para extraer las ligas
+                leagues = league_manager.get_league_data(table, min_columns=5, region_id=region_key)
                 for league in leagues:
                     region.add_league(league)
 
