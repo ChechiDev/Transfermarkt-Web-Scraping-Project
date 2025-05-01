@@ -1,3 +1,4 @@
+import os
 from scraping.ws_httpClient import HTTPClient
 from scraping.ws_engine import ScrapingEngine
 from scraping.ws_urls import TransfermarktURLManager
@@ -27,14 +28,15 @@ def initialize_scraping():
         for region_key, region_data in url_manager.urls.items():
             logging.info(f"Procesando región: {region_key}")
 
-            # Crear estadísticas ficticias para la región
+            # Instancia a la Región:
             region_stats = RegionStats(
                 fk_region=region_key,
-                avg_age=0,  # Valor ficticio
-                avg_height=0,  # Valor ficticio
-                avg_weight=0,  # Valor ficticio
-                avg_salary=0,  # Valor ficticio
-                avg_market_value=0  # Valor ficticio
+                avg_age=0,
+                avg_height=0,
+                avg_weight=0,
+                avg_salary=0,
+                average_market_value=0,
+                total_value=0,
             )
 
             # Crear la región
@@ -46,7 +48,7 @@ def initialize_scraping():
             )
 
             # Extraer ligas de la región
-            for url in region_data["url"]:
+            for page_number, url in enumerate(region_data["url"], start=1):
                 response = http_client.make_request(url)
                 if not response:
                     logging.warning(f"No se pudo obtener el HTML de la URL: {url}")
@@ -62,6 +64,22 @@ def initialize_scraping():
                 leagues = league_manager.get_league_data(table, min_columns=5, region_id=region_key)
                 for league in leagues:
                     region.add_league(league)
+
+                os.system('cls' if os.name == 'nt' else 'clear')
+                # Mostrar un mensaje resumido para cada página procesada
+                logging.info(f"Página {page_number} de {len(region_data['url'])}: {len(leagues)} filas extraídas.")
+
+
+        # Calculo promedio de las estadísticas de la región
+        if region.leagues:
+            stats_to_calculate = ["average_market_value", "total_value"]
+
+            for stat_name in stats_to_calculate:
+                ScrapingEngine.calculate_avg_value(
+                    region.leagues,
+                    region.stats,
+                    stat_name
+                )
 
             # Añadir la región al DataManager
             data_manager.add_region(region)

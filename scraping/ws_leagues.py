@@ -47,20 +47,22 @@ class LeagueManager:
         "total_clubs": {
             **base_config,
             "key": "clubs",
-            "transform": lambda x: int(
+            "transform": lambda x: ScrapingEngine.int_validation(
                 x.get_text(strip=True)
                 .replace(".", "")
-                .replace("-", "")
+                .replace("-", ""),
+                default=0
                 )
                 if x else 0
         },
         "total_players": {
             **base_config,
             "key": "player",
-            "transform": lambda x: int(
+            "transform": lambda x: ScrapingEngine.int_validation(
                 x.get_text(strip=True)
                 .replace(".", "")
-                .replace("-", "")
+                .replace("-", ""),
+                default=0
                 )
                 if x else 0
         },

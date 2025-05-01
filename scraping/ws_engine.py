@@ -1,5 +1,6 @@
 import re
 import logging
+from typing import Dict
 from bs4 import BeautifulSoup
 from scraping.ws_httpClient import HTTPClient
 from config.exceptions import HTTPClientError
@@ -34,7 +35,6 @@ class ScrapingEngine:
         except Exception as e:
             logging.error(f"Error al expandir las celdas colapsadas en la tabla. \nDetalle: {e}")
             raise ValueError(f"Error al expandir celdas colapsadas en la tabla. \nDetalle: {e}")
-
 
 
     def get_total_pages(self, url: str) -> int:
@@ -93,7 +93,6 @@ class ScrapingEngine:
             raise HTTPClientError(f"Error al calcular el número de páginas para la URL: {url}. \nDetalle: {e}")
 
 
-
     def get_table_headers(self, table: BeautifulSoup) -> dict:
         """
         Extrae los encabezados de una tabla HTML y los convierte en un diccionario.
@@ -130,7 +129,6 @@ class ScrapingEngine:
         except Exception as e:
             logging.error(f"Error al extraer encabezados de la tabla: {e}")
             return {}
-
 
 
     def measure_row_lengths(self, table: BeautifulSoup) -> tuple:
@@ -171,6 +169,17 @@ class ScrapingEngine:
 
 
     @staticmethod
+    def int_validation(value, default) -> int:
+        """
+        Convierte un valor a entero de forma segura.
+        Si el valor no es válido, devuelve un valor por defecto.
+        """
+        try:
+            return int(value)
+        except (ValueError, TypeError):
+            return default
+
+    @staticmethod
     def float_validation(value: str) -> float:
         """
         Convierte un valor de texto a un número flotante.
@@ -184,7 +193,6 @@ class ScrapingEngine:
 
         except ValueError:
             return 0.0
-
 
     @staticmethod
     def parse_currency_to_float(value: str) -> float:
@@ -227,3 +235,39 @@ class ScrapingEngine:
             # Si no se puede convertir, devolver 0.0 como valor predeterminado
             logging.warning(f"No se pudo convertir el valor: {value}")
             return 0.0
+
+    @staticmethod
+    def calculate_avg_value(
+        leagues: Dict[str, League],
+        region_stats: RegionStats,
+        stat_name: str
+    ) -> float:
+        """
+        Calcula el promedio de una estadística específica de una Región.
+
+        Args:
+            leagues (Dict[str, League]): Diccionario de ligas.
+            region_stats (RegionStats): Objeto RegionStats donde se almacenará el promedio.
+            stat_name (str): Nombre del atributo de LeagueStats que se desea calcular.
+
+        Returns:
+            float: Promedio de la estadística especificada.
+        """
+        if not leagues:
+            setattr(region_stats, stat_name, 0.0)
+            return 0.0
+
+        valid_values = [
+            getattr(league.stats, stat_name, 0.0) for league in leagues.values()
+            if league.stats and getattr(league.stats, stat_name, None) is not None
+        ]
+
+        if not valid_values:
+            setattr(region_stats, stat_name, 0.0)
+            return 0.0
+
+        total_stat_value = sum(valid_values)
+        avg_stat_value = round(total_stat_value / len(valid_values), 2)
+
+        setattr(region_stats, stat_name, avg_stat_value)
+        return avg_stat_value

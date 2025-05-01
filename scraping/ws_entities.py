@@ -91,7 +91,8 @@ class RegionStats:
     avg_height: float
     avg_weight: float
     avg_salary: float
-    avg_market_value: float
+    average_market_value: float
+    total_value: float
 
     def to_dict(self) -> Dict:
         return asdict(self)
@@ -117,15 +118,17 @@ class Region:
                 self.leagues[league_id] = League(**league)
 
     def to_dict(self) -> Dict: # Convertimos atributos Region en dict:
-        return {
+        region_dict = {
             "id_region":self.id_region,
             "region_name": self.region_name,
             "url": self.url,
             "stats": self.stats.to_dict(), # Obj con las estadísticas
             "leagues": {
-                league_id: l.to_dict() for league_id, l in self.leagues.items() # Diccionario con las ligas de la región.
+                league_id: league.to_dict() for league_id, league in self.leagues.items() # Diccionario con las ligas de la región.
             }
         }
+
+        return region_dict
 
     def add_league(self, league: League) -> None:
         """
