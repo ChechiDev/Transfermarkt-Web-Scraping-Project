@@ -7,12 +7,6 @@ import validators
 
 class URLManager:
     def __init__(self, http_client: HTTPClient, scraping_engine: ScrapingEngine):
-        """
-        Constructor del gestor de URL.
-        Args:
-            http_client(HTTPClient): Instancia del cliente HTTP para realizar solicitudes.
-            scraping_engine(ScrapingEngine): Instancia del motor de scraping para procesar el HTML.
-        """
         if not isinstance(http_client, HTTPClient):
             raise ValueError("El cliente HTTP debe ser una instancia de HTTPClient.")
 
@@ -32,10 +26,10 @@ class TransfermarktURLManager(URLManager):
         super().__init__(http_client, scraping_engine)
         self.base_url = "https://www.transfermarkt.com/wettbewerbe/{region}/wettbewerbe?ajax=yw1&plus=22&page={page}"
         self.regions = {
-            # "EUR1": "europa",
+            "EUR1": "europa",
             # "AME1": "amerika",
             # "ASI1": "asien",
-            "AFR1": "afrika",
+            # "AFR1": "afrika",
         }
         self.initialize_urls()
 
