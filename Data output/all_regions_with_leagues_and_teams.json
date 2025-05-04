@@ -1,0 +1,2898 @@
+{
+    "regions": {
+        "AFR1": {
+            "id_region": "AFR1",
+            "region_name": "Africa",
+            "url_region": "https://www.transfermarkt.com/wettbewerbe/afrika/wettbewerbe?ajax=yw1&plus=22&page=1",
+            "stats": {
+                "fk_region": "AFR1",
+                "avg_age": 0,
+                "avg_height": 0,
+                "avg_weight": 0,
+                "avg_salary": 0,
+                "average_market_value": 0.0,
+                "total_value": 8126835576.92
+            },
+            "leagues": {
+                "SFA1": {
+                    "id_league": "SFA1",
+                    "competition": "Betway Premiership",
+                    "country": "South Africa",
+                    "url_league": "https://www.transfermarkt.com/betway-premiership/startseite/wettbewerb/SFA1",
+                    "stats": {
+                        "fk_league": "SFA1",
+                        "fk_region": "AFR1",
+                        "total_clubs": 16,
+                        "total_players": 539,
+                        "avg_age": 27.7,
+                        "foreigners": 15.8,
+                        "game_ratio_of_foreign_players": null,
+                        "goals_per_match": 2.02,
+                        "average_market_value": null,
+                        "total_value": 16855000000.0
+                    },
+                    "teams": {
+                        "fk_region": "AFR1",
+                        "fk_league": "SFA1",
+                        "url_league": "https://www.transfermarkt.com/betway-premiership/startseite/wettbewerb/SFA1",
+                        "Mamelodi Sundowns FC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "SFA1",
+                            "team_name": "Mamelodi Sundowns FC",
+                            "url_league": "https://www.transfermarkt.com/betway-premiership/startseite/wettbewerb/SFA1",
+                            "stats": {
+                                "total_players": 40
+                            },
+                            "players": {}
+                        },
+                        "Orlando Pirates": {
+                            "fk_region": "AFR1",
+                            "fk_league": "SFA1",
+                            "team_name": "Orlando Pirates",
+                            "url_league": "https://www.transfermarkt.com/betway-premiership/startseite/wettbewerb/SFA1",
+                            "stats": {
+                                "total_players": 35
+                            },
+                            "players": {}
+                        },
+                        "Kaizer Chiefs": {
+                            "fk_region": "AFR1",
+                            "fk_league": "SFA1",
+                            "team_name": "Kaizer Chiefs",
+                            "url_league": "https://www.transfermarkt.com/betway-premiership/startseite/wettbewerb/SFA1",
+                            "stats": {
+                                "total_players": 33
+                            },
+                            "players": {}
+                        },
+                        "SuperSport United": {
+                            "fk_region": "AFR1",
+                            "fk_league": "SFA1",
+                            "team_name": "SuperSport United",
+                            "url_league": "https://www.transfermarkt.com/betway-premiership/startseite/wettbewerb/SFA1",
+                            "stats": {
+                                "total_players": 37
+                            },
+                            "players": {}
+                        },
+                        "Lamontville Golden Arrows": {
+                            "fk_region": "AFR1",
+                            "fk_league": "SFA1",
+                            "team_name": "Lamontville Golden Arrows",
+                            "url_league": "https://www.transfermarkt.com/betway-premiership/startseite/wettbewerb/SFA1",
+                            "stats": {
+                                "total_players": 39
+                            },
+                            "players": {}
+                        },
+                        "Stellenbosch FC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "SFA1",
+                            "team_name": "Stellenbosch FC",
+                            "url_league": "https://www.transfermarkt.com/betway-premiership/startseite/wettbewerb/SFA1",
+                            "stats": {
+                                "total_players": 29
+                            },
+                            "players": {}
+                        },
+                        "AmaZulu FC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "SFA1",
+                            "team_name": "AmaZulu FC",
+                            "url_league": "https://www.transfermarkt.com/betway-premiership/startseite/wettbewerb/SFA1",
+                            "stats": {
+                                "total_players": 28
+                            },
+                            "players": {}
+                        },
+                        "Cape Town City FC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "SFA1",
+                            "team_name": "Cape Town City FC",
+                            "url_league": "https://www.transfermarkt.com/betway-premiership/startseite/wettbewerb/SFA1",
+                            "stats": {
+                                "total_players": 31
+                            },
+                            "players": {}
+                        },
+                        "Richards Bay FC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "SFA1",
+                            "team_name": "Richards Bay FC",
+                            "url_league": "https://www.transfermarkt.com/betway-premiership/startseite/wettbewerb/SFA1",
+                            "stats": {
+                                "total_players": 35
+                            },
+                            "players": {}
+                        },
+                        "Sekhukhune United FC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "SFA1",
+                            "team_name": "Sekhukhune United FC",
+                            "url_league": "https://www.transfermarkt.com/betway-premiership/startseite/wettbewerb/SFA1",
+                            "stats": {
+                                "total_players": 33
+                            },
+                            "players": {}
+                        },
+                        "TS Galaxy FC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "SFA1",
+                            "team_name": "TS Galaxy FC",
+                            "url_league": "https://www.transfermarkt.com/betway-premiership/startseite/wettbewerb/SFA1",
+                            "stats": {
+                                "total_players": 28
+                            },
+                            "players": {}
+                        },
+                        "Chippa United": {
+                            "fk_region": "AFR1",
+                            "fk_league": "SFA1",
+                            "team_name": "Chippa United",
+                            "url_league": "https://www.transfermarkt.com/betway-premiership/startseite/wettbewerb/SFA1",
+                            "stats": {
+                                "total_players": 35
+                            },
+                            "players": {}
+                        },
+                        "Polokwane City FC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "SFA1",
+                            "team_name": "Polokwane City FC",
+                            "url_league": "https://www.transfermarkt.com/betway-premiership/startseite/wettbewerb/SFA1",
+                            "stats": {
+                                "total_players": 33
+                            },
+                            "players": {}
+                        },
+                        "Marumo Gallants FC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "SFA1",
+                            "team_name": "Marumo Gallants FC",
+                            "url_league": "https://www.transfermarkt.com/betway-premiership/startseite/wettbewerb/SFA1",
+                            "stats": {
+                                "total_players": 37
+                            },
+                            "players": {}
+                        },
+                        "Royal AM FC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "SFA1",
+                            "team_name": "Royal AM FC",
+                            "url_league": "https://www.transfermarkt.com/betway-premiership/startseite/wettbewerb/SFA1",
+                            "stats": {
+                                "total_players": 31
+                            },
+                            "players": {}
+                        },
+                        "Magesi FC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "SFA1",
+                            "team_name": "Magesi FC",
+                            "url_league": "https://www.transfermarkt.com/betway-premiership/startseite/wettbewerb/SFA1",
+                            "stats": {
+                                "total_players": 35
+                            },
+                            "players": {}
+                        }
+                    }
+                },
+                "EGY1": {
+                    "id_league": "EGY1",
+                    "competition": "Premier League",
+                    "country": "Egypt",
+                    "url_league": "https://www.transfermarkt.com/egyptian-premier-league/startseite/wettbewerb/EGY1",
+                    "stats": {
+                        "fk_league": "EGY1",
+                        "fk_region": "AFR1",
+                        "total_clubs": 18,
+                        "total_players": 608,
+                        "avg_age": 26.9,
+                        "foreigners": 17.9,
+                        "game_ratio_of_foreign_players": null,
+                        "goals_per_match": 2.06,
+                        "average_market_value": null,
+                        "total_value": 15165000000.0
+                    },
+                    "teams": {
+                        "fk_region": "AFR1",
+                        "fk_league": "EGY1",
+                        "url_league": "https://www.transfermarkt.com/egyptian-premier-league/startseite/wettbewerb/EGY1",
+                        "Al Ahly FC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "EGY1",
+                            "team_name": "Al Ahly FC",
+                            "url_league": "https://www.transfermarkt.com/egyptian-premier-league/startseite/wettbewerb/EGY1",
+                            "stats": {
+                                "total_players": 32
+                            },
+                            "players": {}
+                        },
+                        "Pyramids FC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "EGY1",
+                            "team_name": "Pyramids FC",
+                            "url_league": "https://www.transfermarkt.com/egyptian-premier-league/startseite/wettbewerb/EGY1",
+                            "stats": {
+                                "total_players": 28
+                            },
+                            "players": {}
+                        },
+                        "Zamalek SC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "EGY1",
+                            "team_name": "Zamalek SC",
+                            "url_league": "https://www.transfermarkt.com/egyptian-premier-league/startseite/wettbewerb/EGY1",
+                            "stats": {
+                                "total_players": 38
+                            },
+                            "players": {}
+                        },
+                        "Cleopatra FC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "EGY1",
+                            "team_name": "Cleopatra FC",
+                            "url_league": "https://www.transfermarkt.com/egyptian-premier-league/startseite/wettbewerb/EGY1",
+                            "stats": {
+                                "total_players": 41
+                            },
+                            "players": {}
+                        },
+                        "El Masry SC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "EGY1",
+                            "team_name": "El Masry SC",
+                            "url_league": "https://www.transfermarkt.com/egyptian-premier-league/startseite/wettbewerb/EGY1",
+                            "stats": {
+                                "total_players": 36
+                            },
+                            "players": {}
+                        },
+                        "Modern Sport Club": {
+                            "fk_region": "AFR1",
+                            "fk_league": "EGY1",
+                            "team_name": "Modern Sport Club",
+                            "url_league": "https://www.transfermarkt.com/egyptian-premier-league/startseite/wettbewerb/EGY1",
+                            "stats": {
+                                "total_players": 36
+                            },
+                            "players": {}
+                        },
+                        "Bank El Ahly": {
+                            "fk_region": "AFR1",
+                            "fk_league": "EGY1",
+                            "team_name": "Bank El Ahly",
+                            "url_league": "https://www.transfermarkt.com/egyptian-premier-league/startseite/wettbewerb/EGY1",
+                            "stats": {
+                                "total_players": 31
+                            },
+                            "players": {}
+                        },
+                        "Zed FC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "EGY1",
+                            "team_name": "Zed FC",
+                            "url_league": "https://www.transfermarkt.com/egyptian-premier-league/startseite/wettbewerb/EGY1",
+                            "stats": {
+                                "total_players": 31
+                            },
+                            "players": {}
+                        },
+                        "Smouha SC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "EGY1",
+                            "team_name": "Smouha SC",
+                            "url_league": "https://www.transfermarkt.com/egyptian-premier-league/startseite/wettbewerb/EGY1",
+                            "stats": {
+                                "total_players": 36
+                            },
+                            "players": {}
+                        },
+                        "Ittihad Alexandria SC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "EGY1",
+                            "team_name": "Ittihad Alexandria SC",
+                            "url_league": "https://www.transfermarkt.com/egyptian-premier-league/startseite/wettbewerb/EGY1",
+                            "stats": {
+                                "total_players": 39
+                            },
+                            "players": {}
+                        },
+                        "Tala'ea El Gaish": {
+                            "fk_region": "AFR1",
+                            "fk_league": "EGY1",
+                            "team_name": "Tala'ea El Gaish",
+                            "url_league": "https://www.transfermarkt.com/egyptian-premier-league/startseite/wettbewerb/EGY1",
+                            "stats": {
+                                "total_players": 31
+                            },
+                            "players": {}
+                        },
+                        "Enppi SC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "EGY1",
+                            "team_name": "Enppi SC",
+                            "url_league": "https://www.transfermarkt.com/egyptian-premier-league/startseite/wettbewerb/EGY1",
+                            "stats": {
+                                "total_players": 35
+                            },
+                            "players": {}
+                        },
+                        "Ghazl El Mahalla": {
+                            "fk_region": "AFR1",
+                            "fk_league": "EGY1",
+                            "team_name": "Ghazl El Mahalla",
+                            "url_league": "https://www.transfermarkt.com/egyptian-premier-league/startseite/wettbewerb/EGY1",
+                            "stats": {
+                                "total_players": 36
+                            },
+                            "players": {}
+                        },
+                        "Harras El Hodoud": {
+                            "fk_region": "AFR1",
+                            "fk_league": "EGY1",
+                            "team_name": "Harras El Hodoud",
+                            "url_league": "https://www.transfermarkt.com/egyptian-premier-league/startseite/wettbewerb/EGY1",
+                            "stats": {
+                                "total_players": 35
+                            },
+                            "players": {}
+                        },
+                        "Pharco FC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "EGY1",
+                            "team_name": "Pharco FC",
+                            "url_league": "https://www.transfermarkt.com/egyptian-premier-league/startseite/wettbewerb/EGY1",
+                            "stats": {
+                                "total_players": 33
+                            },
+                            "players": {}
+                        },
+                        "Petrojet": {
+                            "fk_region": "AFR1",
+                            "fk_league": "EGY1",
+                            "team_name": "Petrojet",
+                            "url_league": "https://www.transfermarkt.com/egyptian-premier-league/startseite/wettbewerb/EGY1",
+                            "stats": {
+                                "total_players": 27
+                            },
+                            "players": {}
+                        },
+                        "Ismaily SC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "EGY1",
+                            "team_name": "Ismaily SC",
+                            "url_league": "https://www.transfermarkt.com/egyptian-premier-league/startseite/wettbewerb/EGY1",
+                            "stats": {
+                                "total_players": 31
+                            },
+                            "players": {}
+                        },
+                        "El Gouna FC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "EGY1",
+                            "team_name": "El Gouna FC",
+                            "url_league": "https://www.transfermarkt.com/egyptian-premier-league/startseite/wettbewerb/EGY1",
+                            "stats": {
+                                "total_players": 32
+                            },
+                            "players": {}
+                        }
+                    }
+                },
+                "MAR1": {
+                    "id_league": "MAR1",
+                    "competition": "Botola Pro Inwi",
+                    "country": "Morocco",
+                    "url_league": "https://www.transfermarkt.com/botola-pro-inwi/startseite/wettbewerb/MAR1",
+                    "stats": {
+                        "fk_league": "MAR1",
+                        "fk_region": "AFR1",
+                        "total_clubs": 16,
+                        "total_players": 452,
+                        "avg_age": 26.8,
+                        "foreigners": 14.4,
+                        "game_ratio_of_foreign_players": null,
+                        "goals_per_match": 2.23,
+                        "average_market_value": null,
+                        "total_value": 12003000000.0
+                    },
+                    "teams": {
+                        "fk_region": "AFR1",
+                        "fk_league": "MAR1",
+                        "url_league": "https://www.transfermarkt.com/botola-pro-inwi/startseite/wettbewerb/MAR1",
+                        "Wydad Casablanca": {
+                            "fk_region": "AFR1",
+                            "fk_league": "MAR1",
+                            "team_name": "Wydad Casablanca",
+                            "url_league": "https://www.transfermarkt.com/botola-pro-inwi/startseite/wettbewerb/MAR1",
+                            "stats": {
+                                "total_players": 29
+                            },
+                            "players": {}
+                        },
+                        "AS FAR Rabat": {
+                            "fk_region": "AFR1",
+                            "fk_league": "MAR1",
+                            "team_name": "AS FAR Rabat",
+                            "url_league": "https://www.transfermarkt.com/botola-pro-inwi/startseite/wettbewerb/MAR1",
+                            "stats": {
+                                "total_players": 23
+                            },
+                            "players": {}
+                        },
+                        "Renaissance de Berkane": {
+                            "fk_region": "AFR1",
+                            "fk_league": "MAR1",
+                            "team_name": "Renaissance de Berkane",
+                            "url_league": "https://www.transfermarkt.com/botola-pro-inwi/startseite/wettbewerb/MAR1",
+                            "stats": {
+                                "total_players": 26
+                            },
+                            "players": {}
+                        },
+                        "Raja Club Athletic": {
+                            "fk_region": "AFR1",
+                            "fk_league": "MAR1",
+                            "team_name": "Raja Club Athletic",
+                            "url_league": "https://www.transfermarkt.com/botola-pro-inwi/startseite/wettbewerb/MAR1",
+                            "stats": {
+                                "total_players": 25
+                            },
+                            "players": {}
+                        },
+                        "FUS Rabat": {
+                            "fk_region": "AFR1",
+                            "fk_league": "MAR1",
+                            "team_name": "FUS Rabat",
+                            "url_league": "https://www.transfermarkt.com/botola-pro-inwi/startseite/wettbewerb/MAR1",
+                            "stats": {
+                                "total_players": 24
+                            },
+                            "players": {}
+                        },
+                        "MAS Fès": {
+                            "fk_region": "AFR1",
+                            "fk_league": "MAR1",
+                            "team_name": "MAS Fès",
+                            "url_league": "https://www.transfermarkt.com/botola-pro-inwi/startseite/wettbewerb/MAR1",
+                            "stats": {
+                                "total_players": 26
+                            },
+                            "players": {}
+                        },
+                        "Union Touarga Sportif": {
+                            "fk_region": "AFR1",
+                            "fk_league": "MAR1",
+                            "team_name": "Union Touarga Sportif",
+                            "url_league": "https://www.transfermarkt.com/botola-pro-inwi/startseite/wettbewerb/MAR1",
+                            "stats": {
+                                "total_players": 35
+                            },
+                            "players": {}
+                        },
+                        "Moghreb Atlético Tétouan": {
+                            "fk_region": "AFR1",
+                            "fk_league": "MAR1",
+                            "team_name": "Moghreb Atlético Tétouan",
+                            "url_league": "https://www.transfermarkt.com/botola-pro-inwi/startseite/wettbewerb/MAR1",
+                            "stats": {
+                                "total_players": 34
+                            },
+                            "players": {}
+                        },
+                        "Renaissance Zemamra": {
+                            "fk_region": "AFR1",
+                            "fk_league": "MAR1",
+                            "team_name": "Renaissance Zemamra",
+                            "url_league": "https://www.transfermarkt.com/botola-pro-inwi/startseite/wettbewerb/MAR1",
+                            "stats": {
+                                "total_players": 32
+                            },
+                            "players": {}
+                        },
+                        "Ittihad Tanger": {
+                            "fk_region": "AFR1",
+                            "fk_league": "MAR1",
+                            "team_name": "Ittihad Tanger",
+                            "url_league": "https://www.transfermarkt.com/botola-pro-inwi/startseite/wettbewerb/MAR1",
+                            "stats": {
+                                "total_players": 30
+                            },
+                            "players": {}
+                        },
+                        "Hassania d'Agadir": {
+                            "fk_region": "AFR1",
+                            "fk_league": "MAR1",
+                            "team_name": "Hassania d'Agadir",
+                            "url_league": "https://www.transfermarkt.com/botola-pro-inwi/startseite/wettbewerb/MAR1",
+                            "stats": {
+                                "total_players": 28
+                            },
+                            "players": {}
+                        },
+                        "Olympique Safi": {
+                            "fk_region": "AFR1",
+                            "fk_league": "MAR1",
+                            "team_name": "Olympique Safi",
+                            "url_league": "https://www.transfermarkt.com/botola-pro-inwi/startseite/wettbewerb/MAR1",
+                            "stats": {
+                                "total_players": 23
+                            },
+                            "players": {}
+                        },
+                        "Difaâ El Jadida": {
+                            "fk_region": "AFR1",
+                            "fk_league": "MAR1",
+                            "team_name": "Difaâ El Jadida",
+                            "url_league": "https://www.transfermarkt.com/botola-pro-inwi/startseite/wettbewerb/MAR1",
+                            "stats": {
+                                "total_players": 27
+                            },
+                            "players": {}
+                        },
+                        "COD Meknès": {
+                            "fk_region": "AFR1",
+                            "fk_league": "MAR1",
+                            "team_name": "COD Meknès",
+                            "url_league": "https://www.transfermarkt.com/botola-pro-inwi/startseite/wettbewerb/MAR1",
+                            "stats": {
+                                "total_players": 32
+                            },
+                            "players": {}
+                        },
+                        "Jeunesse Sportive de Soualem": {
+                            "fk_region": "AFR1",
+                            "fk_league": "MAR1",
+                            "team_name": "Jeunesse Sportive de Soualem",
+                            "url_league": "https://www.transfermarkt.com/botola-pro-inwi/startseite/wettbewerb/MAR1",
+                            "stats": {
+                                "total_players": 34
+                            },
+                            "players": {}
+                        },
+                        "SC Chabab Mohammédia": {
+                            "fk_region": "AFR1",
+                            "fk_league": "MAR1",
+                            "team_name": "SC Chabab Mohammédia",
+                            "url_league": "https://www.transfermarkt.com/botola-pro-inwi/startseite/wettbewerb/MAR1",
+                            "stats": {
+                                "total_players": 24
+                            },
+                            "players": {}
+                        }
+                    }
+                },
+                "ALG1": {
+                    "id_league": "ALG1",
+                    "competition": "Ligue Professionnelle 1",
+                    "country": "Algeria",
+                    "url_league": "https://www.transfermarkt.com/ligue-professionnelle-1/startseite/wettbewerb/ALG1",
+                    "stats": {
+                        "fk_league": "ALG1",
+                        "fk_region": "AFR1",
+                        "total_clubs": 16,
+                        "total_players": 420,
+                        "avg_age": 27.3,
+                        "foreigners": 11.2,
+                        "game_ratio_of_foreign_players": null,
+                        "goals_per_match": 1.88,
+                        "average_market_value": null,
+                        "total_value": 10178000000.0
+                    },
+                    "teams": {
+                        "fk_region": "AFR1",
+                        "fk_league": "ALG1",
+                        "url_league": "https://www.transfermarkt.com/ligue-professionnelle-1/startseite/wettbewerb/ALG1",
+                        "USM Alger": {
+                            "fk_region": "AFR1",
+                            "fk_league": "ALG1",
+                            "team_name": "USM Alger",
+                            "url_league": "https://www.transfermarkt.com/ligue-professionnelle-1/startseite/wettbewerb/ALG1",
+                            "stats": {
+                                "total_players": 28
+                            },
+                            "players": {}
+                        },
+                        "MC Algiers": {
+                            "fk_region": "AFR1",
+                            "fk_league": "ALG1",
+                            "team_name": "MC Algiers",
+                            "url_league": "https://www.transfermarkt.com/ligue-professionnelle-1/startseite/wettbewerb/ALG1",
+                            "stats": {
+                                "total_players": 28
+                            },
+                            "players": {}
+                        },
+                        "CR Belouizdad": {
+                            "fk_region": "AFR1",
+                            "fk_league": "ALG1",
+                            "team_name": "CR Belouizdad",
+                            "url_league": "https://www.transfermarkt.com/ligue-professionnelle-1/startseite/wettbewerb/ALG1",
+                            "stats": {
+                                "total_players": 24
+                            },
+                            "players": {}
+                        },
+                        "JS Kabylie": {
+                            "fk_region": "AFR1",
+                            "fk_league": "ALG1",
+                            "team_name": "JS Kabylie",
+                            "url_league": "https://www.transfermarkt.com/ligue-professionnelle-1/startseite/wettbewerb/ALG1",
+                            "stats": {
+                                "total_players": 26
+                            },
+                            "players": {}
+                        },
+                        "Paradou AC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "ALG1",
+                            "team_name": "Paradou AC",
+                            "url_league": "https://www.transfermarkt.com/ligue-professionnelle-1/startseite/wettbewerb/ALG1",
+                            "stats": {
+                                "total_players": 31
+                            },
+                            "players": {}
+                        },
+                        "CS Constantine": {
+                            "fk_region": "AFR1",
+                            "fk_league": "ALG1",
+                            "team_name": "CS Constantine",
+                            "url_league": "https://www.transfermarkt.com/ligue-professionnelle-1/startseite/wettbewerb/ALG1",
+                            "stats": {
+                                "total_players": 27
+                            },
+                            "players": {}
+                        },
+                        "ES Sétif": {
+                            "fk_region": "AFR1",
+                            "fk_league": "ALG1",
+                            "team_name": "ES Sétif",
+                            "url_league": "https://www.transfermarkt.com/ligue-professionnelle-1/startseite/wettbewerb/ALG1",
+                            "stats": {
+                                "total_players": 25
+                            },
+                            "players": {}
+                        },
+                        "MC Oran": {
+                            "fk_region": "AFR1",
+                            "fk_league": "ALG1",
+                            "team_name": "MC Oran",
+                            "url_league": "https://www.transfermarkt.com/ligue-professionnelle-1/startseite/wettbewerb/ALG1",
+                            "stats": {
+                                "total_players": 27
+                            },
+                            "players": {}
+                        },
+                        "JS Saoura": {
+                            "fk_region": "AFR1",
+                            "fk_league": "ALG1",
+                            "team_name": "JS Saoura",
+                            "url_league": "https://www.transfermarkt.com/ligue-professionnelle-1/startseite/wettbewerb/ALG1",
+                            "stats": {
+                                "total_players": 28
+                            },
+                            "players": {}
+                        },
+                        "ASO Chlef": {
+                            "fk_region": "AFR1",
+                            "fk_league": "ALG1",
+                            "team_name": "ASO Chlef",
+                            "url_league": "https://www.transfermarkt.com/ligue-professionnelle-1/startseite/wettbewerb/ALG1",
+                            "stats": {
+                                "total_players": 27
+                            },
+                            "players": {}
+                        },
+                        "ES Mostaganem": {
+                            "fk_region": "AFR1",
+                            "fk_league": "ALG1",
+                            "team_name": "ES Mostaganem",
+                            "url_league": "https://www.transfermarkt.com/ligue-professionnelle-1/startseite/wettbewerb/ALG1",
+                            "stats": {
+                                "total_players": 28
+                            },
+                            "players": {}
+                        },
+                        "NC Magra": {
+                            "fk_region": "AFR1",
+                            "fk_league": "ALG1",
+                            "team_name": "NC Magra",
+                            "url_league": "https://www.transfermarkt.com/ligue-professionnelle-1/startseite/wettbewerb/ALG1",
+                            "stats": {
+                                "total_players": 25
+                            },
+                            "players": {}
+                        },
+                        "Olympique Akbou": {
+                            "fk_region": "AFR1",
+                            "fk_league": "ALG1",
+                            "team_name": "Olympique Akbou",
+                            "url_league": "https://www.transfermarkt.com/ligue-professionnelle-1/startseite/wettbewerb/ALG1",
+                            "stats": {
+                                "total_players": 25
+                            },
+                            "players": {}
+                        },
+                        "USM Khenchela": {
+                            "fk_region": "AFR1",
+                            "fk_league": "ALG1",
+                            "team_name": "USM Khenchela",
+                            "url_league": "https://www.transfermarkt.com/ligue-professionnelle-1/startseite/wettbewerb/ALG1",
+                            "stats": {
+                                "total_players": 22
+                            },
+                            "players": {}
+                        },
+                        "US Biskra": {
+                            "fk_region": "AFR1",
+                            "fk_league": "ALG1",
+                            "team_name": "US Biskra",
+                            "url_league": "https://www.transfermarkt.com/ligue-professionnelle-1/startseite/wettbewerb/ALG1",
+                            "stats": {
+                                "total_players": 25
+                            },
+                            "players": {}
+                        },
+                        "MC El Bayadh": {
+                            "fk_region": "AFR1",
+                            "fk_league": "ALG1",
+                            "team_name": "MC El Bayadh",
+                            "url_league": "https://www.transfermarkt.com/ligue-professionnelle-1/startseite/wettbewerb/ALG1",
+                            "stats": {
+                                "total_players": 24
+                            },
+                            "players": {}
+                        }
+                    }
+                },
+                "TUN1": {
+                    "id_league": "TUN1",
+                    "competition": "Ligue I Pro",
+                    "country": "Tunisia",
+                    "url_league": "https://www.transfermarkt.com/ligue-professionnelle-1/startseite/wettbewerb/TUN1",
+                    "stats": {
+                        "fk_league": "TUN1",
+                        "fk_region": "AFR1",
+                        "total_clubs": 16,
+                        "total_players": 549,
+                        "avg_age": 25.0,
+                        "foreigners": 18.8,
+                        "game_ratio_of_foreign_players": null,
+                        "goals_per_match": 2.04,
+                        "average_market_value": null,
+                        "total_value": 9423000000.0
+                    },
+                    "teams": {
+                        "fk_region": "AFR1",
+                        "fk_league": "TUN1",
+                        "url_league": "https://www.transfermarkt.com/ligue-professionnelle-1/startseite/wettbewerb/TUN1",
+                        "Esperance Tunis": {
+                            "fk_region": "AFR1",
+                            "fk_league": "TUN1",
+                            "team_name": "Esperance Tunis",
+                            "url_league": "https://www.transfermarkt.com/ligue-professionnelle-1/startseite/wettbewerb/TUN1",
+                            "stats": {
+                                "total_players": 35
+                            },
+                            "players": {}
+                        },
+                        "Club Africain": {
+                            "fk_region": "AFR1",
+                            "fk_league": "TUN1",
+                            "team_name": "Club Africain",
+                            "url_league": "https://www.transfermarkt.com/ligue-professionnelle-1/startseite/wettbewerb/TUN1",
+                            "stats": {
+                                "total_players": 30
+                            },
+                            "players": {}
+                        },
+                        "CS Sfaxien": {
+                            "fk_region": "AFR1",
+                            "fk_league": "TUN1",
+                            "team_name": "CS Sfaxien",
+                            "url_league": "https://www.transfermarkt.com/ligue-professionnelle-1/startseite/wettbewerb/TUN1",
+                            "stats": {
+                                "total_players": 32
+                            },
+                            "players": {}
+                        },
+                        "US Monastir": {
+                            "fk_region": "AFR1",
+                            "fk_league": "TUN1",
+                            "team_name": "US Monastir",
+                            "url_league": "https://www.transfermarkt.com/ligue-professionnelle-1/startseite/wettbewerb/TUN1",
+                            "stats": {
+                                "total_players": 31
+                            },
+                            "players": {}
+                        },
+                        "Etoile Sportive du Sahel": {
+                            "fk_region": "AFR1",
+                            "fk_league": "TUN1",
+                            "team_name": "Etoile Sportive du Sahel",
+                            "url_league": "https://www.transfermarkt.com/ligue-professionnelle-1/startseite/wettbewerb/TUN1",
+                            "stats": {
+                                "total_players": 29
+                            },
+                            "players": {}
+                        },
+                        "Club Athlétique Bizertin": {
+                            "fk_region": "AFR1",
+                            "fk_league": "TUN1",
+                            "team_name": "Club Athlétique Bizertin",
+                            "url_league": "https://www.transfermarkt.com/ligue-professionnelle-1/startseite/wettbewerb/TUN1",
+                            "stats": {
+                                "total_players": 36
+                            },
+                            "players": {}
+                        },
+                        "Stade Tunisien": {
+                            "fk_region": "AFR1",
+                            "fk_league": "TUN1",
+                            "team_name": "Stade Tunisien",
+                            "url_league": "https://www.transfermarkt.com/ligue-professionnelle-1/startseite/wettbewerb/TUN1",
+                            "stats": {
+                                "total_players": 36
+                            },
+                            "players": {}
+                        },
+                        "Olympique Beja": {
+                            "fk_region": "AFR1",
+                            "fk_league": "TUN1",
+                            "team_name": "Olympique Beja",
+                            "url_league": "https://www.transfermarkt.com/ligue-professionnelle-1/startseite/wettbewerb/TUN1",
+                            "stats": {
+                                "total_players": 37
+                            },
+                            "players": {}
+                        },
+                        "Union Sportive de Ben Guerdane": {
+                            "fk_region": "AFR1",
+                            "fk_league": "TUN1",
+                            "team_name": "Union Sportive de Ben Guerdane",
+                            "url_league": "https://www.transfermarkt.com/ligue-professionnelle-1/startseite/wettbewerb/TUN1",
+                            "stats": {
+                                "total_players": 30
+                            },
+                            "players": {}
+                        },
+                        "Etoile Sportive Metlaoui": {
+                            "fk_region": "AFR1",
+                            "fk_league": "TUN1",
+                            "team_name": "Etoile Sportive Metlaoui",
+                            "url_league": "https://www.transfermarkt.com/ligue-professionnelle-1/startseite/wettbewerb/TUN1",
+                            "stats": {
+                                "total_players": 37
+                            },
+                            "players": {}
+                        },
+                        "ES Zarzis": {
+                            "fk_region": "AFR1",
+                            "fk_league": "TUN1",
+                            "team_name": "ES Zarzis",
+                            "url_league": "https://www.transfermarkt.com/ligue-professionnelle-1/startseite/wettbewerb/TUN1",
+                            "stats": {
+                                "total_players": 39
+                            },
+                            "players": {}
+                        },
+                        "AS Soliman": {
+                            "fk_region": "AFR1",
+                            "fk_league": "TUN1",
+                            "team_name": "AS Soliman",
+                            "url_league": "https://www.transfermarkt.com/ligue-professionnelle-1/startseite/wettbewerb/TUN1",
+                            "stats": {
+                                "total_players": 45
+                            },
+                            "players": {}
+                        },
+                        "EGS Gafsa": {
+                            "fk_region": "AFR1",
+                            "fk_league": "TUN1",
+                            "team_name": "EGS Gafsa",
+                            "url_league": "https://www.transfermarkt.com/ligue-professionnelle-1/startseite/wettbewerb/TUN1",
+                            "stats": {
+                                "total_players": 36
+                            },
+                            "players": {}
+                        },
+                        "Avenir Sportif de Gabès": {
+                            "fk_region": "AFR1",
+                            "fk_league": "TUN1",
+                            "team_name": "Avenir Sportif de Gabès",
+                            "url_league": "https://www.transfermarkt.com/ligue-professionnelle-1/startseite/wettbewerb/TUN1",
+                            "stats": {
+                                "total_players": 31
+                            },
+                            "players": {}
+                        },
+                        "Jeunesse Sportive Omrane": {
+                            "fk_region": "AFR1",
+                            "fk_league": "TUN1",
+                            "team_name": "Jeunesse Sportive Omrane",
+                            "url_league": "https://www.transfermarkt.com/ligue-professionnelle-1/startseite/wettbewerb/TUN1",
+                            "stats": {
+                                "total_players": 36
+                            },
+                            "players": {}
+                        },
+                        "US Tataouine": {
+                            "fk_region": "AFR1",
+                            "fk_league": "TUN1",
+                            "team_name": "US Tataouine",
+                            "url_league": "https://www.transfermarkt.com/ligue-professionnelle-1/startseite/wettbewerb/TUN1",
+                            "stats": {
+                                "total_players": 29
+                            },
+                            "players": {}
+                        }
+                    }
+                },
+                "GHPL": {
+                    "id_league": "GHPL",
+                    "competition": "Premier League",
+                    "country": "Ghana",
+                    "url_league": "https://www.transfermarkt.com/ghana-premier-league/startseite/wettbewerb/GHPL",
+                    "stats": {
+                        "fk_league": "GHPL",
+                        "fk_region": "AFR1",
+                        "total_clubs": 18,
+                        "total_players": 629,
+                        "avg_age": 23.6,
+                        "foreigners": 2.4,
+                        "game_ratio_of_foreign_players": null,
+                        "goals_per_match": 1.79,
+                        "average_market_value": null,
+                        "total_value": 2983000000.0
+                    },
+                    "teams": {
+                        "fk_region": "AFR1",
+                        "fk_league": "GHPL",
+                        "url_league": "https://www.transfermarkt.com/ghana-premier-league/startseite/wettbewerb/GHPL",
+                        "Medeama SC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "GHPL",
+                            "team_name": "Medeama SC",
+                            "url_league": "https://www.transfermarkt.com/ghana-premier-league/startseite/wettbewerb/GHPL",
+                            "stats": {
+                                "total_players": 37
+                            },
+                            "players": {}
+                        },
+                        "FC Samartex": {
+                            "fk_region": "AFR1",
+                            "fk_league": "GHPL",
+                            "team_name": "FC Samartex",
+                            "url_league": "https://www.transfermarkt.com/ghana-premier-league/startseite/wettbewerb/GHPL",
+                            "stats": {
+                                "total_players": 34
+                            },
+                            "players": {}
+                        },
+                        "Asante Kotoko SC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "GHPL",
+                            "team_name": "Asante Kotoko SC",
+                            "url_league": "https://www.transfermarkt.com/ghana-premier-league/startseite/wettbewerb/GHPL",
+                            "stats": {
+                                "total_players": 32
+                            },
+                            "players": {}
+                        },
+                        "Hearts of Oak": {
+                            "fk_region": "AFR1",
+                            "fk_league": "GHPL",
+                            "team_name": "Hearts of Oak",
+                            "url_league": "https://www.transfermarkt.com/ghana-premier-league/startseite/wettbewerb/GHPL",
+                            "stats": {
+                                "total_players": 30
+                            },
+                            "players": {}
+                        },
+                        "Nations Football Club": {
+                            "fk_region": "AFR1",
+                            "fk_league": "GHPL",
+                            "team_name": "Nations Football Club",
+                            "url_league": "https://www.transfermarkt.com/ghana-premier-league/startseite/wettbewerb/GHPL",
+                            "stats": {
+                                "total_players": 35
+                            },
+                            "players": {}
+                        },
+                        "Accra Lions FC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "GHPL",
+                            "team_name": "Accra Lions FC",
+                            "url_league": "https://www.transfermarkt.com/ghana-premier-league/startseite/wettbewerb/GHPL",
+                            "stats": {
+                                "total_players": 32
+                            },
+                            "players": {}
+                        },
+                        "Bechem United FC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "GHPL",
+                            "team_name": "Bechem United FC",
+                            "url_league": "https://www.transfermarkt.com/ghana-premier-league/startseite/wettbewerb/GHPL",
+                            "stats": {
+                                "total_players": 34
+                            },
+                            "players": {}
+                        },
+                        "Berekum Chelsea FC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "GHPL",
+                            "team_name": "Berekum Chelsea FC",
+                            "url_league": "https://www.transfermarkt.com/ghana-premier-league/startseite/wettbewerb/GHPL",
+                            "stats": {
+                                "total_players": 31
+                            },
+                            "players": {}
+                        },
+                        "Bibiani Gold Stars FC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "GHPL",
+                            "team_name": "Bibiani Gold Stars FC",
+                            "url_league": "https://www.transfermarkt.com/ghana-premier-league/startseite/wettbewerb/GHPL",
+                            "stats": {
+                                "total_players": 34
+                            },
+                            "players": {}
+                        },
+                        "Vision FC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "GHPL",
+                            "team_name": "Vision FC",
+                            "url_league": "https://www.transfermarkt.com/ghana-premier-league/startseite/wettbewerb/GHPL",
+                            "stats": {
+                                "total_players": 44
+                            },
+                            "players": {}
+                        },
+                        "Nsoatreman FC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "GHPL",
+                            "team_name": "Nsoatreman FC",
+                            "url_league": "https://www.transfermarkt.com/ghana-premier-league/startseite/wettbewerb/GHPL",
+                            "stats": {
+                                "total_players": 32
+                            },
+                            "players": {}
+                        },
+                        "Karela United FC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "GHPL",
+                            "team_name": "Karela United FC",
+                            "url_league": "https://www.transfermarkt.com/ghana-premier-league/startseite/wettbewerb/GHPL",
+                            "stats": {
+                                "total_players": 40
+                            },
+                            "players": {}
+                        },
+                        "Aduana Stars FC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "GHPL",
+                            "team_name": "Aduana Stars FC",
+                            "url_league": "https://www.transfermarkt.com/ghana-premier-league/startseite/wettbewerb/GHPL",
+                            "stats": {
+                                "total_players": 33
+                            },
+                            "players": {}
+                        },
+                        "Young Apostles FC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "GHPL",
+                            "team_name": "Young Apostles FC",
+                            "url_league": "https://www.transfermarkt.com/ghana-premier-league/startseite/wettbewerb/GHPL",
+                            "stats": {
+                                "total_players": 39
+                            },
+                            "players": {}
+                        },
+                        "Legon Cities FC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "GHPL",
+                            "team_name": "Legon Cities FC",
+                            "url_league": "https://www.transfermarkt.com/ghana-premier-league/startseite/wettbewerb/GHPL",
+                            "stats": {
+                                "total_players": 39
+                            },
+                            "players": {}
+                        },
+                        "Heart of Lions FC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "GHPL",
+                            "team_name": "Heart of Lions FC",
+                            "url_league": "https://www.transfermarkt.com/ghana-premier-league/startseite/wettbewerb/GHPL",
+                            "stats": {
+                                "total_players": 29
+                            },
+                            "players": {}
+                        },
+                        "Dreams FC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "GHPL",
+                            "team_name": "Dreams FC",
+                            "url_league": "https://www.transfermarkt.com/ghana-premier-league/startseite/wettbewerb/GHPL",
+                            "stats": {
+                                "total_players": 39
+                            },
+                            "players": {}
+                        },
+                        "Basake Holy Stars FC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "GHPL",
+                            "team_name": "Basake Holy Stars FC",
+                            "url_league": "https://www.transfermarkt.com/ghana-premier-league/startseite/wettbewerb/GHPL",
+                            "stats": {
+                                "total_players": 35
+                            },
+                            "players": {}
+                        }
+                    }
+                },
+                "LPL": {
+                    "id_league": "LPL",
+                    "competition": "Libyan Premier League",
+                    "country": "Libya",
+                    "url_league": "https://www.transfermarkt.com/libyan-premier-league/startseite/wettbewerb/LPL",
+                    "stats": {
+                        "fk_league": "LPL",
+                        "fk_region": "AFR1",
+                        "total_clubs": 35,
+                        "total_players": 1042,
+                        "avg_age": 27.4,
+                        "foreigners": 28.0,
+                        "game_ratio_of_foreign_players": null,
+                        "goals_per_match": 2.4,
+                        "average_market_value": null,
+                        "total_value": 2318000000.0
+                    },
+                    "teams": {
+                        "fk_region": "AFR1",
+                        "fk_league": "LPL",
+                        "url_league": "https://www.transfermarkt.com/libyan-premier-league/startseite/wettbewerb/LPL",
+                        "Al-Ahli SC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "LPL",
+                            "team_name": "Al-Ahli SC",
+                            "url_league": "https://www.transfermarkt.com/libyan-premier-league/startseite/wettbewerb/LPL",
+                            "stats": {
+                                "total_players": 30
+                            },
+                            "players": {}
+                        },
+                        "Al-Ittihad SC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "LPL",
+                            "team_name": "Al-Ittihad SC",
+                            "url_league": "https://www.transfermarkt.com/libyan-premier-league/startseite/wettbewerb/LPL",
+                            "stats": {
+                                "total_players": 27
+                            },
+                            "players": {}
+                        },
+                        "Asswehly SC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "LPL",
+                            "team_name": "Asswehly SC",
+                            "url_league": "https://www.transfermarkt.com/libyan-premier-league/startseite/wettbewerb/LPL",
+                            "stats": {
+                                "total_players": 27
+                            },
+                            "players": {}
+                        },
+                        "Al-Ahly SC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "LPL",
+                            "team_name": "Al-Ahly SC",
+                            "url_league": "https://www.transfermarkt.com/libyan-premier-league/startseite/wettbewerb/LPL",
+                            "stats": {
+                                "total_players": 29
+                            },
+                            "players": {}
+                        },
+                        "Al-Nasr SC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "LPL",
+                            "team_name": "Al-Nasr SC",
+                            "url_league": "https://www.transfermarkt.com/libyan-premier-league/startseite/wettbewerb/LPL",
+                            "stats": {
+                                "total_players": 33
+                            },
+                            "players": {}
+                        },
+                        "Al-Akhdar SC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "LPL",
+                            "team_name": "Al-Akhdar SC",
+                            "url_league": "https://www.transfermarkt.com/libyan-premier-league/startseite/wettbewerb/LPL",
+                            "stats": {
+                                "total_players": 28
+                            },
+                            "players": {}
+                        },
+                        "Al-Hilal SC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "LPL",
+                            "team_name": "Al-Hilal SC",
+                            "url_league": "https://www.transfermarkt.com/libyan-premier-league/startseite/wettbewerb/LPL",
+                            "stats": {
+                                "total_players": 28
+                            },
+                            "players": {}
+                        },
+                        "Al-Madina SC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "LPL",
+                            "team_name": "Al-Madina SC",
+                            "url_league": "https://www.transfermarkt.com/libyan-premier-league/startseite/wettbewerb/LPL",
+                            "stats": {
+                                "total_players": 26
+                            },
+                            "players": {}
+                        },
+                        "Khaleej Sirte SC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "LPL",
+                            "team_name": "Khaleej Sirte SC",
+                            "url_league": "https://www.transfermarkt.com/libyan-premier-league/startseite/wettbewerb/LPL",
+                            "stats": {
+                                "total_players": 26
+                            },
+                            "players": {}
+                        },
+                        "Abu Salim SC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "LPL",
+                            "team_name": "Abu Salim SC",
+                            "url_league": "https://www.transfermarkt.com/libyan-premier-league/startseite/wettbewerb/LPL",
+                            "stats": {
+                                "total_players": 29
+                            },
+                            "players": {}
+                        },
+                        "Abelashhar SC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "LPL",
+                            "team_name": "Abelashhar SC",
+                            "url_league": "https://www.transfermarkt.com/libyan-premier-league/startseite/wettbewerb/LPL",
+                            "stats": {
+                                "total_players": 33
+                            },
+                            "players": {}
+                        },
+                        "Olympic Azzawiya SC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "LPL",
+                            "team_name": "Olympic Azzawiya SC",
+                            "url_league": "https://www.transfermarkt.com/libyan-premier-league/startseite/wettbewerb/LPL",
+                            "stats": {
+                                "total_players": 26
+                            },
+                            "players": {}
+                        },
+                        "Asaria SC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "LPL",
+                            "team_name": "Asaria SC",
+                            "url_league": "https://www.transfermarkt.com/libyan-premier-league/startseite/wettbewerb/LPL",
+                            "stats": {
+                                "total_players": 31
+                            },
+                            "players": {}
+                        },
+                        "Al Ansar Al Bayda": {
+                            "fk_region": "AFR1",
+                            "fk_league": "LPL",
+                            "team_name": "Al Ansar Al Bayda",
+                            "url_league": "https://www.transfermarkt.com/libyan-premier-league/startseite/wettbewerb/LPL",
+                            "stats": {
+                                "total_players": 31
+                            },
+                            "players": {}
+                        },
+                        "Al Bashayer Misrata": {
+                            "fk_region": "AFR1",
+                            "fk_league": "LPL",
+                            "team_name": "Al Bashayer Misrata",
+                            "url_league": "https://www.transfermarkt.com/libyan-premier-league/startseite/wettbewerb/LPL",
+                            "stats": {
+                                "total_players": 27
+                            },
+                            "players": {}
+                        },
+                        "Al Murooj": {
+                            "fk_region": "AFR1",
+                            "fk_league": "LPL",
+                            "team_name": "Al Murooj",
+                            "url_league": "https://www.transfermarkt.com/libyan-premier-league/startseite/wettbewerb/LPL",
+                            "stats": {
+                                "total_players": 32
+                            },
+                            "players": {}
+                        },
+                        "Al-Ta'awon SC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "LPL",
+                            "team_name": "Al-Ta'awon SC",
+                            "url_league": "https://www.transfermarkt.com/libyan-premier-league/startseite/wettbewerb/LPL",
+                            "stats": {
+                                "total_players": 29
+                            },
+                            "players": {}
+                        },
+                        "Al Tersana Tripoli": {
+                            "fk_region": "AFR1",
+                            "fk_league": "LPL",
+                            "team_name": "Al Tersana Tripoli",
+                            "url_league": "https://www.transfermarkt.com/libyan-premier-league/startseite/wettbewerb/LPL",
+                            "stats": {
+                                "total_players": 29
+                            },
+                            "players": {}
+                        },
+                        "Al Dahra Tripoli FC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "LPL",
+                            "team_name": "Al Dahra Tripoli FC",
+                            "url_league": "https://www.transfermarkt.com/libyan-premier-league/startseite/wettbewerb/LPL",
+                            "stats": {
+                                "total_players": 35
+                            },
+                            "players": {}
+                        },
+                        "Al-Tahaddy SC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "LPL",
+                            "team_name": "Al-Tahaddy SC",
+                            "url_league": "https://www.transfermarkt.com/libyan-premier-league/startseite/wettbewerb/LPL",
+                            "stats": {
+                                "total_players": 28
+                            },
+                            "players": {}
+                        },
+                        "Al-Borouq FC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "LPL",
+                            "team_name": "Al-Borouq FC",
+                            "url_league": "https://www.transfermarkt.com/libyan-premier-league/startseite/wettbewerb/LPL",
+                            "stats": {
+                                "total_players": 31
+                            },
+                            "players": {}
+                        },
+                        "Al-Majd SCC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "LPL",
+                            "team_name": "Al-Majd SCC",
+                            "url_league": "https://www.transfermarkt.com/libyan-premier-league/startseite/wettbewerb/LPL",
+                            "stats": {
+                                "total_players": 35
+                            },
+                            "players": {}
+                        },
+                        "Al-Anwar Al-Abyar SC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "LPL",
+                            "team_name": "Al-Anwar Al-Abyar SC",
+                            "url_league": "https://www.transfermarkt.com/libyan-premier-league/startseite/wettbewerb/LPL",
+                            "stats": {
+                                "total_players": 26
+                            },
+                            "players": {}
+                        },
+                        "Andalus FC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "LPL",
+                            "team_name": "Andalus FC",
+                            "url_league": "https://www.transfermarkt.com/libyan-premier-league/startseite/wettbewerb/LPL",
+                            "stats": {
+                                "total_players": 30
+                            },
+                            "players": {}
+                        },
+                        "Al Wefaq Ajdabiya": {
+                            "fk_region": "AFR1",
+                            "fk_league": "LPL",
+                            "team_name": "Al Wefaq Ajdabiya",
+                            "url_league": "https://www.transfermarkt.com/libyan-premier-league/startseite/wettbewerb/LPL",
+                            "stats": {
+                                "total_players": 30
+                            },
+                            "players": {}
+                        },
+                        "Al Soqour Tobruk": {
+                            "fk_region": "AFR1",
+                            "fk_league": "LPL",
+                            "team_name": "Al Soqour Tobruk",
+                            "url_league": "https://www.transfermarkt.com/libyan-premier-league/startseite/wettbewerb/LPL",
+                            "stats": {
+                                "total_players": 32
+                            },
+                            "players": {}
+                        },
+                        "Al Sadaqa Shahat SC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "LPL",
+                            "team_name": "Al Sadaqa Shahat SC",
+                            "url_league": "https://www.transfermarkt.com/libyan-premier-league/startseite/wettbewerb/LPL",
+                            "stats": {
+                                "total_players": 28
+                            },
+                            "players": {}
+                        },
+                        "Branes SC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "LPL",
+                            "team_name": "Branes SC",
+                            "url_league": "https://www.transfermarkt.com/libyan-premier-league/startseite/wettbewerb/LPL",
+                            "stats": {
+                                "total_players": 35
+                            },
+                            "players": {}
+                        },
+                        "Al Mahdia": {
+                            "fk_region": "AFR1",
+                            "fk_league": "LPL",
+                            "team_name": "Al Mahdia",
+                            "url_league": "https://www.transfermarkt.com/libyan-premier-league/startseite/wettbewerb/LPL",
+                            "stats": {
+                                "total_players": 31
+                            },
+                            "players": {}
+                        },
+                        "Al Nahda Sabha": {
+                            "fk_region": "AFR1",
+                            "fk_league": "LPL",
+                            "team_name": "Al Nahda Sabha",
+                            "url_league": "https://www.transfermarkt.com/libyan-premier-league/startseite/wettbewerb/LPL",
+                            "stats": {
+                                "total_players": 29
+                            },
+                            "players": {}
+                        },
+                        "Shabab Al Ghar": {
+                            "fk_region": "AFR1",
+                            "fk_league": "LPL",
+                            "team_name": "Shabab Al Ghar",
+                            "url_league": "https://www.transfermarkt.com/libyan-premier-league/startseite/wettbewerb/LPL",
+                            "stats": {
+                                "total_players": 32
+                            },
+                            "players": {}
+                        },
+                        "El Ettihad Al-Misraty SC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "LPL",
+                            "team_name": "El Ettihad Al-Misraty SC",
+                            "url_league": "https://www.transfermarkt.com/libyan-premier-league/startseite/wettbewerb/LPL",
+                            "stats": {
+                                "total_players": 30
+                            },
+                            "players": {}
+                        },
+                        "Al-Khums SC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "LPL",
+                            "team_name": "Al-Khums SC",
+                            "url_league": "https://www.transfermarkt.com/libyan-premier-league/startseite/wettbewerb/LPL",
+                            "stats": {
+                                "total_players": 31
+                            },
+                            "players": {}
+                        },
+                        "Al-Watan SC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "LPL",
+                            "team_name": "Al-Watan SC",
+                            "url_league": "https://www.transfermarkt.com/libyan-premier-league/startseite/wettbewerb/LPL",
+                            "stats": {
+                                "total_players": 28
+                            },
+                            "players": {}
+                        },
+                        "Libyan Stadium": {
+                            "fk_region": "AFR1",
+                            "fk_league": "LPL",
+                            "team_name": "Libyan Stadium",
+                            "url_league": "https://www.transfermarkt.com/libyan-premier-league/startseite/wettbewerb/LPL",
+                            "stats": {
+                                "total_players": 30
+                            },
+                            "players": {}
+                        }
+                    }
+                },
+                "NPFL": {
+                    "id_league": "NPFL",
+                    "competition": "NPFL",
+                    "country": "Nigeria",
+                    "url_league": "https://www.transfermarkt.com/nigeria-professional-football-league/startseite/wettbewerb/NPFL",
+                    "stats": {
+                        "fk_league": "NPFL",
+                        "fk_region": "AFR1",
+                        "total_clubs": 20,
+                        "total_players": 800,
+                        "avg_age": 25.3,
+                        "foreigners": 2.5,
+                        "game_ratio_of_foreign_players": null,
+                        "goals_per_match": 2.0,
+                        "average_market_value": null,
+                        "total_value": 900000.0
+                    },
+                    "teams": {
+                        "fk_region": "AFR1",
+                        "fk_league": "NPFL",
+                        "url_league": "https://www.transfermarkt.com/nigeria-professional-football-league/startseite/wettbewerb/NPFL",
+                        "Kano Pillars": {
+                            "fk_region": "AFR1",
+                            "fk_league": "NPFL",
+                            "team_name": "Kano Pillars",
+                            "url_league": "https://www.transfermarkt.com/nigeria-professional-football-league/startseite/wettbewerb/NPFL",
+                            "stats": {
+                                "total_players": 37
+                            },
+                            "players": {}
+                        },
+                        "Bayelsa United": {
+                            "fk_region": "AFR1",
+                            "fk_league": "NPFL",
+                            "team_name": "Bayelsa United",
+                            "url_league": "https://www.transfermarkt.com/nigeria-professional-football-league/startseite/wettbewerb/NPFL",
+                            "stats": {
+                                "total_players": 42
+                            },
+                            "players": {}
+                        },
+                        "Abia Warriors FC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "NPFL",
+                            "team_name": "Abia Warriors FC",
+                            "url_league": "https://www.transfermarkt.com/nigeria-professional-football-league/startseite/wettbewerb/NPFL",
+                            "stats": {
+                                "total_players": 34
+                            },
+                            "players": {}
+                        },
+                        "Remo Stars FC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "NPFL",
+                            "team_name": "Remo Stars FC",
+                            "url_league": "https://www.transfermarkt.com/nigeria-professional-football-league/startseite/wettbewerb/NPFL",
+                            "stats": {
+                                "total_players": 38
+                            },
+                            "players": {}
+                        },
+                        "Akwa United": {
+                            "fk_region": "AFR1",
+                            "fk_league": "NPFL",
+                            "team_name": "Akwa United",
+                            "url_league": "https://www.transfermarkt.com/nigeria-professional-football-league/startseite/wettbewerb/NPFL",
+                            "stats": {
+                                "total_players": 42
+                            },
+                            "players": {}
+                        },
+                        "Plateau United FC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "NPFL",
+                            "team_name": "Plateau United FC",
+                            "url_league": "https://www.transfermarkt.com/nigeria-professional-football-league/startseite/wettbewerb/NPFL",
+                            "stats": {
+                                "total_players": 39
+                            },
+                            "players": {}
+                        },
+                        "Rivers United FC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "NPFL",
+                            "team_name": "Rivers United FC",
+                            "url_league": "https://www.transfermarkt.com/nigeria-professional-football-league/startseite/wettbewerb/NPFL",
+                            "stats": {
+                                "total_players": 38
+                            },
+                            "players": {}
+                        },
+                        "Ikorodu City FC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "NPFL",
+                            "team_name": "Ikorodu City FC",
+                            "url_league": "https://www.transfermarkt.com/nigeria-professional-football-league/startseite/wettbewerb/NPFL",
+                            "stats": {
+                                "total_players": 41
+                            },
+                            "players": {}
+                        },
+                        "Katsina United FC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "NPFL",
+                            "team_name": "Katsina United FC",
+                            "url_league": "https://www.transfermarkt.com/nigeria-professional-football-league/startseite/wettbewerb/NPFL",
+                            "stats": {
+                                "total_players": 36
+                            },
+                            "players": {}
+                        },
+                        "El-Kanemi Warriors": {
+                            "fk_region": "AFR1",
+                            "fk_league": "NPFL",
+                            "team_name": "El-Kanemi Warriors",
+                            "url_league": "https://www.transfermarkt.com/nigeria-professional-football-league/startseite/wettbewerb/NPFL",
+                            "stats": {
+                                "total_players": 33
+                            },
+                            "players": {}
+                        },
+                        "Sunshine Stars": {
+                            "fk_region": "AFR1",
+                            "fk_league": "NPFL",
+                            "team_name": "Sunshine Stars",
+                            "url_league": "https://www.transfermarkt.com/nigeria-professional-football-league/startseite/wettbewerb/NPFL",
+                            "stats": {
+                                "total_players": 43
+                            },
+                            "players": {}
+                        },
+                        "Niger Tornadoes": {
+                            "fk_region": "AFR1",
+                            "fk_league": "NPFL",
+                            "team_name": "Niger Tornadoes",
+                            "url_league": "https://www.transfermarkt.com/nigeria-professional-football-league/startseite/wettbewerb/NPFL",
+                            "stats": {
+                                "total_players": 39
+                            },
+                            "players": {}
+                        },
+                        "Kwara United FC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "NPFL",
+                            "team_name": "Kwara United FC",
+                            "url_league": "https://www.transfermarkt.com/nigeria-professional-football-league/startseite/wettbewerb/NPFL",
+                            "stats": {
+                                "total_players": 35
+                            },
+                            "players": {}
+                        },
+                        "Enyimba Aba": {
+                            "fk_region": "AFR1",
+                            "fk_league": "NPFL",
+                            "team_name": "Enyimba Aba",
+                            "url_league": "https://www.transfermarkt.com/nigeria-professional-football-league/startseite/wettbewerb/NPFL",
+                            "stats": {
+                                "total_players": 44
+                            },
+                            "players": {}
+                        },
+                        "Nasarawa United": {
+                            "fk_region": "AFR1",
+                            "fk_league": "NPFL",
+                            "team_name": "Nasarawa United",
+                            "url_league": "https://www.transfermarkt.com/nigeria-professional-football-league/startseite/wettbewerb/NPFL",
+                            "stats": {
+                                "total_players": 48
+                            },
+                            "players": {}
+                        },
+                        "FC Heartland": {
+                            "fk_region": "AFR1",
+                            "fk_league": "NPFL",
+                            "team_name": "FC Heartland",
+                            "url_league": "https://www.transfermarkt.com/nigeria-professional-football-league/startseite/wettbewerb/NPFL",
+                            "stats": {
+                                "total_players": 51
+                            },
+                            "players": {}
+                        },
+                        "Lobi Stars FC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "NPFL",
+                            "team_name": "Lobi Stars FC",
+                            "url_league": "https://www.transfermarkt.com/nigeria-professional-football-league/startseite/wettbewerb/NPFL",
+                            "stats": {
+                                "total_players": 46
+                            },
+                            "players": {}
+                        },
+                        "Shooting Stars Sports Club": {
+                            "fk_region": "AFR1",
+                            "fk_league": "NPFL",
+                            "team_name": "Shooting Stars Sports Club",
+                            "url_league": "https://www.transfermarkt.com/nigeria-professional-football-league/startseite/wettbewerb/NPFL",
+                            "stats": {
+                                "total_players": 36
+                            },
+                            "players": {}
+                        },
+                        "Bendel Insurance": {
+                            "fk_region": "AFR1",
+                            "fk_league": "NPFL",
+                            "team_name": "Bendel Insurance",
+                            "url_league": "https://www.transfermarkt.com/nigeria-professional-football-league/startseite/wettbewerb/NPFL",
+                            "stats": {
+                                "total_players": 41
+                            },
+                            "players": {}
+                        },
+                        "Enugu Rangers IFC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "NPFL",
+                            "team_name": "Enugu Rangers IFC",
+                            "url_league": "https://www.transfermarkt.com/nigeria-professional-football-league/startseite/wettbewerb/NPFL",
+                            "stats": {
+                                "total_players": 37
+                            },
+                            "players": {}
+                        }
+                    }
+                },
+                "UGL1": {
+                    "id_league": "UGL1",
+                    "competition": "Uganda Premier League",
+                    "country": "Uganda",
+                    "url_league": "https://www.transfermarkt.com/uganda-premier-league/startseite/wettbewerb/UGL1",
+                    "stats": {
+                        "fk_league": "UGL1",
+                        "fk_region": "AFR1",
+                        "total_clubs": 16,
+                        "total_players": 492,
+                        "avg_age": 26.4,
+                        "foreigners": 5.1,
+                        "game_ratio_of_foreign_players": null,
+                        "goals_per_match": 2.06,
+                        "average_market_value": null,
+                        "total_value": 500000.0
+                    },
+                    "teams": {
+                        "fk_region": "AFR1",
+                        "fk_league": "UGL1",
+                        "url_league": "https://www.transfermarkt.com/uganda-premier-league/startseite/wettbewerb/UGL1",
+                        "Vipers SC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "UGL1",
+                            "team_name": "Vipers SC",
+                            "url_league": "https://www.transfermarkt.com/uganda-premier-league/startseite/wettbewerb/UGL1",
+                            "stats": {
+                                "total_players": 30
+                            },
+                            "players": {}
+                        },
+                        "BUL Jinja FC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "UGL1",
+                            "team_name": "BUL Jinja FC",
+                            "url_league": "https://www.transfermarkt.com/uganda-premier-league/startseite/wettbewerb/UGL1",
+                            "stats": {
+                                "total_players": 31
+                            },
+                            "players": {}
+                        },
+                        "Express FC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "UGL1",
+                            "team_name": "Express FC",
+                            "url_league": "https://www.transfermarkt.com/uganda-premier-league/startseite/wettbewerb/UGL1",
+                            "stats": {
+                                "total_players": 26
+                            },
+                            "players": {}
+                        },
+                        "Kampala Capital City Authority FC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "UGL1",
+                            "team_name": "Kampala Capital City Authority FC",
+                            "url_league": "https://www.transfermarkt.com/uganda-premier-league/startseite/wettbewerb/UGL1",
+                            "stats": {
+                                "total_players": 29
+                            },
+                            "players": {}
+                        },
+                        "Kitara FC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "UGL1",
+                            "team_name": "Kitara FC",
+                            "url_league": "https://www.transfermarkt.com/uganda-premier-league/startseite/wettbewerb/UGL1",
+                            "stats": {
+                                "total_players": 35
+                            },
+                            "players": {}
+                        },
+                        "Lugazi FC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "UGL1",
+                            "team_name": "Lugazi FC",
+                            "url_league": "https://www.transfermarkt.com/uganda-premier-league/startseite/wettbewerb/UGL1",
+                            "stats": {
+                                "total_players": 33
+                            },
+                            "players": {}
+                        },
+                        "Maroons FC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "UGL1",
+                            "team_name": "Maroons FC",
+                            "url_league": "https://www.transfermarkt.com/uganda-premier-league/startseite/wettbewerb/UGL1",
+                            "stats": {
+                                "total_players": 31
+                            },
+                            "players": {}
+                        },
+                        "Mbale Heroes FC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "UGL1",
+                            "team_name": "Mbale Heroes FC",
+                            "url_league": "https://www.transfermarkt.com/uganda-premier-league/startseite/wettbewerb/UGL1",
+                            "stats": {
+                                "total_players": 34
+                            },
+                            "players": {}
+                        },
+                        "Mbarara City FC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "UGL1",
+                            "team_name": "Mbarara City FC",
+                            "url_league": "https://www.transfermarkt.com/uganda-premier-league/startseite/wettbewerb/UGL1",
+                            "stats": {
+                                "total_players": 34
+                            },
+                            "players": {}
+                        },
+                        "National Enterprise Corporation FC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "UGL1",
+                            "team_name": "National Enterprise Corporation FC",
+                            "url_league": "https://www.transfermarkt.com/uganda-premier-league/startseite/wettbewerb/UGL1",
+                            "stats": {
+                                "total_players": 29
+                            },
+                            "players": {}
+                        },
+                        "Police FC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "UGL1",
+                            "team_name": "Police FC",
+                            "url_league": "https://www.transfermarkt.com/uganda-premier-league/startseite/wettbewerb/UGL1",
+                            "stats": {
+                                "total_players": 29
+                            },
+                            "players": {}
+                        },
+                        "Sports Club Villa": {
+                            "fk_region": "AFR1",
+                            "fk_league": "UGL1",
+                            "team_name": "Sports Club Villa",
+                            "url_league": "https://www.transfermarkt.com/uganda-premier-league/startseite/wettbewerb/UGL1",
+                            "stats": {
+                                "total_players": 31
+                            },
+                            "players": {}
+                        },
+                        "Soltilo Bright Stars FC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "UGL1",
+                            "team_name": "Soltilo Bright Stars FC",
+                            "url_league": "https://www.transfermarkt.com/uganda-premier-league/startseite/wettbewerb/UGL1",
+                            "stats": {
+                                "total_players": 26
+                            },
+                            "players": {}
+                        },
+                        "Uganda People's Defence Force FC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "UGL1",
+                            "team_name": "Uganda People's Defence Force FC",
+                            "url_league": "https://www.transfermarkt.com/uganda-premier-league/startseite/wettbewerb/UGL1",
+                            "stats": {
+                                "total_players": 30
+                            },
+                            "players": {}
+                        },
+                        "Uganda Revenue Authority FC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "UGL1",
+                            "team_name": "Uganda Revenue Authority FC",
+                            "url_league": "https://www.transfermarkt.com/uganda-premier-league/startseite/wettbewerb/UGL1",
+                            "stats": {
+                                "total_players": 31
+                            },
+                            "players": {}
+                        },
+                        "Wakiso Giants FC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "UGL1",
+                            "team_name": "Wakiso Giants FC",
+                            "url_league": "https://www.transfermarkt.com/uganda-premier-league/startseite/wettbewerb/UGL1",
+                            "stats": {
+                                "total_players": 33
+                            },
+                            "players": {}
+                        }
+                    }
+                },
+                "ETP1": {
+                    "id_league": "ETP1",
+                    "competition": "Premier League",
+                    "country": "Ethiopia",
+                    "url_league": "https://www.transfermarkt.com/ethiopian-premier-league/startseite/wettbewerb/ETP1",
+                    "stats": {
+                        "fk_league": "ETP1",
+                        "fk_region": "AFR1",
+                        "total_clubs": 18,
+                        "total_players": 566,
+                        "avg_age": 24.6,
+                        "foreigners": 8.5,
+                        "game_ratio_of_foreign_players": null,
+                        "goals_per_match": 1.84,
+                        "average_market_value": null,
+                        "total_value": 325000.0
+                    },
+                    "teams": {
+                        "fk_region": "AFR1",
+                        "fk_league": "ETP1",
+                        "url_league": "https://www.transfermarkt.com/ethiopian-premier-league/startseite/wettbewerb/ETP1",
+                        "Wolwalo Adigrat University FC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "ETP1",
+                            "team_name": "Wolwalo Adigrat University FC",
+                            "url_league": "https://www.transfermarkt.com/ethiopian-premier-league/startseite/wettbewerb/ETP1",
+                            "stats": {
+                                "total_players": 34
+                            },
+                            "players": {}
+                        },
+                        "Adama Ketema FC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "ETP1",
+                            "team_name": "Adama Ketema FC",
+                            "url_league": "https://www.transfermarkt.com/ethiopian-premier-league/startseite/wettbewerb/ETP1",
+                            "stats": {
+                                "total_players": 29
+                            },
+                            "players": {}
+                        },
+                        "Arbaminch Ketema FC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "ETP1",
+                            "team_name": "Arbaminch Ketema FC",
+                            "url_league": "https://www.transfermarkt.com/ethiopian-premier-league/startseite/wettbewerb/ETP1",
+                            "stats": {
+                                "total_players": 32
+                            },
+                            "players": {}
+                        },
+                        "Bahirdar Ketema SC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "ETP1",
+                            "team_name": "Bahirdar Ketema SC",
+                            "url_league": "https://www.transfermarkt.com/ethiopian-premier-league/startseite/wettbewerb/ETP1",
+                            "stats": {
+                                "total_players": 32
+                            },
+                            "players": {}
+                        },
+                        "Diredawa Ketema SC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "ETP1",
+                            "team_name": "Diredawa Ketema SC",
+                            "url_league": "https://www.transfermarkt.com/ethiopian-premier-league/startseite/wettbewerb/ETP1",
+                            "stats": {
+                                "total_players": 29
+                            },
+                            "players": {}
+                        },
+                        "Ethio Electric SC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "ETP1",
+                            "team_name": "Ethio Electric SC",
+                            "url_league": "https://www.transfermarkt.com/ethiopian-premier-league/startseite/wettbewerb/ETP1",
+                            "stats": {
+                                "total_players": 34
+                            },
+                            "players": {}
+                        },
+                        "Ethiopia Bunna SC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "ETP1",
+                            "team_name": "Ethiopia Bunna SC",
+                            "url_league": "https://www.transfermarkt.com/ethiopian-premier-league/startseite/wettbewerb/ETP1",
+                            "stats": {
+                                "total_players": 33
+                            },
+                            "players": {}
+                        },
+                        "Ethiopia Nigd Bank SA": {
+                            "fk_region": "AFR1",
+                            "fk_league": "ETP1",
+                            "team_name": "Ethiopia Nigd Bank SA",
+                            "url_league": "https://www.transfermarkt.com/ethiopian-premier-league/startseite/wettbewerb/ETP1",
+                            "stats": {
+                                "total_players": 29
+                            },
+                            "players": {}
+                        },
+                        "Ethiopian Insurance Corporation SA": {
+                            "fk_region": "AFR1",
+                            "fk_league": "ETP1",
+                            "team_name": "Ethiopian Insurance Corporation SA",
+                            "url_league": "https://www.transfermarkt.com/ethiopian-premier-league/startseite/wettbewerb/ETP1",
+                            "stats": {
+                                "total_players": 27
+                            },
+                            "players": {}
+                        },
+                        "Fasil Kenema SC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "ETP1",
+                            "team_name": "Fasil Kenema SC",
+                            "url_league": "https://www.transfermarkt.com/ethiopian-premier-league/startseite/wettbewerb/ETP1",
+                            "stats": {
+                                "total_players": 32
+                            },
+                            "players": {}
+                        },
+                        "Hadia Hosaina FC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "ETP1",
+                            "team_name": "Hadia Hosaina FC",
+                            "url_league": "https://www.transfermarkt.com/ethiopian-premier-league/startseite/wettbewerb/ETP1",
+                            "stats": {
+                                "total_players": 31
+                            },
+                            "players": {}
+                        },
+                        "Hawasa Ketema SC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "ETP1",
+                            "team_name": "Hawasa Ketema SC",
+                            "url_league": "https://www.transfermarkt.com/ethiopian-premier-league/startseite/wettbewerb/ETP1",
+                            "stats": {
+                                "total_players": 31
+                            },
+                            "players": {}
+                        },
+                        "Kidus Giorgis SA": {
+                            "fk_region": "AFR1",
+                            "fk_league": "ETP1",
+                            "team_name": "Kidus Giorgis SA",
+                            "url_league": "https://www.transfermarkt.com/ethiopian-premier-league/startseite/wettbewerb/ETP1",
+                            "stats": {
+                                "total_players": 31
+                            },
+                            "players": {}
+                        },
+                        "Mechal SC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "ETP1",
+                            "team_name": "Mechal SC",
+                            "url_league": "https://www.transfermarkt.com/ethiopian-premier-league/startseite/wettbewerb/ETP1",
+                            "stats": {
+                                "total_players": 31
+                            },
+                            "players": {}
+                        },
+                        "Mekele 70 Enderta FC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "ETP1",
+                            "team_name": "Mekele 70 Enderta FC",
+                            "url_league": "https://www.transfermarkt.com/ethiopian-premier-league/startseite/wettbewerb/ETP1",
+                            "stats": {
+                                "total_players": 35
+                            },
+                            "players": {}
+                        },
+                        "Sidama Bunna FC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "ETP1",
+                            "team_name": "Sidama Bunna FC",
+                            "url_league": "https://www.transfermarkt.com/ethiopian-premier-league/startseite/wettbewerb/ETP1",
+                            "stats": {
+                                "total_players": 32
+                            },
+                            "players": {}
+                        },
+                        "Sihul Shire FC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "ETP1",
+                            "team_name": "Sihul Shire FC",
+                            "url_league": "https://www.transfermarkt.com/ethiopian-premier-league/startseite/wettbewerb/ETP1",
+                            "stats": {
+                                "total_players": 33
+                            },
+                            "players": {}
+                        },
+                        "Wolayta Dicha SC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "ETP1",
+                            "team_name": "Wolayta Dicha SC",
+                            "url_league": "https://www.transfermarkt.com/ethiopian-premier-league/startseite/wettbewerb/ETP1",
+                            "stats": {
+                                "total_players": 31
+                            },
+                            "players": {}
+                        }
+                    }
+                },
+                "NEDC": {
+                    "id_league": "NEDC",
+                    "competition": "Nedbank Cup",
+                    "country": "South Africa",
+                    "url_league": "https://www.transfermarkt.com/nedbank-cup/startseite/wettbewerb/NEDC",
+                    "stats": {
+                        "fk_league": "NEDC",
+                        "fk_region": "AFR1",
+                        "total_clubs": 40,
+                        "total_players": 1266,
+                        "avg_age": 28.1,
+                        "foreigners": 10.1,
+                        "game_ratio_of_foreign_players": null,
+                        "goals_per_match": 3.13,
+                        "average_market_value": null,
+                        "total_value": 17035000000.0
+                    },
+                    "teams": {
+                        "fk_region": "AFR1",
+                        "fk_league": "NEDC",
+                        "url_league": "https://www.transfermarkt.com/nedbank-cup/startseite/wettbewerb/NEDC"
+                    }
+                },
+                "TELK": {
+                    "id_league": "TELK",
+                    "competition": "Carling Knockout",
+                    "country": "South Africa",
+                    "url_league": "https://www.transfermarkt.com/carling-knockout/startseite/wettbewerb/TELK",
+                    "stats": {
+                        "fk_league": "TELK",
+                        "fk_region": "AFR1",
+                        "total_clubs": 16,
+                        "total_players": 539,
+                        "avg_age": 27.7,
+                        "foreigners": 15.8,
+                        "game_ratio_of_foreign_players": null,
+                        "goals_per_match": 3.2,
+                        "average_market_value": null,
+                        "total_value": 16855000000.0
+                    },
+                    "teams": {
+                        "fk_region": "AFR1",
+                        "fk_league": "TELK",
+                        "url_league": "https://www.transfermarkt.com/carling-knockout/startseite/wettbewerb/TELK"
+                    }
+                },
+                "EGYP": {
+                    "id_league": "EGYP",
+                    "competition": "Egypt Cup",
+                    "country": "Egypt",
+                    "url_league": "https://www.transfermarkt.com/egypt-cup/startseite/wettbewerb/EGYP",
+                    "stats": {
+                        "fk_league": "EGYP",
+                        "fk_region": "AFR1",
+                        "total_clubs": 32,
+                        "total_players": 928,
+                        "avg_age": 27.4,
+                        "foreigners": 13.4,
+                        "game_ratio_of_foreign_players": null,
+                        "goals_per_match": 3.0,
+                        "average_market_value": null,
+                        "total_value": 11850000000.0
+                    },
+                    "teams": {
+                        "fk_region": "AFR1",
+                        "fk_league": "EGYP",
+                        "url_league": "https://www.transfermarkt.com/egypt-cup/startseite/wettbewerb/EGYP"
+                    }
+                },
+                "MARP": {
+                    "id_league": "MARP",
+                    "competition": "Coupe du Trône Marocaine",
+                    "country": "Morocco",
+                    "url_league": "https://www.transfermarkt.com/coupe-du-trone-marocaine/startseite/wettbewerb/MARP",
+                    "stats": {
+                        "fk_league": "MARP",
+                        "fk_region": "AFR1",
+                        "total_clubs": 32,
+                        "total_players": 833,
+                        "avg_age": 26.9,
+                        "foreigners": 12.1,
+                        "game_ratio_of_foreign_players": null,
+                        "goals_per_match": 3.32,
+                        "average_market_value": null,
+                        "total_value": 11533000000.0
+                    },
+                    "teams": {
+                        "fk_region": "AFR1",
+                        "fk_league": "MARP",
+                        "url_league": "https://www.transfermarkt.com/coupe-du-trone-marocaine/startseite/wettbewerb/MARP"
+                    }
+                },
+                "SFAL": {
+                    "id_league": "SFAL",
+                    "competition": "MTN8",
+                    "country": "South Africa",
+                    "url_league": "https://www.transfermarkt.com/mtn8/startseite/wettbewerb/SFAL",
+                    "stats": {
+                        "fk_league": "SFAL",
+                        "fk_region": "AFR1",
+                        "total_clubs": 8,
+                        "total_players": 266,
+                        "avg_age": 27.1,
+                        "foreigners": 16.9,
+                        "game_ratio_of_foreign_players": null,
+                        "goals_per_match": 2.22,
+                        "average_market_value": null,
+                        "total_value": 10795000000.0
+                    },
+                    "teams": {
+                        "fk_region": "AFR1",
+                        "fk_league": "SFAL",
+                        "url_league": "https://www.transfermarkt.com/mtn8/startseite/wettbewerb/SFAL"
+                    }
+                },
+                "ALGP": {
+                    "id_league": "ALGP",
+                    "competition": "Coupe d'Algerie",
+                    "country": "Algeria",
+                    "url_league": "https://www.transfermarkt.com/coupe-dalgerie/startseite/wettbewerb/ALGP",
+                    "stats": {
+                        "fk_league": "ALGP",
+                        "fk_region": "AFR1",
+                        "total_clubs": 64,
+                        "total_players": 1087,
+                        "avg_age": 29.9,
+                        "foreigners": 4.5,
+                        "game_ratio_of_foreign_players": null,
+                        "goals_per_match": 2.6,
+                        "average_market_value": null,
+                        "total_value": 10178000000.0
+                    },
+                    "teams": {
+                        "fk_region": "AFR1",
+                        "fk_league": "ALGP",
+                        "url_league": "https://www.transfermarkt.com/coupe-dalgerie/startseite/wettbewerb/ALGP"
+                    }
+                },
+                "TUNP": {
+                    "id_league": "TUNP",
+                    "competition": "Tunisian Cup",
+                    "country": "Tunisia",
+                    "url_league": "https://www.transfermarkt.com/tunisian-cup/startseite/wettbewerb/TUNP",
+                    "stats": {
+                        "fk_league": "TUNP",
+                        "fk_region": "AFR1",
+                        "total_clubs": 32,
+                        "total_players": 990,
+                        "avg_age": 26.1,
+                        "foreigners": 10.5,
+                        "game_ratio_of_foreign_players": null,
+                        "goals_per_match": 2.67,
+                        "average_market_value": null,
+                        "total_value": 9430000000.0
+                    },
+                    "teams": {
+                        "fk_region": "AFR1",
+                        "fk_league": "TUNP",
+                        "url_league": "https://www.transfermarkt.com/tunisian-cup/startseite/wettbewerb/TUNP"
+                    }
+                },
+                "ESCU": {
+                    "id_league": "ESCU",
+                    "competition": "Egyptian Super Cup",
+                    "country": "Egypt",
+                    "url_league": "https://www.transfermarkt.com/egyptian-super-cup/startseite/wettbewerb/ESCU",
+                    "stats": {
+                        "fk_league": "ESCU",
+                        "fk_region": "AFR1",
+                        "total_clubs": 4,
+                        "total_players": 139,
+                        "avg_age": 27.3,
+                        "foreigners": 19.4,
+                        "game_ratio_of_foreign_players": null,
+                        "goals_per_match": 10.0,
+                        "average_market_value": null,
+                        "total_value": 8105000000.0
+                    },
+                    "teams": {
+                        "fk_region": "AFR1",
+                        "fk_league": "ESCU",
+                        "url_league": "https://www.transfermarkt.com/egyptian-super-cup/startseite/wettbewerb/ESCU"
+                    }
+                },
+                "AGSC": {
+                    "id_league": "AGSC",
+                    "competition": "Supercoupe d'Algérie",
+                    "country": "Algeria",
+                    "url_league": "https://www.transfermarkt.com/supercoupe-dalgerie/startseite/wettbewerb/AGSC",
+                    "stats": {
+                        "fk_league": "AGSC",
+                        "fk_region": "AFR1",
+                        "total_clubs": 2,
+                        "total_players": 52,
+                        "avg_age": 27.0,
+                        "foreigners": 15.4,
+                        "game_ratio_of_foreign_players": null,
+                        "goals_per_match": 11.0,
+                        "average_market_value": null,
+                        "total_value": 2068000000.0
+                    },
+                    "teams": {
+                        "fk_region": "AFR1",
+                        "fk_league": "AGSC",
+                        "url_league": "https://www.transfermarkt.com/supercoupe-dalgerie/startseite/wettbewerb/AGSC"
+                    }
+                },
+                "EGCP": {
+                    "id_league": "EGCP",
+                    "competition": "Championship Playoff",
+                    "country": "Egypt",
+                    "url_league": "https://www.transfermarkt.com/championship-playoff/startseite/wettbewerb/EGCP",
+                    "stats": {
+                        "fk_league": "EGCP",
+                        "fk_region": "AFR1",
+                        "total_clubs": 9,
+                        "total_players": 301,
+                        "avg_age": 26.9,
+                        "foreigners": 19.3,
+                        "game_ratio_of_foreign_players": null,
+                        "goals_per_match": 2.75,
+                        "average_market_value": null,
+                        "total_value": 10775000000.0
+                    },
+                    "teams": {
+                        "fk_region": "AFR1",
+                        "fk_league": "EGCP",
+                        "url_league": "https://www.transfermarkt.com/championship-playoff/startseite/wettbewerb/EGCP",
+                        "Al Ahly FC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "EGCP",
+                            "team_name": "Al Ahly FC",
+                            "url_league": "https://www.transfermarkt.com/championship-playoff/startseite/wettbewerb/EGCP",
+                            "stats": {
+                                "total_players": 32
+                            },
+                            "players": {}
+                        },
+                        "Pyramids FC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "EGCP",
+                            "team_name": "Pyramids FC",
+                            "url_league": "https://www.transfermarkt.com/championship-playoff/startseite/wettbewerb/EGCP",
+                            "stats": {
+                                "total_players": 28
+                            },
+                            "players": {}
+                        },
+                        "Zamalek SC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "EGCP",
+                            "team_name": "Zamalek SC",
+                            "url_league": "https://www.transfermarkt.com/championship-playoff/startseite/wettbewerb/EGCP",
+                            "stats": {
+                                "total_players": 38
+                            },
+                            "players": {}
+                        },
+                        "Cleopatra FC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "EGCP",
+                            "team_name": "Cleopatra FC",
+                            "url_league": "https://www.transfermarkt.com/championship-playoff/startseite/wettbewerb/EGCP",
+                            "stats": {
+                                "total_players": 41
+                            },
+                            "players": {}
+                        },
+                        "El Masry SC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "EGCP",
+                            "team_name": "El Masry SC",
+                            "url_league": "https://www.transfermarkt.com/championship-playoff/startseite/wettbewerb/EGCP",
+                            "stats": {
+                                "total_players": 36
+                            },
+                            "players": {}
+                        },
+                        "Bank El Ahly": {
+                            "fk_region": "AFR1",
+                            "fk_league": "EGCP",
+                            "team_name": "Bank El Ahly",
+                            "url_league": "https://www.transfermarkt.com/championship-playoff/startseite/wettbewerb/EGCP",
+                            "stats": {
+                                "total_players": 31
+                            },
+                            "players": {}
+                        },
+                        "Harras El Hodoud": {
+                            "fk_region": "AFR1",
+                            "fk_league": "EGCP",
+                            "team_name": "Harras El Hodoud",
+                            "url_league": "https://www.transfermarkt.com/championship-playoff/startseite/wettbewerb/EGCP",
+                            "stats": {
+                                "total_players": 35
+                            },
+                            "players": {}
+                        },
+                        "Pharco FC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "EGCP",
+                            "team_name": "Pharco FC",
+                            "url_league": "https://www.transfermarkt.com/championship-playoff/startseite/wettbewerb/EGCP",
+                            "stats": {
+                                "total_players": 33
+                            },
+                            "players": {}
+                        },
+                        "Petrojet": {
+                            "fk_region": "AFR1",
+                            "fk_league": "EGCP",
+                            "team_name": "Petrojet",
+                            "url_league": "https://www.transfermarkt.com/championship-playoff/startseite/wettbewerb/EGCP",
+                            "stats": {
+                                "total_players": 27
+                            },
+                            "players": {}
+                        }
+                    }
+                },
+                "EGRP": {
+                    "id_league": "EGRP",
+                    "competition": "Relegation Playoff",
+                    "country": "Egypt",
+                    "url_league": "https://www.transfermarkt.com/relegation-playoff/startseite/wettbewerb/EGRP",
+                    "stats": {
+                        "fk_league": "EGRP",
+                        "fk_region": "AFR1",
+                        "total_clubs": 9,
+                        "total_players": 307,
+                        "avg_age": 26.9,
+                        "foreigners": 16.6,
+                        "game_ratio_of_foreign_players": null,
+                        "goals_per_match": 1.81,
+                        "average_market_value": null,
+                        "total_value": 4390000000.0
+                    },
+                    "teams": {
+                        "fk_region": "AFR1",
+                        "fk_league": "EGRP",
+                        "url_league": "https://www.transfermarkt.com/relegation-playoff/startseite/wettbewerb/EGRP",
+                        "Modern Sport Club": {
+                            "fk_region": "AFR1",
+                            "fk_league": "EGRP",
+                            "team_name": "Modern Sport Club",
+                            "url_league": "https://www.transfermarkt.com/relegation-playoff/startseite/wettbewerb/EGRP",
+                            "stats": {
+                                "total_players": 36
+                            },
+                            "players": {}
+                        },
+                        "Zed FC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "EGRP",
+                            "team_name": "Zed FC",
+                            "url_league": "https://www.transfermarkt.com/relegation-playoff/startseite/wettbewerb/EGRP",
+                            "stats": {
+                                "total_players": 31
+                            },
+                            "players": {}
+                        },
+                        "Smouha SC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "EGRP",
+                            "team_name": "Smouha SC",
+                            "url_league": "https://www.transfermarkt.com/relegation-playoff/startseite/wettbewerb/EGRP",
+                            "stats": {
+                                "total_players": 36
+                            },
+                            "players": {}
+                        },
+                        "Ittihad Alexandria SC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "EGRP",
+                            "team_name": "Ittihad Alexandria SC",
+                            "url_league": "https://www.transfermarkt.com/relegation-playoff/startseite/wettbewerb/EGRP",
+                            "stats": {
+                                "total_players": 39
+                            },
+                            "players": {}
+                        },
+                        "Tala'ea El Gaish": {
+                            "fk_region": "AFR1",
+                            "fk_league": "EGRP",
+                            "team_name": "Tala'ea El Gaish",
+                            "url_league": "https://www.transfermarkt.com/relegation-playoff/startseite/wettbewerb/EGRP",
+                            "stats": {
+                                "total_players": 31
+                            },
+                            "players": {}
+                        },
+                        "Enppi SC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "EGRP",
+                            "team_name": "Enppi SC",
+                            "url_league": "https://www.transfermarkt.com/relegation-playoff/startseite/wettbewerb/EGRP",
+                            "stats": {
+                                "total_players": 35
+                            },
+                            "players": {}
+                        },
+                        "Ghazl El Mahalla": {
+                            "fk_region": "AFR1",
+                            "fk_league": "EGRP",
+                            "team_name": "Ghazl El Mahalla",
+                            "url_league": "https://www.transfermarkt.com/relegation-playoff/startseite/wettbewerb/EGRP",
+                            "stats": {
+                                "total_players": 36
+                            },
+                            "players": {}
+                        },
+                        "Ismaily SC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "EGRP",
+                            "team_name": "Ismaily SC",
+                            "url_league": "https://www.transfermarkt.com/relegation-playoff/startseite/wettbewerb/EGRP",
+                            "stats": {
+                                "total_players": 31
+                            },
+                            "players": {}
+                        },
+                        "El Gouna FC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "EGRP",
+                            "team_name": "El Gouna FC",
+                            "url_league": "https://www.transfermarkt.com/relegation-playoff/startseite/wettbewerb/EGRP",
+                            "stats": {
+                                "total_players": 32
+                            },
+                            "players": {}
+                        }
+                    }
+                },
+                "LPL2": {
+                    "id_league": "LPL2",
+                    "competition": "Qualif. Playoff",
+                    "country": "Libya",
+                    "url_league": "https://www.transfermarkt.com/libya-qualification-playoff/startseite/wettbewerb/LPL2",
+                    "stats": {
+                        "fk_league": "LPL2",
+                        "fk_region": "AFR1",
+                        "total_clubs": 12,
+                        "total_players": 340,
+                        "avg_age": 27.7,
+                        "foreigners": 28.8,
+                        "game_ratio_of_foreign_players": null,
+                        "goals_per_match": 2.33,
+                        "average_market_value": null,
+                        "total_value": 1885000000.0
+                    },
+                    "teams": {
+                        "fk_region": "AFR1",
+                        "fk_league": "LPL2",
+                        "url_league": "https://www.transfermarkt.com/libya-qualification-playoff/startseite/wettbewerb/LPL2",
+                        "Al-Ahli SC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "LPL2",
+                            "team_name": "Al-Ahli SC",
+                            "url_league": "https://www.transfermarkt.com/libya-qualification-playoff/startseite/wettbewerb/LPL2",
+                            "stats": {
+                                "total_players": 30
+                            },
+                            "players": {}
+                        },
+                        "Al-Ittihad SC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "LPL2",
+                            "team_name": "Al-Ittihad SC",
+                            "url_league": "https://www.transfermarkt.com/libya-qualification-playoff/startseite/wettbewerb/LPL2",
+                            "stats": {
+                                "total_players": 27
+                            },
+                            "players": {}
+                        },
+                        "Asswehly SC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "LPL2",
+                            "team_name": "Asswehly SC",
+                            "url_league": "https://www.transfermarkt.com/libya-qualification-playoff/startseite/wettbewerb/LPL2",
+                            "stats": {
+                                "total_players": 27
+                            },
+                            "players": {}
+                        },
+                        "Al-Ahly SC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "LPL2",
+                            "team_name": "Al-Ahly SC",
+                            "url_league": "https://www.transfermarkt.com/libya-qualification-playoff/startseite/wettbewerb/LPL2",
+                            "stats": {
+                                "total_players": 29
+                            },
+                            "players": {}
+                        },
+                        "Al-Nasr SC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "LPL2",
+                            "team_name": "Al-Nasr SC",
+                            "url_league": "https://www.transfermarkt.com/libya-qualification-playoff/startseite/wettbewerb/LPL2",
+                            "stats": {
+                                "total_players": 33
+                            },
+                            "players": {}
+                        },
+                        "Al-Akhdar SC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "LPL2",
+                            "team_name": "Al-Akhdar SC",
+                            "url_league": "https://www.transfermarkt.com/libya-qualification-playoff/startseite/wettbewerb/LPL2",
+                            "stats": {
+                                "total_players": 28
+                            },
+                            "players": {}
+                        },
+                        "Al-Hilal SC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "LPL2",
+                            "team_name": "Al-Hilal SC",
+                            "url_league": "https://www.transfermarkt.com/libya-qualification-playoff/startseite/wettbewerb/LPL2",
+                            "stats": {
+                                "total_players": 28
+                            },
+                            "players": {}
+                        },
+                        "Al-Madina SC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "LPL2",
+                            "team_name": "Al-Madina SC",
+                            "url_league": "https://www.transfermarkt.com/libya-qualification-playoff/startseite/wettbewerb/LPL2",
+                            "stats": {
+                                "total_players": 26
+                            },
+                            "players": {}
+                        },
+                        "Olympic Azzawiya SC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "LPL2",
+                            "team_name": "Olympic Azzawiya SC",
+                            "url_league": "https://www.transfermarkt.com/libya-qualification-playoff/startseite/wettbewerb/LPL2",
+                            "stats": {
+                                "total_players": 26
+                            },
+                            "players": {}
+                        },
+                        "Al-Tahaddy SC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "LPL2",
+                            "team_name": "Al-Tahaddy SC",
+                            "url_league": "https://www.transfermarkt.com/libya-qualification-playoff/startseite/wettbewerb/LPL2",
+                            "stats": {
+                                "total_players": 28
+                            },
+                            "players": {}
+                        },
+                        "Al Sadaqa Shahat SC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "LPL2",
+                            "team_name": "Al Sadaqa Shahat SC",
+                            "url_league": "https://www.transfermarkt.com/libya-qualification-playoff/startseite/wettbewerb/LPL2",
+                            "stats": {
+                                "total_players": 28
+                            },
+                            "players": {}
+                        },
+                        "El Ettihad Al-Misraty SC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "LPL2",
+                            "team_name": "El Ettihad Al-Misraty SC",
+                            "url_league": "https://www.transfermarkt.com/libya-qualification-playoff/startseite/wettbewerb/LPL2",
+                            "stats": {
+                                "total_players": 30
+                            },
+                            "players": {}
+                        }
+                    }
+                },
+                "LPL1": {
+                    "id_league": "LPL1",
+                    "competition": "Rel. Playoff",
+                    "country": "Libya",
+                    "url_league": "https://www.transfermarkt.com/libya-relegation-playoff/startseite/wettbewerb/LPL1",
+                    "stats": {
+                        "fk_league": "LPL1",
+                        "fk_region": "AFR1",
+                        "total_clubs": 8,
+                        "total_players": 248,
+                        "avg_age": 27.3,
+                        "foreigners": 29.8,
+                        "game_ratio_of_foreign_players": null,
+                        "goals_per_match": 0.0,
+                        "average_market_value": null,
+                        "total_value": 268000000.0
+                    },
+                    "teams": {
+                        "fk_region": "AFR1",
+                        "fk_league": "LPL1",
+                        "url_league": "https://www.transfermarkt.com/libya-relegation-playoff/startseite/wettbewerb/LPL1",
+                        "Khaleej Sirte SC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "LPL1",
+                            "team_name": "Khaleej Sirte SC",
+                            "url_league": "https://www.transfermarkt.com/libya-relegation-playoff/startseite/wettbewerb/LPL1",
+                            "stats": {
+                                "total_players": 26
+                            },
+                            "players": {}
+                        },
+                        "Abelashhar SC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "LPL1",
+                            "team_name": "Abelashhar SC",
+                            "url_league": "https://www.transfermarkt.com/libya-relegation-playoff/startseite/wettbewerb/LPL1",
+                            "stats": {
+                                "total_players": 33
+                            },
+                            "players": {}
+                        },
+                        "Al Ansar Al Bayda": {
+                            "fk_region": "AFR1",
+                            "fk_league": "LPL1",
+                            "team_name": "Al Ansar Al Bayda",
+                            "url_league": "https://www.transfermarkt.com/libya-relegation-playoff/startseite/wettbewerb/LPL1",
+                            "stats": {
+                                "total_players": 31
+                            },
+                            "players": {}
+                        },
+                        "Al Bashayer Misrata": {
+                            "fk_region": "AFR1",
+                            "fk_league": "LPL1",
+                            "team_name": "Al Bashayer Misrata",
+                            "url_league": "https://www.transfermarkt.com/libya-relegation-playoff/startseite/wettbewerb/LPL1",
+                            "stats": {
+                                "total_players": 27
+                            },
+                            "players": {}
+                        },
+                        "Al Murooj": {
+                            "fk_region": "AFR1",
+                            "fk_league": "LPL1",
+                            "team_name": "Al Murooj",
+                            "url_league": "https://www.transfermarkt.com/libya-relegation-playoff/startseite/wettbewerb/LPL1",
+                            "stats": {
+                                "total_players": 32
+                            },
+                            "players": {}
+                        },
+                        "Al Tersana Tripoli": {
+                            "fk_region": "AFR1",
+                            "fk_league": "LPL1",
+                            "team_name": "Al Tersana Tripoli",
+                            "url_league": "https://www.transfermarkt.com/libya-relegation-playoff/startseite/wettbewerb/LPL1",
+                            "stats": {
+                                "total_players": 29
+                            },
+                            "players": {}
+                        },
+                        "Al Dahra Tripoli FC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "LPL1",
+                            "team_name": "Al Dahra Tripoli FC",
+                            "url_league": "https://www.transfermarkt.com/libya-relegation-playoff/startseite/wettbewerb/LPL1",
+                            "stats": {
+                                "total_players": 35
+                            },
+                            "players": {}
+                        },
+                        "Branes SC": {
+                            "fk_region": "AFR1",
+                            "fk_league": "LPL1",
+                            "team_name": "Branes SC",
+                            "url_league": "https://www.transfermarkt.com/libya-relegation-playoff/startseite/wettbewerb/LPL1",
+                            "stats": {
+                                "total_players": 35
+                            },
+                            "players": {}
+                        }
+                    }
+                },
+                "EGLC": {
+                    "id_league": "EGLC",
+                    "competition": "Egyptian League Cup",
+                    "country": "Egypt",
+                    "url_league": "https://www.transfermarkt.com/egyptian-league-cup/startseite/wettbewerb/EGLC",
+                    "stats": {
+                        "fk_league": "EGLC",
+                        "fk_region": "AFR1",
+                        "total_clubs": 18,
+                        "total_players": 608,
+                        "avg_age": 26.9,
+                        "foreigners": 17.9,
+                        "game_ratio_of_foreign_players": null,
+                        "goals_per_match": 2.14,
+                        "average_market_value": null,
+                        "total_value": 15165000000.0
+                    },
+                    "teams": {
+                        "fk_region": "AFR1",
+                        "fk_league": "EGLC",
+                        "url_league": "https://www.transfermarkt.com/egyptian-league-cup/startseite/wettbewerb/EGLC"
+                    }
+                },
+                "MEC1": {
+                    "id_league": "MEC1",
+                    "competition": "Excellence Cup",
+                    "country": "Morocco",
+                    "url_league": "https://www.transfermarkt.com/moroccan-excellence-cup/startseite/wettbewerb/MEC1",
+                    "stats": {
+                        "fk_league": "MEC1",
+                        "fk_region": "AFR1",
+                        "total_clubs": 32,
+                        "total_players": 1006,
+                        "avg_age": 27.0,
+                        "foreigners": 11.1,
+                        "game_ratio_of_foreign_players": null,
+                        "goals_per_match": 2.4,
+                        "average_market_value": null,
+                        "total_value": 12039000000.0
+                    },
+                    "teams": {
+                        "fk_region": "AFR1",
+                        "fk_league": "MEC1",
+                        "url_league": "https://www.transfermarkt.com/moroccan-excellence-cup/startseite/wettbewerb/MEC1",
+                        "null": {
+                            "fk_region": "AFR1",
+                            "fk_league": "MEC1",
+                            "team_name": null,
+                            "url_league": "https://www.transfermarkt.com/moroccan-excellence-cup/startseite/wettbewerb/MEC1",
+                            "stats": {
+                                "total_players": null
+                            },
+                            "players": {}
+                        }
+                    }
+                },
+                "AGS2": {
+                    "id_league": "AGS2",
+                    "competition": "Supercoupe d'Algérie U21",
+                    "country": "Algeria",
+                    "url_league": "https://www.transfermarkt.com/supercoupe-dalgerie-u21/startseite/wettbewerb/AGS2",
+                    "stats": {
+                        "fk_league": "AGS2",
+                        "fk_region": "AFR1",
+                        "total_clubs": 2,
+                        "total_players": 40,
+                        "avg_age": 20.2,
+                        "foreigners": 0.0,
+                        "game_ratio_of_foreign_players": null,
+                        "goals_per_match": 3.0,
+                        "average_market_value": null,
+                        "total_value": 0.0
+                    },
+                    "teams": {
+                        "fk_region": "AFR1",
+                        "fk_league": "AGS2",
+                        "url_league": "https://www.transfermarkt.com/supercoupe-dalgerie-u21/startseite/wettbewerb/AGS2"
+                    }
+                }
+            }
+        }
+    }
+}

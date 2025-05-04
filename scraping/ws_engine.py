@@ -7,24 +7,16 @@ from config.exceptions import HTTPClientError
 from scraping.ws_entities import League, LeagueStats, RegionStats, TransferMarket
 
 class ScrapingEngine:
-    """
-    Motor reutilizable que contiene métodos genéricos reutilizables para el scraping.
-    """
     def __init__(self, http_client: HTTPClient):
-        # Instancia a HTTPClient para manejar las peticiones HTTP:
         self.http_client = http_client
 
 
     def expand_collpased_cells(self, table: BeautifulSoup):
         """
         Expande las celdas colapsadas en una tabla HTML.
-
-        Args:
-            table (BeautifulSoup): Objeto BeautifulSoup que contiene la tabla HTML.
         """
 
         try:
-            # Recorremos todas las celdas de la tabla:
             for cell in table.find_all("td", {"class": "collapsed-cell"}):
                 expanded_content = cell.get("data-content")
 
@@ -40,17 +32,10 @@ class ScrapingEngine:
     def get_total_pages(self, url: str) -> int:
         """
         Obtiene el número total de páginas (end_page) para una región específica.
-
-        Args:
-            url (str): URL de la primera página de la región.
-
-        Returns:
-            int: Número total de páginas.
         """
 
         # Realizamos la solicitud HTTP para obtener el HTML de la página:
         try:
-            # Realizamos la solicitud HTTP para obtener el HTML de la página:
             response = self.http_client.make_request(url)
 
             if not response:
@@ -93,16 +78,7 @@ class ScrapingEngine:
             raise HTTPClientError(f"Error al calcular el número de páginas para la URL: {url}. \nDetalle: {e}")
 
 
-    def get_table_headers(self, table: BeautifulSoup) -> dict:
-        """
-        Extrae los encabezados de una tabla HTML y los convierte en un diccionario.
-
-        Args:
-            table (BeautifulSoup): Tabla HTML parseada.
-
-        Returns:
-            dict: Diccionario con encabezados como claves y sus índices como valores.
-        """
+    def get_table_headers(self, table: BeautifulSoup, header_type: str = "default") -> dict:
         try:
             headers = {}
 
@@ -120,9 +96,17 @@ class ScrapingEngine:
             th_elements = header_row.find_all(["th", "td"])
             for idx, th in enumerate(th_elements):
                 text = th.get_text(strip=True)
-                if text:  # ignorar columnas vacías
-                    formattted_text = text.replace(" ", "_").replace(".", "").lower()
-                    headers[formattted_text] = idx
+                if text:  # Ignorar columnas vacías
+                    formatted_text = text.replace(" ", "_").replace(".", "").replace("ø", "avg").lower()
+
+                    # Personalizar encabezados según el tipo de tabla
+                    if header_type == "region":
+                        formatted_text = f"region_{formatted_text}"
+
+                    elif header_type == "league":
+                        formatted_text = f"league_{formatted_text}"
+
+                    headers[formatted_text] = idx
 
             return headers
 
@@ -132,15 +116,6 @@ class ScrapingEngine:
 
 
     def measure_row_lengths(self, table: BeautifulSoup) -> tuple:
-        """
-        Mide la longitud de cada fila en una tabla HTML y devuelve un resumen y el valor más alto.
-
-        Args:
-            table (BeautifulSoup): Tabla HTML parseada.
-
-        Returns:
-            tuple: Un diccionario con las longitudes de las filas y su frecuencia, y el valor más alto.
-        """
         try:
             # Extraer las filas de la tabla
             rows = table.find("tbody").find_all("tr")
@@ -159,8 +134,6 @@ class ScrapingEngine:
             # Obtener el valor más alto
             max_length = max(row_lengths) if row_lengths else 0
 
-            logging.info(f"Resumen de longitudes de filas: {length_summary}")
-            logging.info(f"Valor más alto de longitud de fila: {max_length}")
             return length_summary, max_length
 
         except Exception as e:
@@ -168,26 +141,45 @@ class ScrapingEngine:
             return {}, 0
 
 
+    def get_seasons(self, url: str) -> list[int]:
+        try:
+            respponse = self.http_client.make_request(url)
+            if not respponse:
+                logging.error(f"No se pudo obtener el HTML de la URL: '{url}'.")
+                raise HTTPClientError(f"No se pudo obtener el HTML de la URL: {url}")
+
+            # Parseamos:
+            soup = BeautifulSoup(respponse.content, "html.parser")
+
+            select_element = soup.find("select", {"name": "saison_id"})
+            if not select_element:
+                logging.error(f"No se encontró el elemento select para las temporadas en la URL: {url}")
+                return []
+
+            # Extraemos las seasons:
+            seasons = [
+                int(option.get("value"))
+                for option in select_element.find_all("option")
+                if option.get("value")
+            ]
+
+            logging.info(f"Seasons extraídas: {seasons}")
+            return seasons
+
+        except Exception as e:
+            logging.error(f"Error al obtener las temporadas de la URL: {url}. \nDetalle: {e}")
+            raise HTTPClientError(f"Error al obtener las temporadas de la URL: {url}. \nDetalle: {e}")
+
     @staticmethod
     def int_validation(value, default) -> int:
-        """
-        Convierte un valor a entero de forma segura.
-        Si el valor no es válido, devuelve un valor por defecto.
-        """
         try:
             return int(value)
+
         except (ValueError, TypeError):
             return default
 
     @staticmethod
     def float_validation(value: str) -> float:
-        """
-        Convierte un valor de texto a un número flotante.
-        Args:
-            value (str): El valor en formato de texto.
-        Returns:
-            float: El valor convertido a flotante, o 0.0 si no es válido.
-        """
         try:
             return float(value.replace(",", ".").replace(" %", ""))
 
@@ -196,15 +188,6 @@ class ScrapingEngine:
 
     @staticmethod
     def parse_currency_to_float(value: str) -> float:
-        """
-        Convierte un texto de moneda como '592,92 mill. €' o '11,86 mil mill. €' a float.
-
-        Args:
-            value (str): Texto de moneda a convertir.
-
-        Returns:
-            float: Valor numérico convertido.
-        """
         try:
             value = value.replace("€", "").replace(" ", "").strip().lower()
 
@@ -232,7 +215,6 @@ class ScrapingEngine:
             return float(value) * multiplier
 
         except ValueError:
-            # Si no se puede convertir, devolver 0.0 como valor predeterminado
             logging.warning(f"No se pudo convertir el valor: {value}")
             return 0.0
 
@@ -241,18 +223,9 @@ class ScrapingEngine:
         leagues: Dict[str, League],
         region_stats: RegionStats,
         stat_name: str
+
     ) -> float:
-        """
-        Calcula el promedio de una estadística específica de una Región.
 
-        Args:
-            leagues (Dict[str, League]): Diccionario de ligas.
-            region_stats (RegionStats): Objeto RegionStats donde se almacenará el promedio.
-            stat_name (str): Nombre del atributo de LeagueStats que se desea calcular.
-
-        Returns:
-            float: Promedio de la estadística especificada.
-        """
         if not leagues:
             setattr(region_stats, stat_name, 0.0)
             return 0.0

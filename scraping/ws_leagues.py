@@ -1,15 +1,11 @@
 import logging
 from bs4 import BeautifulSoup
 from scraping.ws_engine import ScrapingEngine
-from scraping.ws_entities import League, LeagueStats
+from scraping.ws_entities import League, LeagueStats, Team
 from scraping.ws_dataManager import DataManager
 from typing import List
 
 class LeagueManager:
-    """
-    Clase para gestionar las operaciones relacionadas con las ligas.
-    """
-    # URL base para completar enlaces relativos
     base_url = "https://www.transfermarkt.com"
 
     # Diccionario base para configuraciones comunes
@@ -227,9 +223,13 @@ class LeagueManager:
                     id_league=league_stats.fk_league,
                     competition=extracted_values["competition_name"],
                     country=extracted_values["country_name"],
-                    url=extracted_values["competition_url"],
+                    url_league=extracted_values["competition_url"],
                     stats=league_stats,
-                    teams={}
+                    teams={
+                        "fk_region": region_id,
+                        "fk_league": extracted_values["competition_url"].split("/")[-1] if extracted_values["competition_url"] else None,
+                        "url_league": extracted_values["competition_url"]
+                    }
                 )
 
                 leagues.append(league)

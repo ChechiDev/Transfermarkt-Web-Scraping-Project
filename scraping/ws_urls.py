@@ -37,8 +37,8 @@ class TransfermarktURLManager(URLManager):
     def initialize_urls(self):
         for key, region in self.regions.items():
             region_name = self.format_region_name(region)
-            url = self.build_url(region, page=1)
-            response = self.fetch_html(url)
+            url_region = self.build_url(region, page=1)
+            response = self.fetch_html(url_region)
 
             if not response:
                 self.handle_failed_region(key)
@@ -51,11 +51,6 @@ class TransfermarktURLManager(URLManager):
 
 
     def build_url(self, region: str, page: int) -> str:
-        """
-        Construye una URL para una región y una página específica.
-        Returns:
-            str: URL construida.
-        """
         return self.base_url.format(region=region, page=page)
 
 
@@ -67,6 +62,7 @@ class TransfermarktURLManager(URLManager):
         if not response:
             logging.warning(f"No se pudo obtener el HTML de la URL: {url}")
             return None
+
         return BeautifulSoup(response.content, "html.parser")
 
 
@@ -74,7 +70,7 @@ class TransfermarktURLManager(URLManager):
         logging.warning(f"No se pudo obtener el HTML de la región: '{key}'.")
         self.urls[key] = {
             "region_name": None,
-            "url": [],
+            "url_region": [],
             "region": None,
             "table_header": None,
             "start_page": 1,
@@ -92,7 +88,7 @@ class TransfermarktURLManager(URLManager):
 
         self.urls[key] = {
             "region_name": region_name,
-            "url": urls,
+            "url_region": urls,
             "region": region,
             "table_header": table_header,
             "start_page": 1,
@@ -101,10 +97,11 @@ class TransfermarktURLManager(URLManager):
 
 
     def extract_table_header(self, html: BeautifulSoup):
-        table = html.find("table")
+        table = html.find("table", {"class": "items"})
         if not table:
             logging.warning("No se encontró ninguna tabla en la página.")
             return None
+
         return self.scraping_engine.get_table_headers(table)
 
 

@@ -12,10 +12,7 @@ from config.exceptions import (
 )
 
 class HTTPClient:
-    """
-    Client HTTP reutilizable para descargar y parsear HTML de forma segura.
-    """
-    def __init__(self, base_headers = None, timeout = 5, retries = 3, delay = 1):
+    def __init__(self, base_headers = None, timeout = 7, retries = 10, delay = 3):
         """
         Constructor del cliente HTTP.
         Args:
@@ -92,7 +89,6 @@ class HTTPClient:
             # Pausamos antes de reintento:
             sleep(self.delay)
 
-        # Si todos los intentos fallan, lanzamos una excepción:
         raise Exception(f"Error: No se puede acceder a la URL {url} después de {self.retries} intentos.")
 
 
@@ -160,7 +156,6 @@ class HTTPClient:
             response = self.make_request(url, **kwargs)
             return response.json()
 
-        # Manejo de excepciones para errores de conexión o tiempo de espera:
         except Exception as e:
             logging.error(f"Error al obtener el JSON de la URL: {url}: {e}")
 
