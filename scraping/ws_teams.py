@@ -1,3 +1,4 @@
+import re
 import logging
 from bs4 import BeautifulSoup
 from scraping.ws_engine import ScrapingEngine
@@ -21,7 +22,7 @@ class TeamManager:
             "key": "name",
             "transform": lambda x: x.get_text(strip=True) if x else None
         },
-        "team_url": {
+        "url_team": {
             **base_config,
             "key": "name",
             "transform": lambda x: (
@@ -36,7 +37,42 @@ class TeamManager:
             "transform": lambda x: ScrapingEngine.int_validation(
                 x.get_text(strip=True).replace(".", ""),
                 default=0
-            ) if x else 0
+                )
+                if x else 0
+        },
+        "avg_age": {
+            **base_config,
+            "key": "avg_age",
+            "transform": lambda x: ScrapingEngine.float_validation(
+                x.get_text(strip=True)
+                .replace(",", ".")
+                )
+                if x else 0.0
+        },
+        "foreigners": {
+            **base_config,
+            "key": "foreigners",
+            "transform": lambda x: ScrapingEngine.int_validation(
+                x.get_text(strip=True).replace(".", ""),
+                default=0
+                )
+                if x else 0.0
+        },
+        "avg_market_value": {
+            **base_config,
+            "key": "average_market_value",
+            "transform": lambda x: ScrapingEngine.parse_currency_to_float(
+                x.get_text(strip=True)
+                )
+                if x else 0.0
+        },
+        "total_market_value": {
+            **base_config,
+            "key": "total_market_value",
+            "transform": lambda x: ScrapingEngine.parse_currency_to_float(
+                x.get_text(strip=True)
+                )
+                if x else 0.0
         }
     }
 
@@ -101,22 +137,25 @@ class TeamManager:
                 # Propagar valores desde la liga
                 extracted_values["fk_region"] = region.id_region
                 extracted_values["fk_league"] = league.id_league
-                extracted_values["url_league"] = league.url_league
 
                 team_stats = TeamStats(
+                    # Extraemos el ID del equipo de la URL
+                    fk_team=re.search(r"verein/(\d+)", extracted_values["url_team"]).group(1)
+                    if extracted_values["url_team"] else None,
+
                     total_players=extracted_values["squad"],
-                    # avg_age: 0.0,
-                    # foreigners: 0.0,
-                    # average_market_value: 0,0,
-                    # total_market_value: 0.0
+                    avg_age=extracted_values["avg_age"],
+                    foreigners=extracted_values["foreigners"],
+                    avg_market_value=extracted_values["avg_market_value"],
+                    total_market_value=extracted_values["total_market_value"]
                 )
 
                 team = Team(
+                    id_team=team_stats.fk_team,
                     fk_region=extracted_values["fk_region"],
                     fk_league=extracted_values["fk_league"],
                     team_name=extracted_values["name"],
-                    url_league=extracted_values["url_league"],
-                    url_team=extracted_values.get("team_url"),
+                    url_team=extracted_values.get("url_team"),
                     stats=team_stats
                 )
 
@@ -126,5 +165,5 @@ class TeamManager:
                 logging.warning(f"No se ha podido extraer los campos de la fila: {e}")
                 continue
 
-        logging.info(f"Datos extraídos de la tabla: {len(teams)} filas.")
+        # logging.info(f"Datos extraídos de la tabla: {len(teams)} filas.")
         return teams

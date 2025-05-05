@@ -18,13 +18,8 @@ class DataManager:
 
 
     def add_region(self, region: Region) -> None:
-        """
-        Añade una región a TransferMarket.
-        Args:
-            region (Region): Objeto de la clase Region.
-        Raises:
-            ValueError: Si el objeto region no es una instancia de Region.
-        """
+        logging.debug(f"Añadiendo región: {region}, tipo: {type(region)}")
+
         if not isinstance(region, Region):
             logging.error("El objeto proporcionado no es una instancia de la clase Region.")
             raise ValueError("El objeto proporcionado no es una instancia de la clase Region.")
@@ -34,11 +29,6 @@ class DataManager:
 
 
     def to_dict(self) -> Dict:
-        """
-        Convierte la instancia de TransferMarket en un diccionario.
-        Returns:
-            dict: Representación en diccionario de TransferMarket.
-        """
         try:
             data = self.transfer_market.to_dict()
             logging.info("Datos convertidos a diccionario correctamente.")
@@ -50,11 +40,6 @@ class DataManager:
 
 
     def to_json(self, file_name: str) -> None:
-        """
-        Guarda los datos en un archivo JSON dentro de la carpeta 'Data Output'.
-        Args:
-            file_name (str): Nombre del archivo JSON (sin la ruta completa).
-        """
         try:
             # Construimos la ruta para guardar el json con la data:
             output_dir = os.path.join(os.getcwd(), "Data output")

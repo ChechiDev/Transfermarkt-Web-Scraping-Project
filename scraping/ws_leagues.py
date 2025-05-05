@@ -1,7 +1,8 @@
 import logging
 from bs4 import BeautifulSoup
 from scraping.ws_engine import ScrapingEngine
-from scraping.ws_entities import League, LeagueStats, Team
+from scraping.ws_entities import League, LeagueStats, Team, Region
+from scraping.ws_teams import TeamManager
 from scraping.ws_dataManager import DataManager
 from typing import List
 
@@ -122,6 +123,61 @@ class LeagueManager:
         self.scraping_engine = scraping_engine
         self.data_manager = DataManager(http_client=scraping_engine.http_client)
 
+
+    def process_league_season(self, league: League, region: Region, team_manager: TeamManager) -> None:
+        # logging.info(f"Iniciando el procesamiento de temporadas para la liga: {league.competition}")
+        seasons = self.scraping_engine.get_seasons(league.url_league)
+        if not seasons:
+            logging.warning(f"No se encontraron temporadas para la liga: {league.competition}")
+            return
+
+        # Filtro TEMPORAL para solo procesar la temporada 2024
+        seasons = [season for season in seasons if season == 2024]
+
+        for season in seasons:
+            season_key = f"{season}/{season + 1}"
+            # logging.info(f"Procesando temporada: {season_key} para la liga: {league.competition}")
+
+            try:
+                league.season = season
+
+                # Construimos la URL dinámica para la temporada
+                season_url = f"{league.url_league}/plus/?saison_id={season}"
+                team_response = self.scraping_engine.http_client.make_request(season_url)
+
+                if not team_response:
+                    logging.warning(f"No se pudo obtener el HTML de la liga: {season_url}")
+                    continue
+
+                team_soup = BeautifulSoup(team_response.content, "html.parser")
+                team_table = team_soup.find("table", {"class": "items"})
+
+                if not team_table:
+                    logging.warning(f"No se encontró la tabla de equipos en la liga: {season_url}")
+                    continue
+
+                # Llamamos a get_team_data en el objeto correcto (TeamManager)
+                teams = team_manager.get_team_data(
+                    table=team_table,
+                    min_columns=5,
+                    region=region,
+                    league=league
+                )
+
+                # Agregamos los equipos a la temporada correspondiente
+                for team in teams:
+                    league.add_team_to_season(
+                        season_key=season_key,
+                        team=team
+                    )
+                    # logging.info(f"Equipo '{team.team_name}' añadido a la temporada '{season_key}'.")
+
+                logging.info(f"Se procesaron {len(teams)} equipos para la temporada: {season_key}")
+
+            except Exception as e:
+                logging.error(f"Error al procesar la temporada {season_key} para la liga {league.competition}: {e}")
+
+
     def extract_cell_value(
             self,
             headers,
@@ -152,6 +208,7 @@ class LeagueManager:
         except (IndexError, AttributeError) as e:
             logging.warning(f"Error al extraer el valor de la celda: {e}")
             return default
+
 
     def get_league_data(
             self,
@@ -222,6 +279,7 @@ class LeagueManager:
                 league = League(
                     id_league=league_stats.fk_league,
                     competition=extracted_values["competition_name"],
+                    season=0,
                     country=extracted_values["country_name"],
                     url_league=extracted_values["competition_url"],
                     stats=league_stats,
@@ -238,5 +296,5 @@ class LeagueManager:
                 logging.warning(f"No se ha podido extraer los campos de la fila: {e}")
                 continue
 
-        logging.info(f"Datos extraídos de la tabla: {len(leagues)} filas.")
+        # logging.info(f"Datos extraídos de la tabla: {len(leagues)} filas.")
         return leagues

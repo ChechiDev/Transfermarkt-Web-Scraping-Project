@@ -141,6 +141,39 @@ class ScrapingEngine:
             return {}, 0
 
 
+    def get_league_tier(self, table: BeautifulSoup) -> Dict[str, str]:
+        """
+        Obtiene el nivel/categoría de la liga a partir de la tabla HTML.
+        """
+        try:
+            competition_to_tier = {}
+            rows = table.find("tbody").find_all("tr")
+
+            if not rows:
+                logging.warning("No se encontraron filas en la tabla.")
+                return competition_to_tier
+
+            current_tier = None
+            for row in rows:
+                # Comprobamos si la fila es un encabezado de tier
+                tier_cell = row.find("td", {"class": "extrarow bg_blau_20 hauptlink"})
+                if tier_cell:
+                    current_tier = tier_cell.get_text(strip=True)
+                    continue
+
+                # Detectar si la fila es una liga
+                competition_cell = row.find("td", {"class": "hauptlink"})
+                if competition_cell and current_tier:
+                    competition_name = competition_cell.get_text(strip=True)
+                    competition_to_tier[competition_name] = current_tier
+
+            return competition_to_tier
+
+        except Exception as e:
+            logging.error(f"Error al obtener el nivel de la liga: {e}")
+            raise ValueError(f"Error al obtener el nivel de la liga: {e}")
+
+
     def get_seasons(self, url: str) -> list[int]:
         try:
             respponse = self.http_client.make_request(url)
@@ -163,7 +196,7 @@ class ScrapingEngine:
                 if option.get("value")
             ]
 
-            logging.info(f"Seasons extraídas: {seasons}")
+            # logging.info(f"Seasons extraídas: {seasons}")
             return seasons
 
         except Exception as e:
@@ -225,16 +258,30 @@ class ScrapingEngine:
         stat_name: str
 
     ) -> float:
+        # Validar que region_stats sea una instancia de RegionStats
+        if not isinstance(region_stats, RegionStats):
+            raise TypeError(f"Se esperaba una instancia de RegionStats, pero se recibió {type(region_stats)}")
 
-        if not leagues:
-            setattr(region_stats, stat_name, 0.0)
-            return 0.0
+        valid_values = []
 
-        valid_values = [
-            getattr(league.stats, stat_name, 0.0) for league in leagues.values()
-            if league.stats and getattr(league.stats, stat_name, None) is not None
-        ]
+        for tier, leagues_in_tier in leagues.items():
+            for league_id, league in leagues_in_tier.items():
+                # Validar que league sea una instancia de League
+                if not isinstance(league, League):
+                    logging.warning(f"La liga {league_id} no es una instancia de League. Tipo recibido: {type(league)}")
+                    continue
 
+                # Validar que league.stats sea una instancia de LeagueStats
+                if not isinstance(league.stats, LeagueStats):
+                    logging.warning(f"La liga {league_id} tiene un atributo 'stats' inválido. Tipo recibido: {type(league.stats)}")
+                    continue
+
+                # Obtener el valor de la estadística
+                value = getattr(league.stats, stat_name, None)
+                if value is not None:
+                    valid_values.append(value)
+
+        # Calcular el promedio
         if not valid_values:
             setattr(region_stats, stat_name, 0.0)
             return 0.0

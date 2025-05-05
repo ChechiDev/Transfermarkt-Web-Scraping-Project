@@ -12,16 +12,7 @@ from config.exceptions import (
 )
 
 class HTTPClient:
-    def __init__(self, base_headers = None, timeout = 7, retries = 10, delay = 3):
-        """
-        Constructor del cliente HTTP.
-        Args:
-            base_headers (dict, opcional): Headers HTTP predeterminados para las solicitudes.
-            timeout (int, opcional): Tiempo máximo de espera para una solicitud (en segundos).
-            retries (int, opcional): Número de intentos en caso de fallo.
-            delay (int, opcional): Tiempo de espera entre intentos (en segundos).
-        """
-
+    def __init__(self, base_headers = None, timeout = 5, retries = 10, delay = 2):
         self.headers = base_headers or headers
         self.timeout = timeout # Tiempo de espera para la conexión
         self.retries = retries # Número de reintentos
@@ -32,8 +23,6 @@ class HTTPClient:
     def set_url_manager(self, url_manager):
         """
         Asigna un gestor de URL al cliente HTTP.
-        Args:
-            url_manager (URLManager): Instancia del gestor de URL.
         """
         from scraping.ws_urls import URLManager
         from scraping.ws_engine import ScrapingEngine
@@ -59,7 +48,7 @@ class HTTPClient:
 
         for attempt in range(self.retries):
             try:
-                # Combinar los headers predeterminados con los headers de kwargs
+                # Combina los headers predeterminados con los headers de kwargs
                 request_headers = kwargs.pop("headers", self.headers)
 
                 # Realizamos la solicitud GET a la URL con el método especificado:
@@ -78,11 +67,13 @@ class HTTPClient:
 
             except requests.Timeout:
                 logging.warning(f"Timeout: Fallo en intento {attempt + 1}/{self.retries} para la url: {url}")
+
                 if attempt == self.retries - 1:
                     raise HTTPTimeoutError(f"Error: Timeout al acceder a la URL {url} después de {self.retries} intentos.")
 
             except requests.RequestException as e:
                 logging.warning(f"Error: Fallo en intento {attempt + 1}/{self.retries} para la url: {url}. \nDetalle: {e}")
+
                 if attempt == self.retries - 1:
                     raise HTTPConnectionError(f"Error: No se puede acceder a la URL {url} después de {self.retries} intentos.")
 
@@ -95,12 +86,6 @@ class HTTPClient:
     def retry_request(self, func, *args, **kwargs):
         """
         Método para realizar una solicitud HTTP con reintentos.
-        Args:
-            func (callable): Función a ejecutar (por ejemplo, make_request).
-            *args: Argumentos posicionales para la función.
-            **kwargs: Argumentos de palabra clave para la función.
-        Returns:
-            request.Response: Respuesta de la solicitud HTTP, si es exitosa.
         """
         for attempt in range(self.retries):
             try:
@@ -116,14 +101,6 @@ class HTTPClient:
     def get_html(self, url: str, **kwargs):
         """
         Realiza una solicitud GET y devuelve el contenido HTML de la página como un objeto BeautifulSoup.
-
-        Args:
-            url (str): URL de la página a descargar.
-            **kwargs: Parámetros adicionales para la solicitud GET.
-
-        Returns:
-            BeautifulSoup: Objeto BeautifulSoup con el contenido HTML si la solicitud es exitosa.
-            None: Si la solicitud falla o la URL es inválida.
         """
         if not validators.url(url):
             logging.error(f"URL no válida: {url}")
@@ -146,11 +123,6 @@ class HTTPClient:
     def get_json(self, url, **kwargs):
         """
         Realiza una solicitud GET y devuelve el contenido JSON de la página.
-        Args:
-            url (str): URL de la página a descargar.
-            **kwargs: Parámetros adicionales para la solicitud GET.
-        Returns:
-            dict: Objeto JSON con el contenido de la respuesta.
         """
         try:
             response = self.make_request(url, **kwargs)
