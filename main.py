@@ -31,7 +31,6 @@ def initialize_scraping():
 
             region_manager.process_region(region, region_data)
 
-            # Añade la región a DataManager
             data_manager.add_region(region)
             logging.info(f"Región añadida a DataManager: {region_key}")
 

@@ -141,6 +141,53 @@ class ScrapingEngine:
             return {}, 0
 
 
+    def get_country_info(self, table: BeautifulSoup) -> dict:
+        try:
+            country_info = {}
+            rows = table.find("tbody").find_all("tr")
+
+            if not rows:
+                logging.warning("No se encontraron filas en la tabla.")
+                return country_info
+
+            for row in rows:
+                country_cell = row.find("td", {"class": "zentriert"})
+                if not country_cell:
+                    continue
+
+                country_flag = country_cell.find("img", {"class": "flaggenrahmen"})
+                if not country_flag:
+                    logging.debug("No se encontró la imagen con clase 'flaggenrahmen'.")
+                    continue
+
+                # URL de la bandera
+                country_flag_url = country_flag.get("src", "").strip()
+                if not country_flag_url:
+                    logging.warning("No se encontró la URL de la bandera.")
+                    continue
+
+                # Extraemos el ID del país de la URL de la bandera
+                match = re.search(r"tiny/(\d+)\.png", country_flag_url)
+                country_id = match.group(1) if match else None
+
+                country_name = country_flag.get("title", "").strip()
+                if not country_name:
+                    logging.warning(f"No se encontró el nombre del país para la bandera con URL: {country_flag_url}")
+                    continue
+
+                country_info[country_id] = {
+                    "id_country": country_id,
+                    "country_name": country_name,
+                    "country_flag": country_flag_url,
+                }
+
+            return country_info
+
+        except Exception as e:
+            logging.error(f"Error al obtener la información del país: {e}")
+            raise ValueError(f"Error al obtener la información del país: {e}")
+
+
     def get_league_tier(self, table: BeautifulSoup) -> Dict[str, str]:
         """
         Obtiene el nivel/categoría de la liga a partir de la tabla HTML.

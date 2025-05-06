@@ -265,6 +265,7 @@ class LeagueManager:
                 league_stats = LeagueStats(
                     fk_league=extracted_values["competition_url"].split("/")[-1] if extracted_values["competition_url"] else None,
                     fk_region=region_id,
+                    season=0,
                     total_clubs=extracted_values["total_clubs"],
                     total_players=extracted_values["total_players"],
                     avg_age=extracted_values["avg_age"],

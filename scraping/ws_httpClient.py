@@ -93,7 +93,7 @@ class HTTPClient:
 
             except requests.RequestException as e:
                 logging.warning(f"Intento {attempt + 1}/{self.retries} fallido: {e}")
-                sleep(self.delay)  # Espera antes de reintentar
+                sleep(self.delay)
 
         raise Exception(f"Error: No se puede completar la solicitud después de {self.retries} intentos.")
 

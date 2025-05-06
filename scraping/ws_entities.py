@@ -15,8 +15,9 @@ class Player:
 @dataclass
 class TeamStats:
     fk_team: str
-    # fk_league: str
-    # fk_region: str
+    fk_league: str
+    fk_region: str
+    season: int
     total_players: int
     avg_age: float
     foreigners: int
@@ -33,6 +34,7 @@ class Team:
     id_team: str
     fk_region: str
     fk_league: str
+    season: int
     team_name: str
     url_team: str
     stats: TeamStats
@@ -48,6 +50,7 @@ class Team:
             "id_team": self.id_team,
             "fk_region": self.fk_region,
             "fk_league": self.fk_league,
+            "season": self.season,
             "team_name": self.team_name,
             "url_team": self.url_team,
             "stats": self.stats.to_dict() if self.stats else None,
@@ -64,6 +67,7 @@ class Team:
 class LeagueStats:
     fk_league: str
     fk_region: str
+    season: int
     total_clubs: float
     total_players: float
     avg_age: float
@@ -142,6 +146,18 @@ class RegionStats:
     def to_dict(self) -> Dict:
         return asdict(self)
 
+@dataclass
+class Country:
+    id_country: str
+    country_name: str
+    country_flag: str
+
+    def to_dict(self) -> Dict:
+        return {
+            "id_country": self.id_country,
+            "country_name": self.country_name,
+            "country_flag": self.country_flag
+        }
 
 @dataclass
 class Region:
@@ -149,12 +165,17 @@ class Region:
     region_name: str
     url_region: str
     stats: RegionStats
+    countries: Dict[str, Country] = field(default_factory=dict)
     leagues: Dict[str, Dict[str, League]] = field(default_factory=dict)
 
     def __post_init__(self):
         if not isinstance(self.stats, RegionStats):
             if isinstance(self.stats, dict):
                 self.stats = RegionStats(**self.stats)
+
+        for country_id, country in self.countries.items():
+            if isinstance(country, dict):
+                self.country[country_id] = Country(**country)
 
         for tier, leagues in self.leagues.items():
             for league_id, league in leagues.items():
@@ -166,6 +187,9 @@ class Region:
             "id_region":self.id_region,
             "region_name": self.region_name,
             "url_region": self.url_region,
+            "countries": {
+                country_id: country.to_dict() for country_id, country in self.countries.items()
+            },
             "stats": self.stats.to_dict() if isinstance(self.stats, RegionStats) else self.stats,
             "leagues": {
                 tier: {
@@ -176,6 +200,16 @@ class Region:
         }
 
         return region_dict
+
+    def add_country(self, country: Country) -> None:
+        if not isinstance(country, Country):
+            raise TypeError(f"Se esperaba una instancia de Country, pero se recibió {type(country)}")
+
+        # Evitamos duplicados:
+        if country.id_country in self.countries:
+            return
+
+        self.countries[country.id_country] = country
 
     def add_league(self, tier: str, league: League) -> None:
         if tier not in self.leagues:

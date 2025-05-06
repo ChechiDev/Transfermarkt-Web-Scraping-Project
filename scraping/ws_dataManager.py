@@ -12,7 +12,6 @@ class DataManager:
     Permite generar un JSON con la estructura completa de datos.
     """
     def __init__(self, http_client):
-        # Instancia de TransferMarket para almacenar las regiones y sus datos
         self.transfer_market = TransferMarket()
         self.scraping_engine = ScrapingEngine(http_client)
 

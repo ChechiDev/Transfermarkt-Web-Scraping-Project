@@ -137,12 +137,16 @@ class TeamManager:
                 # Propagar valores desde la liga
                 extracted_values["fk_region"] = region.id_region
                 extracted_values["fk_league"] = league.id_league
+                extracted_values["season"] = league.season
 
                 team_stats = TeamStats(
                     # Extraemos el ID del equipo de la URL
                     fk_team=re.search(r"verein/(\d+)", extracted_values["url_team"]).group(1)
                     if extracted_values["url_team"] else None,
 
+                    fk_region=extracted_values["fk_region"],
+                    fk_league=extracted_values["fk_league"],
+                    season=extracted_values["season"],
                     total_players=extracted_values["squad"],
                     avg_age=extracted_values["avg_age"],
                     foreigners=extracted_values["foreigners"],
@@ -154,6 +158,7 @@ class TeamManager:
                     id_team=team_stats.fk_team,
                     fk_region=extracted_values["fk_region"],
                     fk_league=extracted_values["fk_league"],
+                    season=extracted_values["season"],
                     team_name=extracted_values["name"],
                     url_team=extracted_values.get("url_team"),
                     stats=team_stats

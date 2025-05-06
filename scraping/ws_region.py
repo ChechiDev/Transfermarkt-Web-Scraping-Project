@@ -1,5 +1,5 @@
 import logging
-from scraping.ws_entities import Region, RegionStats, League, LeagueStats
+from scraping.ws_entities import Region, RegionStats, Country, League, LeagueStats
 from scraping.ws_engine import ScrapingEngine
 from bs4 import BeautifulSoup
 from typing import Dict, Any
@@ -23,10 +23,13 @@ class RegionManager:
             total_value=0,
         )
 
+        countries = {}
+
         return Region(
             id_region=region_key,
             region_name=region_data["region_name"],
             url_region=region_data["url_region"][0],
+            countries=countries,
             stats=region_stats
         )
 
@@ -44,6 +47,22 @@ class RegionManager:
             if not table:
                 logging.warning(f"No se encontró la tabla de ligas en la URL: {url}")
                 continue
+
+            # Extraemos la info de los paises:
+            try:
+                country_info = self.league_manager.scraping_engine.get_country_info(table)
+
+                for country_id, country_data in country_info.items():
+                    country = Country(
+                        id_country=country_id,
+                        country_name=country_data["country_name"],
+                        country_flag=country_data["country_flag"]
+                    )
+                    region.add_country(country)
+
+            except Exception as e:
+                logging.error(f"Error al extraer información de países para la región {region.id_region}: {e}")
+
 
             # Obtenemos el diccionario provisional de competition -> tier
             competition_to_tier = self.league_manager.scraping_engine.get_league_tier(table)
