@@ -26,3 +26,4 @@ Thumbs.db
 *.log
 old/
 tests/
+utils/

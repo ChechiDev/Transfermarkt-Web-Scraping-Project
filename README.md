@@ -1,135 +1,121 @@
 ![Work in Progress](https://img.shields.io/badge/Status-Work%20in%20Progress-yellow)
-# <u>Transfermarkt Web Scraping Project</u>
+# Transfermarkt Web Scraping Project
 
-## <u>*Descripción general*</u>
-Este proyecto tiene un propósito **educativo y personal**, sin fines lucrativos. Su objetivo principal es realizar un proceso completo de scraping de datos desde la web de [Transfermarkt](https://www.transfermarkt.es/), seguido de un almacenamiento estructurado en una base de datos PostgreSQL y un análisis posterior utilizando Python.
+## Descripción General
 
-El proyecto está diseñado con una estructura profesional, utilizando:
-- **Programación Orientada a Objetos (POO) con Python**
-- **Jupyter Notebooks** para la documentación y ejecución interactiva
-- **PostgreSQL** para la persistencia de datos
+Este proyecto tiene como objetivo realizar un **scraping total** de la página [Transfermarkt](https://www.transfermarkt.es/), extrayendo datos estructurados de regiones, ligas, equipos y jugadores.
+Actualmente, el enfoque principal está en el desarrollo del módulo de **scraping**, ubicado en la carpeta `scraping`, que contiene toda la lógica para interactuar con la página y procesar los datos.
 
----
-
-## <u>*Flujo de trabajo*</u>
-El flujo principal del proyecto sigue los siguientes pasos:
-
-1. **Configuración del entorno**:
-   - Carga de variables de entorno desde un archivo `.env` utilizando la clase `EnvironmentConfig`.
-   - Configuración de parámetros como usuario, contraseña, host, puerto y base de datos.
-
-2. **Conexión y validación de la base de datos**:
-   - Uso de la clase `DatabaseCreator` para verificar si la base de datos existe.
-   - Si no existe, se crea automáticamente y se actualiza el archivo `.env` con el nuevo nombre.
-
-3. **Scraping de datos**:
-   - Uso de la clase `HttpClient` para realizar solicitudes HTTP.
-   - Uso de la clase `Scraper` para construir URLs dinámicas y realizar el scraping.
-   - Ejecución del scraping mediante `run_scraper`, que permite seleccionar dinámicamente las URLs a scrapear.
-
-4. **Almacenamiento en PostgreSQL**:
-   - Inserción de los datos obtenidos en tablas normalizadas dentro de la base de datos PostgreSQL.
-
-5. **Preparación para análisis**:
-   - Los datos almacenados están listos para ser utilizados en análisis exploratorios o ejercicios de Machine Learning.
+El proyecto está diseñado con una estructura modular y profesional, utilizando:
+- **Python** para la extracción y procesamiento de datos.
+- **BeautifulSoup** para analizar el HTML de las páginas.
+- **Estrategias de scraping dinámico** para manejar múltiples regiones y ligas.
 
 ---
 
-## <u>*Estructura del proyecto*</u>
+## Estado Actual del Proyecto
+
+- **Scraping**: En desarrollo activo. Toda la lógica se encuentra en la carpeta `scraping`.
+- **Base de datos**: En stand-by. Los datos extraídos se almacenan temporalmente en la carpeta `Data Output` en formato JSON.
+- **Configuración del entorno**: En stand-by. Actualmente, las variables de entorno no son necesarias para el scraping.
+
+---
+
+## Flujo de Trabajo Actual
+
+El flujo de trabajo actual se centra exclusivamente en el scraping de datos desde Transfermarkt:
+
+1. **Inicialización del scraping**:
+   - Se configuran los componentes principales, como el cliente HTTP (`HTTPClient`) y el motor de scraping (`ScrapingEngine`).
+
+2. **Extracción de datos**:
+   - Se extraen datos de regiones, ligas, equipos y jugadores utilizando clases específicas como `LeagueManager` y `TeamManager`.
+   - Los datos se procesan dinámicamente para manejar múltiples páginas y tablas HTML.
+
+3. **Almacenamiento temporal**:
+   - Los datos extraídos se guardan en la carpeta `Data Output` en formato JSON para su posterior análisis o integración con una base de datos.
+
+---
+
+## Estructura del Proyecto
+
 El proyecto está organizado de la siguiente manera:
 
 ```bash
-├── config/
-│   ├── config.py          # Gestión de variables de entorno
-│   ├── headers.py         # Headers para las solicitudes HTTP
-│   ├── run_scraper.py     # Lógica principal para ejecutar el scraping
-├── database/
-│   ├── db_connection.py   # Clase para gestionar la conexión a PostgreSQL
-│   ├── db_creator.py      # Clase para crear y validar la base de datos
-├── scraping/
-│   ├── wscrap_engine.py   # Motor base para realizar scraping
-│   ├── wscrap_league.py   # Scraper para ligas
-│   ├── wscrap_teams.py    # (En desarrollo) Scraper para equipos
-│   ├── [wscrap_players.py]  # (En desarrollo) Scraper para jugadores
-├── tests/
-│   ├── testing.py         # Pruebas para verificar el funcionamiento del scraping
-├── [transfermarkt_project.ipynb] # Notebook principal con el flujo del proyecto
-├── [main.py]             # (En desarrollo) Script principal para ejecutar el flujo completo
-├── [requirements.txt]       # Dependencias del proyecto
-├── .env                   # Variables de entorno (no incluido en el repositorio)
-````
+├── scraping/              # Carpeta principal en desarrollo
+│   ├── ws_engine.py       # Motor base para realizar scraping
+│   ├── ws_leagues.py      # Gestión de ligas
+│   ├── ws_teams.py        # Gestión de equipos
+│   ├── ws_dataManager.py  # Gestión de datos extraídos
+│   ├── ws_urls.py         # Gestión de URLs dinámicas
+├── Data Output/           # Carpeta para almacenar temporalmente los datos extraídos
+│   ├── all_regions_with_leagues_and_teams.json
+├── main.py                # Script principal para ejecutar el scraping
+├── README.md              # Documentación del proyecto
+├── requirements.txt       # Dependencias del proyecto
+```
 
 ---
 
-## <u>*Actualización: Depuración y Ajustes en el Scraper de Ligas*</u>
+## Detalles del Módulo de Scraping
 
-### **Problema Detectado**
-Durante el desarrollo del scraper de ligas (`LeagueScraper`), se identificó un problema en la construcción de URLs. El método `build_url` estaba recibiendo una URL completa en lugar de la clave definida en el archivo `.env`, lo que provocaba un error al intentar encontrar la clave en el diccionario `self.urls`.
+### 1. `ws_engine.py`
+El archivo principal del scraping. Contiene la clase `ScrapingEngine`, que incluye métodos para:
+- Extraer encabezados de tablas (`get_table_headers`).
+- Medir longitudes de filas en tablas (`measure_row_lengths`).
+- Obtener información de países, ligas y temporadas.
 
-### **Solución Implementada**
-1. **Depuración del Método `build_url`**:
-   - Se agregó impresión de las claves disponibles y la clave recibida para identificar inconsistencias.
-   - Se corrigió el manejo de espacios en blanco y caracteres invisibles al cargar las claves desde el archivo `.env`.
+### 2. `ws_leagues.py`
+Gestiona la extracción de datos relacionados con las ligas, como:
+- Nombre de la competición.
+- País asociado.
+- URL de la liga.
 
-2. **Ajuste en el Método `get_data`**:
-   - Se aseguró que `get_data` reciba la clave `url_key` en lugar de una URL completa.
+### 3. `ws_teams.py`
+(En desarrollo) Gestionará la extracción de datos relacionados con los equipos, como:
+- Nombre del equipo.
+- Estadísticas generales.
+- Jugadores asociados.
 
-3. **Ajuste en el Método `get_leagues`**:
-   - Se corrigió para que pase correctamente la clave `url_tmkt_eur_leagues` al método `get_data`.
+### 4. `ws_dataManager.py`
+Se encarga de procesar y almacenar los datos extraídos en formato JSON dentro de la carpeta `Data Output`.
 
-4. **Pruebas Realizadas**:
-   - Se ejecutaron pruebas unitarias en `testing.py` para verificar:
-     - La correcta construcción de URLs.
-     - La carga de claves desde el archivo `.env`.
-     - La extracción de datos de ligas desde la tabla HTML.
-
-### **Notas para Depuración Futura**
-- Si el método `build_url` falla, verifica:
-  1. Las claves cargadas desde el archivo `.env` (`self.urls`).
-  2. La clave pasada al método (`url_key`).
-  3. La plantilla de la URL en el archivo `.env`.
-
-- Si el método `get_data` no extrae datos, verifica:
-  1. Que la tabla HTML exista en la página.
-  2. Que el `row_parser` esté procesando correctamente las filas de la tabla.
+### 5. `ws_urls.py`
+Gestiona la construcción dinámica de URLs para manejar múltiples regiones y paginación.
 
 ---
 
-## <u>*Cómo ejecutar el proyecto*</u>
+## Cómo Ejecutar el Proyecto
 
-### 1. Instalación de dependencias
+### 1. Instalación de Dependencias
 Ejecuta el siguiente comando para instalar todas las dependencias necesarias:
 ```bash
 pip install -r requirements.txt
 ```
 
-### 2. Configuración del entorno
-Crea un archivo `.env` en la raíz del proyecto con las siguientes variables:
-```env
-DB_USER=tu_usuario
-DB_PASSWORD=tu_contraseña
-DB_HOST=localhost
-DB_PORT=5432
-DB_NAME=nombre_base_datos
-SCH_NAME=nombre_schema
-TBL_NAME=nombre_tabla
-```
-
-### 3. Ejecución del flujo principal
-Ejecuta el script principal para iniciar el flujo completo del proyecto:
+### 2. Ejecución del Scraping
+Ejecuta el script principal para iniciar el scraping completo:
 ```bash
 python main.py
 ```
 
-### 4. Uso del Notebook
-Abre el archivo `transfermarkt_project.ipynb` en Jupyter Notebook para ejecutar y documentar el flujo de trabajo de manera interactiva.
+### 3. Verificación de Datos
+Los datos extraídos se almacenan en la carpeta `Data Output` en formato JSON. Por ejemplo:
+```bash
+Data Output/
+├── all_regions_with_leagues_and_teams.json
+```
 
 ---
 
-## <u>*Notas importantes*</u>
-- Este proyecto está en desarrollo, y algunas funcionalidades como los scrapers específicos (`wscrap_leagues.py`, `wscrap_teams.py`, `wscrap_players.py`) están en progreso.
+## Notas Importantes
+
+- Actualmente, el enfoque principal está en el desarrollo del módulo de **scraping**.
+- Los datos extraídos se almacenan temporalmente en formato JSON y no se están integrando con una base de datos.
+- Asegúrate de que la estructura HTML de Transfermarkt no haya cambiado, ya que esto podría afectar el scraping.
 
 ---
 
-## <u>*Licencia*</u>
+## Licencia
+
 Este proyecto está licenciado bajo la [GNU General Public License v3.0](LICENSE).
