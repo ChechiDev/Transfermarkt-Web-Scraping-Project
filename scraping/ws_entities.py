@@ -1,15 +1,78 @@
 from dataclasses import dataclass, field, asdict
 from typing import List, Optional, Dict
 from config.exceptions import logging
+from bs4 import BeautifulSoup
+import logging
 
 @dataclass
 class PlayerStats:
-    pass
+    birth_date: str
+    player_age: int
+    player_height: float
+    general_position: str
+    player_position: str
+    player_foot: str
+    market_value: float
+
+    def to_dict(self) -> Dict:
+        return asdict(self)
+
+
+@dataclass
+class PlayerImgInfo:
+    fk_player: str
+    id_img: str
+    img_player: str
+
+    def to_dict(self) -> Dict:
+        return asdict(self)
 
 
 @dataclass
 class Player:
-    pass
+    fk_region: str
+    fk_league: str
+    id_player: str
+    fk_country: str
+    player_name: str
+    season: int
+    player_joined: str
+    player_contract: str
+    fk_team_signed_from: str
+    url_player: str
+    player_img_info: Dict[str, PlayerImgInfo] = field(default_factory=dict)
+    stats: PlayerStats = None
+
+
+    def add_player_img_info(self, img_info: Dict[str, str]) -> None:
+        if not img_info:
+            logging.warning(f"No se proporcionó información de imagen para el jugador {self.player_name}.")
+            return
+
+        self.player_img_info = {
+            "fk_player": self.id_player,
+            "id_img": img_info.get("id_img"),
+            "img_player": img_info.get("img_player")
+        }
+
+
+    def to_dict(self) -> Dict:
+        return {
+            "fk_region": self.fk_region,
+            "fk_league": self.fk_league,
+            "id_player": self.id_player,
+            "player_name": self.player_name,
+
+            "player_img_info": self.player_img_info.to_dict()
+                if isinstance(self.player_img_info, PlayerImgInfo) else self.player_img_info,
+
+            "fk_country": self.fk_country,
+            "player_joined": self.player_joined,
+            "player_contract": self.player_contract,
+            "fk_team_signed_from": self.fk_team_signed_from,
+            "url_player": self.url_player,
+            "stats": self.stats.to_dict() if self.stats else None,
+        }
 
 
 @dataclass
@@ -60,6 +123,7 @@ class Team:
         }
 
     def add_player(self, player: Player) -> None:
+        player.season = self.season
         self.players[player.id_player] = player
 
 
@@ -74,7 +138,7 @@ class LeagueStats:
     foreigners: float
     game_ratio_of_foreign_players: float
     goals_per_match: float
-    average_market_value: float
+    avg_market_value: float
     total_value: float
 
     def to_dict(self) -> Dict:
@@ -86,6 +150,7 @@ class League:
     id_league: str
     competition: str
     season: int
+    fk_country: str
     country: str
     url_league: str
     stats: LeagueStats
@@ -117,11 +182,18 @@ class League:
             "id_league": self.id_league,
             "competition": self.competition,
             "season": self.season,
+            "fk_country": self.fk_country,
             "country": self.country,
             "url_league": self.url_league,
             "stats": self.stats.to_dict(),
             **seasons_dict
         }
+
+    def add_country(self, region_countries: Dict[str, "Country"]) -> None:
+        for country_id, country in region_countries.items():
+            if country.country_name.strip().lower() == self.country.strip().lower():
+                self.fk_country = country_id
+                break
 
     def add_team_to_season(self, season_key: str, team: Team) -> None:
         if season_key not in self.seasons:
@@ -224,7 +296,6 @@ class TransferMarket:
     Clase raíz del proyecto.
     Contiene toda la información de las regiones
     """
-    # Creamos el diccionario de regiones.
     regions:  Dict[str, Region] = field(default_factory=dict)
 
     def __post_init__(self):

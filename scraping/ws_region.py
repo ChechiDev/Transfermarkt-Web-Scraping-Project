@@ -72,8 +72,10 @@ class RegionManager:
                 leagues = self.league_manager.get_league_data(
                     table,
                     min_columns=5,
-                    region_id=region.id_region
+                    region_id=region.id_region,
+                    region_countries=region.countries
                 )
+
             except Exception as e:
                 logging.error(f"Error al obtener las ligas para la región {region.id_region}: {e}")
                 return

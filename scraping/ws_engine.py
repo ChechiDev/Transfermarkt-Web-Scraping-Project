@@ -1,10 +1,12 @@
 import re
 import logging
 from typing import Dict
-from bs4 import BeautifulSoup
+from datetime import datetime, date
+from bs4 import BeautifulSoup, Tag
 from scraping.ws_httpClient import HTTPClient
 from config.exceptions import HTTPClientError
-from scraping.ws_entities import League, LeagueStats, RegionStats, TransferMarket
+from scraping.ws_entities import League, LeagueStats, RegionStats, TransferMarket, Player
+from pprint import pprint
 
 class ScrapingEngine:
     def __init__(self, http_client: HTTPClient):
@@ -188,10 +190,113 @@ class ScrapingEngine:
             raise ValueError(f"Error al obtener la información del país: {e}")
 
 
+    def get_player_img_info(self, table: BeautifulSoup) -> dict:
+        try:
+            player_info = {}
+            rows = table.find("tbody").find_all("tr")
+
+            if not rows:
+                logging.warning("No se encontraron filas en la tabla.")
+                return player_info
+
+            for row in rows:
+                player_cell = row.find("td", {"class": "posrela"})
+                if not player_cell:
+                    continue
+
+                inline_table = player_cell.find("table", class_="inline-table")
+                if not inline_table:
+                    continue
+
+                first_tr = inline_table.find("tr")
+                if not first_tr:
+                    continue
+
+                first_td = first_tr.find("td")
+                if not first_td:
+                    continue
+
+                img_tag = first_td.find("img")
+                img_player = img_tag.get("data-src") or img_tag.get("src") or None
+
+                id_img = None
+                if img_player:
+                    match = re.search(r"/medium/(\d+-\d+)", img_player)
+                    id_img = match.group(1) if match else None
+
+                id_cell = row.find("td", {"class": "hauptlink"})
+                if id_cell:
+                    player_url = id_cell.find("a")["href"]
+                    player_id_match = re.search(r"spieler/(\d+)", player_url)
+                    if player_id_match:
+                        player_id = player_id_match.group(1)
+                        player_info[player_id] = {
+                            "id_img": id_img,
+                            "img_player": img_player
+                        }
+
+            return player_info
+
+        except Exception as e:
+            logging.error(f"Error al obtener la información de imágenes de los jugadores: {e}")
+            raise ValueError(f"Error al obtener la información de imágenes de los jugadores: {e}")
+
+
+    def get_date(self, element: Tag) -> str:
+        if element:
+            text = element.get_text(strip=True)
+
+            # Extraemos solo la fecha antes del paréntesis
+            match = re.search(r"([A-Za-z]+\s\d{1,2},\s\d{4})|(\d{1,2}\s[A-Za-z]+\s\d{4})", text)
+
+            if match:
+                raw_date = match.group(0)
+                return self.format_date_to_sql(raw_date)
+
+        return None
+
+
+    def get_nationality_id(self, cell: Tag) -> str | None:
+        if cell:
+            img = cell.find("img", {"class": "flaggenrahmen"})
+
+            if img:
+                src = img.get("src", "")
+                match = re.search(r"verysmall/(\d+)", src)
+
+                if match:
+                    return match.group(1)
+        return None
+
+
+    def get_team_signed_from_id(self, cell: Tag) -> str | None:
+        if cell:
+            img = cell.find("img")
+
+            if img:
+                src = img.get("src", "")
+                match = re.search(r"verysmall/(\d+)", src)
+
+                if match:
+                    return match.group(1)
+
+        return None
+
+
+    def get_player_height(self, cell: Tag) -> float:
+        if isinstance(cell, str):
+            text = cell
+        else:
+            text = cell.get_text(strip=True)
+
+        match = re.search(r"(\d{1,2},\d{1,2})\s*m", text)
+        if match:
+            return self.float_validation(match.group(1))
+
+        return 0.0
+
+
     def get_league_tier(self, table: BeautifulSoup) -> Dict[str, str]:
-        """
-        Obtiene el nivel/categoría de la liga a partir de la tabla HTML.
-        """
         try:
             competition_to_tier = {}
             rows = table.find("tbody").find_all("tr")
@@ -208,7 +313,7 @@ class ScrapingEngine:
                     current_tier = tier_cell.get_text(strip=True)
                     continue
 
-                # Detectar si la fila es una liga
+                # Comprobamos si la fila es una liga
                 competition_cell = row.find("td", {"class": "hauptlink"})
                 if competition_cell and current_tier:
                     competition_name = competition_cell.get_text(strip=True)
@@ -261,7 +366,12 @@ class ScrapingEngine:
     @staticmethod
     def float_validation(value: str) -> float:
         try:
-            return float(value.replace(",", ".").replace(" %", ""))
+            return float(
+                value
+                .replace(",", ".")
+                .replace("m", "")
+                .replace(" %", "")
+            )
 
         except ValueError:
             return 0.0
@@ -338,3 +448,21 @@ class ScrapingEngine:
 
         setattr(region_stats, stat_name, avg_stat_value)
         return avg_stat_value
+
+    @staticmethod
+    def format_date_to_sql(date_str: str) -> date | None:
+        try:
+            # Detectamos el formato de fecha:
+            date_formats = ["%b %d, %Y", "%d %b %Y", "%Y-%m-%d"]
+            for fmt in date_formats:
+                try:
+                    return datetime.strptime(date_str, fmt).date() # Formateamos a SQL
+
+                except ValueError:
+                    continue
+
+            return None
+
+        except Exception as e:
+            logging.error(f"Error al formatear la fecha '{date_str}' al formato SQL: {e}")
+            return None

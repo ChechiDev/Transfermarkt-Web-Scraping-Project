@@ -2,18 +2,25 @@ import requests
 from bs4 import BeautifulSoup
 from time import sleep
 import validators
-from config.headers import headers
+from config.headers import get_headers
 from config.exceptions import (
     logging,
-    HTTPClientError,
     HTTPConnectionError,
     HTTPTimeoutError,
+    HTTPClientError,
     HTTPResponseError
 )
 
 class HTTPClient:
-    def __init__(self, base_headers = None, timeout = 5, retries = 10, delay = 2):
-        self.headers = base_headers or headers
+    def __init__(
+            self,
+            base_headers = None,
+            timeout = 10,
+            retries = 10,
+            delay = 6
+        ):
+
+        self.headers = base_headers
         self.timeout = timeout # Tiempo de espera para la conexión
         self.retries = retries # Número de reintentos
         self.delay = delay # Segundos entre reintentos
@@ -33,52 +40,45 @@ class HTTPClient:
         self.url_manager = url_manager
 
 
-    def make_request(self, url, method = "GET", **kwargs):
-        """
-        Método para realizar una solicitud HTTP con reintentos.
-        Args:
-            method (str): Método HTTP a utilizar (GET, POST, etc.).
-            url (str): URL a la que se desea acceder.
-            **Kwargs: Parámetros adicionales para la solicitud.
-        Returns:
-            request.Response: Respuesta de la solicitud HTTP, si es exitosa.
-        """
+    def make_request(self, url, method="GET", **kwargs):
         if not validators.url(url):
             raise ValueError(f"URL no válida: {url}")
 
         for attempt in range(self.retries):
             try:
-                # Combina los headers predeterminados con los headers de kwargs
-                request_headers = kwargs.pop("headers", self.headers)
+                # Headers dinámicos para cada solicitud
+                self.headers = get_headers()
 
-                # Realizamos la solicitud GET a la URL con el método especificado:
+                # Realizamos la solicitud HTTP
                 response = requests.request(
-                    method = method, # Agregamos method para más flexibilidad.
-                    url = url,
-                    headers = self.headers,
-                    timeout = self.timeout,
-                    **kwargs, # Pasamos los parámetros adicionales
+                    method=method,
+                    url=url,
+                    headers=self.headers,
+                    timeout=self.timeout,
+                    **kwargs,
                 )
-                # Verificamos si la respuesta es exitosa (código 200):
+
                 if response.status_code == 200:
                     return response
                 else:
                     logging.warning(f"HTTP: {response.status_code} para {url}")
 
             except requests.Timeout:
-                logging.warning(f"Timeout: Fallo en intento {attempt + 1}/{self.retries} para la url: {url}")
+                # logging.warning(f"Timeout: Fallo en intento {attempt + 1}/{self.retries} para la url: {url}")
+                logging.warning(f"Timeout: Fallo en intento {attempt + 1}/{self.retries}")
 
                 if attempt == self.retries - 1:
                     raise HTTPTimeoutError(f"Error: Timeout al acceder a la URL {url} después de {self.retries} intentos.")
 
             except requests.RequestException as e:
-                logging.warning(f"Error: Fallo en intento {attempt + 1}/{self.retries} para la url: {url}. \nDetalle: {e}")
+                # logging.warning(f"Error: Fallo en intento {attempt + 1}/{self.retries} para la url: {url}. \nDetalle: {e}")
+                logging.warning(f"Timeout: Fallo en intento {attempt + 1}/{self.retries}")
 
                 if attempt == self.retries - 1:
                     raise HTTPConnectionError(f"Error: No se puede acceder a la URL {url} después de {self.retries} intentos.")
 
-            # Pausamos antes de reintento:
-            sleep(self.delay)
+            # Pausamos antes de reintento
+            sleep(self.delay * 2)
 
         raise Exception(f"Error: No se puede acceder a la URL {url} después de {self.retries} intentos.")
 
@@ -93,7 +93,7 @@ class HTTPClient:
 
             except requests.RequestException as e:
                 logging.warning(f"Intento {attempt + 1}/{self.retries} fallido: {e}")
-                sleep(self.delay)
+                sleep(self.delay * 2)
 
         raise Exception(f"Error: No se puede completar la solicitud después de {self.retries} intentos.")
 
@@ -121,9 +121,6 @@ class HTTPClient:
 
 
     def get_json(self, url, **kwargs):
-        """
-        Realiza una solicitud GET y devuelve el contenido JSON de la página.
-        """
         try:
             response = self.make_request(url, **kwargs)
             return response.json()

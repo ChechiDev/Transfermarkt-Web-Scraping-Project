@@ -1,10 +1,11 @@
 import logging
+import json
 from bs4 import BeautifulSoup
 from scraping.ws_engine import ScrapingEngine
-from scraping.ws_entities import League, LeagueStats, Team, Region
+from scraping.ws_entities import League, LeagueStats, Team, Country, Region
 from scraping.ws_teams import TeamManager
 from scraping.ws_dataManager import DataManager
-from typing import List
+from typing import List, Dict
 
 class LeagueManager:
     base_url = "https://www.transfermarkt.com"
@@ -28,6 +29,7 @@ class LeagueManager:
             "key": "competition",
             "transform": lambda x: (
                 LeagueManager.base_url + x.find("a")["href"]
+
                 if x and x.find("a") and "href" in x.find("a").attrs
                 else None
             )
@@ -101,9 +103,9 @@ class LeagueManager:
                 )
                 if x else 0.0
         },
-        "average_market_value": {
+        "avg_market_value": {
             **base_config,
-            "key": "average_market_value",
+            "key": "avg_market_value",
             "transform": lambda x: ScrapingEngine.parse_currency_to_float(
                 x.get_text(strip=True)
                 )
@@ -124,7 +126,13 @@ class LeagueManager:
         self.data_manager = DataManager(http_client=scraping_engine.http_client)
 
 
-    def process_league_season(self, league: League, region: Region, team_manager: TeamManager) -> None:
+    def process_league_season(
+            self,
+            league: League,
+            region: Region,
+            team_manager: TeamManager
+
+        ) -> None:
         # logging.info(f"Iniciando el procesamiento de temporadas para la liga: {league.competition}")
         seasons = self.scraping_engine.get_seasons(league.url_league)
         if not seasons:
@@ -170,7 +178,7 @@ class LeagueManager:
                         season_key=season_key,
                         team=team
                     )
-                    # logging.info(f"Equipo '{team.team_name}' añadido a la temporada '{season_key}'.")
+                    team_manager.process_team_players(team)
 
                 logging.info(f"Se procesaron {len(teams)} equipos para la temporada: {season_key}")
 
@@ -187,20 +195,6 @@ class LeagueManager:
             default=None,
             transform=lambda x: x
     ):
-        """
-        Extrae el valor de una celda de la tabla según el encabezado y aplica una transformación opcional.
-
-        Args:
-            headers (dict): Diccionario de encabezados.
-            col (list): Lista de celdas de la fila.
-            key (str): Clave del encabezado.
-            offset (int): Desplazamiento opcional para la columna.
-            default: Valor predeterminado si no se encuentra la celda.
-            transform (callable): Función para transformar el valor extraído.
-
-        Returns:
-            El valor transformado o el valor predeterminado.
-        """
         try:
             cell = col[headers[key] + offset] if headers.get(key) is not None else None
             return transform(cell) if cell else default
@@ -214,21 +208,11 @@ class LeagueManager:
             self,
             table: BeautifulSoup,
             min_columns: int,
-            region_id: str
+            region_id: str,
+            region_countries: dict = [str, Country]
 
     ) -> List[League]:
-        """
-        Extrae todos los datos válidos de una tabla HTML y devuelve una lista de objetos League.
-        Solo incluye filas que tienen al menos `min_columns` columnas.
 
-        Args:
-            table (BeautifulSoup): Tabla HTML parseada.
-            min_columns (int): Número mínimo de columnas requeridas para procesar una fila.
-            region_id (str): ID de la región a la que pertenece la liga.
-
-        Returns:
-            List[League]: Lista de objetos League con los datos extraídos.
-        """
         # Extraemos los encabezados de la tabla:
         headers = self.scraping_engine.get_table_headers(table)
         if not headers:
@@ -272,7 +256,7 @@ class LeagueManager:
                     foreigners=extracted_values["foreigners"],
                     game_ratio_of_foreign_players=extracted_values["game_ratio_of_foreign_players"],
                     goals_per_match=extracted_values["goals_per_match"],
-                    average_market_value=extracted_values["average_market_value"],
+                    avg_market_value=extracted_values["avg_market_value"],
                     total_value=extracted_values["total_value"]
                 )
 
@@ -281,6 +265,7 @@ class LeagueManager:
                     id_league=league_stats.fk_league,
                     competition=extracted_values["competition_name"],
                     season=0,
+                    fk_country=None,
                     country=extracted_values["country_name"],
                     url_league=extracted_values["competition_url"],
                     stats=league_stats,
@@ -291,11 +276,15 @@ class LeagueManager:
                     }
                 )
 
+                # Log del nombre de la liga creada
+                logging.info(f"Liga agregada: {json.dumps(league.__dict__, default=str, ensure_ascii=False, indent=4)}")
+
+                # Asignamos el id_country a la liga:
+                league.add_country(region_countries)
                 leagues.append(league)
 
             except Exception as e:
                 logging.warning(f"No se ha podido extraer los campos de la fila: {e}")
                 continue
 
-        # logging.info(f"Datos extraídos de la tabla: {len(leagues)} filas.")
         return leagues

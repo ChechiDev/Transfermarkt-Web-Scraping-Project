@@ -55,9 +55,6 @@ class TransfermarktURLManager(URLManager):
 
 
     def fetch_html(self, url: str) -> BeautifulSoup:
-        """
-        Realiza una solicitud HTTP y devuelve el HTML parseado.
-        """
         response = self.http_client.make_request(url)
         if not response:
             logging.warning(f"No se pudo obtener el HTML de la URL: {url}")
@@ -79,9 +76,6 @@ class TransfermarktURLManager(URLManager):
 
 
     def process_region_response(self, key: str, region: str, region_name: str, html: BeautifulSoup):
-        """
-        Procesa la respuesta HTML de una región y genera las URLs.
-        """
         table_header = self.extract_table_header(html)
         end_page = self.extract_total_pages(html, region)
         urls = self.generate_urls(region, end_page)

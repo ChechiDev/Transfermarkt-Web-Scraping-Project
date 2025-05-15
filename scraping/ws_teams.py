@@ -1,14 +1,17 @@
 import re
+import json
 import logging
 from bs4 import BeautifulSoup
 from scraping.ws_engine import ScrapingEngine
-from scraping.ws_entities import Team, TeamStats, League, Region
+from scraping.ws_entities import Team, TeamStats, League, Region, Player
+from scraping.ws_players import PlayerManager
 from scraping.ws_dataManager import DataManager
 from typing import List
 
 
 class TeamManager:
     base_url = "https://www.transfermarkt.com"
+    url_plus = "/plus/1"
 
     base_config = {
         "offset": 0,
@@ -24,9 +27,9 @@ class TeamManager:
         },
         "url_team": {
             **base_config,
-            "key": "name",
+            "key": "squad",
             "transform": lambda x: (
-                TeamManager.base_url + x.find("a")["href"]
+                TeamManager.base_url + x.find("a")["href"] + TeamManager.url_plus
                 if x and x.find("a") and "href" in x.find("a").attrs
                 else None
             )
@@ -60,7 +63,7 @@ class TeamManager:
         },
         "avg_market_value": {
             **base_config,
-            "key": "average_market_value",
+            "key": "avg_market_value",
             "transform": lambda x: ScrapingEngine.parse_currency_to_float(
                 x.get_text(strip=True)
                 )
@@ -76,9 +79,40 @@ class TeamManager:
         }
     }
 
-    def __init__(self, scraping_engine: ScrapingEngine, data_manager: DataManager):
+    def __init__(
+            self,
+            scraping_engine: ScrapingEngine,
+            data_manager: DataManager,
+
+        ):
         self.scraping_engine = scraping_engine
         self.data_manager = data_manager
+        self.player_manager = PlayerManager(scraping_engine)
+
+
+    def process_team_players(self, team: Team) -> None:
+        response = self.scraping_engine.http_client.make_request(team.url_team)
+        if not response:
+            logging.error(f"No se pudo obtener el HTML del equipo: {team.url_team}")
+            return
+
+        soup = BeautifulSoup(response.content, "html.parser")
+        table = soup.find("table", {"class": "items"})
+        if not table:
+            logging.warning(f"No se encontró la tabla de jugadores en el equipo: {team.url_team}")
+            return
+
+        players = self.player_manager.get_player_data(
+            table,
+            min_columns=5,
+            fk_region=team.fk_region,
+            fk_league=team.fk_league,
+            team=team,
+        )
+
+        for player in players:
+            team.add_player(player)
+
 
     def extract_cell_value(
             self,
@@ -97,6 +131,7 @@ class TeamManager:
             logging.warning(f"Error al extraer el valor de la celda: {e}")
             return default
 
+
     def get_team_data(
             self,
             table: BeautifulSoup,
@@ -105,6 +140,7 @@ class TeamManager:
             league: League
 
     ) -> List[Team]:
+
         headers = self.scraping_engine.get_table_headers(table)
         if not headers:
             logging.error("No se encontraron encabezados en la tabla.")
@@ -163,6 +199,9 @@ class TeamManager:
                     url_team=extracted_values.get("url_team"),
                     stats=team_stats
                 )
+
+                # Log del nombre del equipo creada
+                logging.info(f"Equipo agregado: {json.dumps(team.__dict__, default=str, ensure_ascii=False, indent=4)}")
 
                 teams.append(team)
 
