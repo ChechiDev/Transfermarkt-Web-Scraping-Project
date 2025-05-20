@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 import os
 
 # Clase que se encargará de crear sobre la base de datos
-class DatabaseCreator:
+class DBCreator:
     # Constructor que carga las variables de entorno (.env):
     def __init__(self, env):
         self.env = env

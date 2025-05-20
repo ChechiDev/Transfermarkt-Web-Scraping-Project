@@ -24,13 +24,13 @@ class DatabaseConnection:
             )
 
             self.connection.autocommit = True
-            print(f"✅ Conexión establecida con la base de datos: {db_to_use}")
+            print(f"Conexión establecida con la base de datos: {db_to_use}")
 
         except OperationalError as e:
-            print(f"❌ Error de conexión con la base de datos: {e}")
+            print(f"Error de conexión con la base de datos: {e}")
 
     def disconnect(self):
         # Cierra la conexión con la base de datos.
         if self.connection:
             self.connection.close()
-            print("✅ Conexión cerrada.")
+            print("Conexión cerrada.")
