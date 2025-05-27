@@ -1,3 +1,4 @@
+import os
 import re
 import logging
 from typing import Dict
@@ -8,16 +9,20 @@ from config.exceptions import HTTPClientError
 from scraping.ws_entities import League, LeagueStats, RegionStats, TransferMarket, Player
 from pprint import pprint
 
+def clear_terminal():
+    os.system("cls" if os.name == "nt" else "clear")
+
+
 class ScrapingEngine:
     def __init__(self, http_client: HTTPClient):
         self.http_client = http_client
 
 
-    def expand_collpased_cells(self, table: BeautifulSoup):
-        """
-        Expande las celdas colapsadas en una tabla HTML.
-        """
+    def get_terminal_clean(self):
+        os.system("cls" if os.name == "nt" else "clear")
 
+
+    def expand_collpased_cells(self, table: BeautifulSoup):
         try:
             for cell in table.find_all("td", {"class": "collapsed-cell"}):
                 expanded_content = cell.get("data-content")
@@ -32,10 +37,6 @@ class ScrapingEngine:
 
 
     def get_total_pages(self, url: str) -> int:
-        """
-        Obtiene el número total de páginas (end_page) para una región específica.
-        """
-
         # Realizamos la solicitud HTTP para obtener el HTML de la página:
         try:
             response = self.http_client.make_request(url)
