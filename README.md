@@ -36,133 +36,83 @@ El objetivo es realizar un scraping exhaustivo de la página [Transfermarkt](htt
 ## Estructura del Proyecto
 
 ```bash
-├── scraping/              # Módulo principal de scraping y gestión de datos
-│   ├── ws_engine.py       # Motor base para scraping y utilidades HTML
-│   ├── ws_leagues.py      # Gestión y extracción de ligas
-│   ├── ws_teams.py        # Gestión y extracción de equipos
-│   ├── ws_players.py      # Gestión y extracción de jugadores
-│   ├── ws_dataManager.py  # Gestión y serialización de datos extraídos
-│   ├── ws_entities.py     # Definición de entidades y modelos de datos
-│   ├── ws_urls.py         # Gestión dinámica de URLs y paginación
-│   ├── ws_region.py       # Gestión y procesamiento de regiones
-│   ├── ws_httpClient.py   # Cliente HTTP robusto con reintentos y validación
-├── database/              # (Futuro) Módulo para integración y gestión de base de datos
-│   ├── models.py          # Modelos ORM para persistencia de datos
-│   ├── db_manager.py      # Lógica de conexión, inserción y consultas
-│   └── ...                # Scripts de migración y utilidades
-├── interactive/           # (Futuro) Módulo para exploración y consulta interactiva
-│   ├── cli.py             # Interfaz de línea de comandos para explorar datos
-│   ├── dashboard.py       # (Opcional) Interfaz web o visualización
-│   └── ...                # Utilidades para navegación y búsqueda
-├── Data Output/           # Carpeta para almacenar temporalmente los datos extraídos
-│   ├── all_regions_with_leagues_and_teams.json
-├── main.py                # Script principal para ejecutar el scraping
-├── README.md              # Documentación del proyecto
-├── requirements.txt       # Dependencias del proyecto
+├── config/
+│   ├── __init__.py
+│   ├── config.py           # Configuración y validación de entorno para conexión a PostgreSQL
+│   ├── exceptions.py       # Excepciones personalizadas para configuración
+│   ├── headers.py          # Headers HTTP para scraping
+│   └── run_scraper.py      # (Opcional) Script para lanzar el scraper desde config
+├── database/
+│   ├── __init__.py
+│   ├── db_connection.py    # Lógica de conexión a la base de datos
+│   ├── db_engine.py        # Funciones y clases para gestión de la base de datos
+│   └── db_creator.py       # Creación y validación de la base de datos
+├── interactive/
+│   ├── __init__.py
+│   ├── menu.py             # Menús interactivos para CLI
+│   └── menu_engine.py      # Utilidades y validaciones de menús
+├── scraping/
+│   ├── ws_engine.py        # Motor base para scraping y utilidades HTML
+│   ├── ws_leagues.py       # Gestión y extracción de ligas
+│   ├── ws_teams.py         # Gestión y extracción de equipos
+│   ├── ws_players.py       # Gestión y extracción de jugadores
+│   ├── ws_dataManager.py   # Gestión y serialización de datos extraídos
+│   ├── ws_entities.py      # Definición de entidades y modelos de datos
+│   ├── ws_urls.py          # Gestión dinámica de URLs y paginación
+│   ├── ws_region.py        # Gestión y procesamiento de regiones
+│   └── ws_httpClient.py    # Cliente HTTP robusto con reintentos y validación
+├── Data Output/
+│   └── all_regions_with_leagues_and_teams.json
+├── main.py                 # Script principal para ejecutar el scraping
+├── transfermarkt_project.ipynb # Notebook de ejemplo y pruebas
+├── requirements.txt        # Dependencias del proyecto
+├── README.md               # Documentación del proyecto
+├── .env                    # Variables de entorno (no versionado)
+├── .gitignore
+└── LICENSE
 ```
 
 ---
 
 ## Lógica y Arquitectura Modular
 
-### 1. Módulo `scraping/`
+### 1. Módulo `config/`
+- **config.py**: Clase `EnvironmentConfig` para recolectar y validar datos de conexión a PostgreSQL.
+  - Métodos: `_input_field`, `_show_fields`, `_collect_config`, `_validate_database`, `__str__`
+- **exceptions.py**: Excepciones personalizadas para errores de configuración.
+- **headers.py**: Headers HTTP para requests.
+- **run_scraper.py**: (Si existe) Script para lanzar el scraper desde la configuración.
 
-#### a) **ws_engine.py**
-Contiene la clase `ScrapingEngine`, núcleo de utilidades para el scraping:
-- **expand_collpased_cells(table: BeautifulSoup)**: Expande celdas HTML colapsadas.
-- **get_total_pages(url: str) -> int**: Calcula el número de páginas de una tabla paginada.
-- **get_table_headers(table: BeautifulSoup, header_type: str = "default") -> dict**: Extrae y normaliza encabezados de tablas.
-- **measure_row_lengths(table: BeautifulSoup) -> tuple**: Analiza la longitud de filas para validar consistencia.
-- **get_country_info(table: BeautifulSoup) -> dict**: Extrae información de países (ID, nombre, bandera).
-- **get_league_tier(table: BeautifulSoup) -> Dict[str, str]**: Asocia ligas con su nivel/tier.
-- **get_seasons(url: str) -> list[int]**: Extrae temporadas disponibles desde un menú desplegable.
-- **calculate_avg_value(leagues, region_stats, stat_name) -> float**: Calcula promedios de estadísticas agregadas.
-- Métodos auxiliares para fechas, monedas, IDs y validación de datos.
+### 2. Módulo `database/`
+- **db_connection.py**: Funciones para conectar a la base de datos.
+- **db_engine.py**: Clase `DBManager` para operaciones sobre la base de datos (validación, inserción, etc.).
+- **db_creator.py**: Clase `DatabaseCreator` para crear y validar la existencia de la base de datos.
 
-#### b) **ws_entities.py**
-Define los modelos de datos usando `@dataclass`:
-- **Player, Team, League, Region, Country, TransferMarket**: Estructuras jerárquicas y métodos `to_dict()` para serialización.
-- **Stats**: Clases para estadísticas agregadas a cada nivel.
-- Métodos para agregar entidades hijas y asegurar integridad de datos.
+### 3. Módulo `interactive/`
+- **menu.py**: Menús interactivos para la CLI.
+- **menu_engine.py**: Clases `MenuUtils` y `MenuValidation` para utilidades y validaciones de menús.
 
-#### c) **ws_dataManager.py**
-Clase `DataManager` para centralizar y serializar los datos:
-- **add_region(region: Region) -> None**: Añade una región validando el tipo.
-- **to_dict() -> Dict**: Convierte toda la estructura a diccionario.
-- **to_json(file_name: str) -> None**: Exporta los datos a un archivo JSON en `Data Output`.
-
-#### d) **ws_urls.py**
-Gestión dinámica de URLs y paginación:
-- **URLManager**: Clase base para almacenar y validar URLs.
-- **TransfermarktURLManager**: Genera URLs para cada región y página, extrae encabezados y páginas totales.
-  - **initialize_urls()**: Inicializa todas las URLs de regiones.
-  - **build_url(region, page)**: Construye URLs dinámicas.
-  - **fetch_html(url)**: Solicita y parsea HTML.
-  - **extract_total_pages(html, region)**: Calcula páginas totales.
-  - **generate_urls(region, end_page)**: Lista todas las URLs de una región.
-
-#### e) **ws_region.py**
-Clase `RegionManager` para orquestar el scraping de una región:
-- **create_region(region_key, region_data) -> Region**: Instancia una región con estadísticas iniciales.
-- **process_region(region, region_data) -> None**: Extrae países, ligas y equipos, y calcula estadísticas agregadas.
-
-#### f) **ws_leagues.py**
-Clase `LeagueManager` para gestionar ligas:
-- **get_league_data(table, min_columns, region_id, region_countries) -> List[League]**: Extrae ligas de una tabla HTML.
-- **process_league_season(league, region, team_manager)**: Procesa temporadas y equipos de una liga.
-- **extract_cell_value(...)**: Utilidad para extraer y transformar celdas de tabla.
-
-#### g) **ws_teams.py**
-Clase `TeamManager` para equipos:
-- **get_team_data(table, min_columns, region, league) -> List[Team]**: Extrae equipos de una tabla HTML.
-- **process_team_players(team)**: Extrae y agrega jugadores a un equipo.
-- **extract_cell_value(...)**: Utilidad para celdas de tabla.
-
-#### h) **ws_players.py**
-Clase `PlayerManager` para jugadores:
-- **get_player_data(table, min_columns, fk_region, fk_league, team) -> List[Player]**: Extrae jugadores de una tabla HTML.
-- **extract_cell_value(...)**: Utilidad para celdas de tabla.
-
-#### i) **ws_httpClient.py**
-Cliente HTTP robusto:
-- **make_request(url, method="GET", ...)**: Solicitud HTTP con reintentos, validación y manejo de errores.
-- **get_html(url, ...)**: Devuelve HTML parseado.
-- **get_json(url, ...)**: Devuelve respuesta JSON.
-
----
-
-### 2. Módulo `database/` (Futuro)
-
-**Propósito:** Integrar y gestionar los datos extraídos en una base de datos relacional (ej. PostgreSQL, SQLite) o NoSQL.
-
-**Estructura esperada:**
-- **models.py**: Definición de modelos ORM (por ejemplo, usando SQLAlchemy o Django ORM) para reflejar la jerarquía de entidades (`Region`, `League`, `Team`, `Player`, etc.).
-- **db_manager.py**: Lógica para la conexión, inserción masiva, migraciones y consultas eficientes.
-- **migrations/**: Scripts para crear y actualizar el esquema de la base de datos.
-- **utils.py**: Funciones auxiliares para validación, transformación y limpieza de datos antes de la inserción.
-
-**Lógica esperada:**
-- Conversión de los datos extraídos (actualmente en JSON) a instancias de modelos ORM.
-- Inserción y actualización de registros de forma transaccional.
-- Consultas complejas para análisis y visualización.
-- Integridad referencial y validación de duplicados.
-
----
-
-### 3. Módulo `interactive/` (Futuro)
-
-**Propósito:** Permitir la exploración y consulta interactiva de los datos extraídos por usuarios finales o desarrolladores.
-
-**Estructura esperada:**
-- **cli.py**: Interfaz de línea de comandos para navegar por regiones, ligas, equipos y jugadores, con comandos de búsqueda y filtrado.
-- **dashboard.py**: (Opcional) Interfaz web o panel visual para explorar los datos con gráficos y tablas interactivas (ej. usando Streamlit, Dash o Flask).
-- **utils.py**: Funciones para formatear la salida, autocompletar comandos y exportar resultados.
-
-**Lógica esperada:**
-- Menús interactivos para seleccionar regiones, ligas, equipos o jugadores.
-- Búsqueda por nombre, país, temporada, etc.
-- Visualización de estadísticas agregadas y detalles individuales.
-- Exportación de resultados a CSV, Excel o visualización directa.
+### 4. Módulo `scraping/`
+- **ws_engine.py**: Clase `ScrapingEngine` con utilidades para scraping:
+  - Métodos: `expand_collpased_cells`, `get_total_pages`, `get_table_headers`, `measure_row_lengths`, `get_country_info`, `get_league_tier`, `get_seasons`, `calculate_avg_value`, y otros auxiliares.
+- **ws_entities.py**: Modelos de datos con `@dataclass`:
+  - Clases: `Player`, `Team`, `League`, `Region`, `Country`, `TransferMarket`, `Stats`
+  - Métodos: `to_dict`, agregación de entidades hijas, validación de integridad.
+- **ws_dataManager.py**: Clase `DataManager` para centralizar y serializar datos:
+  - Métodos: `add_region`, `to_dict`, `to_json`
+- **ws_urls.py**: Gestión dinámica de URLs y paginación:
+  - Clases: `URLManager`, `TransfermarktURLManager`
+  - Métodos: `initialize_urls`, `build_url`, `fetch_html`, `extract_total_pages`, `generate_urls`
+- **ws_region.py**: Clase `RegionManager` para orquestar el scraping de una región:
+  - Métodos: `create_region`, `process_region`
+- **ws_leagues.py**: Clase `LeagueManager` para gestionar ligas:
+  - Métodos: `get_league_data`, `process_league_season`, `extract_cell_value`
+- **ws_teams.py**: Clase `TeamManager` para equipos:
+  - Métodos: `get_team_data`, `process_team_players`, `extract_cell_value`
+- **ws_players.py**: Clase `PlayerManager` para jugadores:
+  - Métodos: `get_player_data`, `extract_cell_value`
+- **ws_httpClient.py**: Cliente HTTP robusto:
+  - Métodos: `make_request`, `get_html`, `get_json`
 
 ---
 
