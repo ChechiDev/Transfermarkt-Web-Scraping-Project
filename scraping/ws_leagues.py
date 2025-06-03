@@ -8,6 +8,10 @@ from scraping.ws_dataManager import DataManager
 from typing import List, Dict
 
 class LeagueManager:
+    """
+    Clase para gestionar la extracción y procesamiento de datos de ligas desde Transfermarkt.
+    Permite obtener información de ligas, procesar temporadas y extraer valores de celdas.
+    """
     base_url = "https://www.transfermarkt.com"
 
     # Diccionario base para configuraciones comunes
@@ -122,6 +126,13 @@ class LeagueManager:
     }
 
     def __init__(self, scraping_engine: ScrapingEngine, data_manager: DataManager):
+        """
+        Inicializa el LeagueManager con el motor de scraping y el gestor de datos.
+
+        Args:
+            scraping_engine (ScrapingEngine): Motor de scraping.
+            data_manager (DataManager): Gestor de datos.
+        """
         self.scraping_engine = scraping_engine
         self.data_manager = DataManager(http_client=scraping_engine.http_client)
 
@@ -133,6 +144,15 @@ class LeagueManager:
             team_manager: TeamManager
 
         ) -> None:
+        """
+        Procesa las temporadas de una liga, extrayendo equipos y jugadores para cada temporada.
+
+        Args:
+            league (League): Liga a procesar.
+            region (Region): Región a la que pertenece la liga.
+            team_manager (TeamManager): Gestor de equipos.
+        """
+
         # logging.info(f"Iniciando el procesamiento de temporadas para la liga: {league.competition}")
         seasons = self.scraping_engine.get_seasons(league.url_league)
         if not seasons:
@@ -194,7 +214,22 @@ class LeagueManager:
             offset: int = 2,
             default=None,
             transform=lambda x: x
-    ):
+        ):
+        """
+        Extrae y transforma el valor de una celda de la tabla según la configuración.
+
+        Args:
+            headers (dict): Diccionario de encabezados de la tabla.
+            col (list): Lista de celdas de la fila.
+            key (str): Clave del encabezado.
+            offset (int): Desplazamiento para la columna.
+            default: Valor por defecto si falla la extracción.
+            transform (callable): Función de transformación para el valor.
+
+        Return:
+            Valor extraído y transformado, o el valor por defecto.
+        """
+
         try:
             cell = col[headers[key] + offset] if headers.get(key) is not None else None
             return transform(cell) if cell else default
@@ -212,6 +247,18 @@ class LeagueManager:
             region_countries: dict = [str, Country]
 
     ) -> List[League]:
+        """
+        Extrae los datos de las ligas de una tabla HTML y devuelve una lista de objetos League.
+
+        Args:
+            table (BeautifulSoup): Tabla HTML con los datos de las ligas.
+            min_columns (int): Número mínimo de columnas requeridas por fila.
+            region_id (str): ID de la región.
+            region_countries (dict): Diccionario de países de la región.
+
+        Return:
+            List[League]: Lista de objetos League extraídos de la tabla.
+        """
 
         # Extraemos los encabezados de la tabla:
         headers = self.scraping_engine.get_table_headers(table)
@@ -276,7 +323,7 @@ class LeagueManager:
                     }
                 )
 
-                # Log del nombre de la liga creada
+                # Log del nombre de la liga creada (formato JSON)
                 logging.info(f"Liga agregada: {json.dumps(league.__dict__, default=str, ensure_ascii=False, indent=4)}")
 
                 # Asignamos el id_country a la liga:

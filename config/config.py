@@ -1,5 +1,5 @@
 from scraping.ws_engine import clear_terminal
-from database.db_engine import DBUtils
+from database.db_engine import DBManager
 from interactive.menu_engine import MenuUtils, MenuValidation
 
 # Nota general:
@@ -16,19 +16,22 @@ class EnvironmentConfig:
         Inicializa la configuración de entorno y solicita los datos de conexión al usuario.
         """
         self.menu_utils = MenuUtils()
-        self.db_utils = DBUtils()
+        self.db_utils = DBManager()
         self._collect_config()
 
     def _input_field(self, name, default, validate, error, values):
         """
         Solicita al usuario un campo de configuración, valida el valor y repite hasta que sea válido.
-        param name: Nombre del campo.
-        param default: Valor por defecto.
-        param validate: Función de validación.
-        param error: Mensaje de error.
-        param values: Diccionario con los valores actuales.
 
-        return: Valor validado.
+        Args:
+            name (str): Nombre del campo.
+            default (str): Valor por defecto.
+            validate (Callable): Función de validación.
+            error (str): Mensaje de error.
+            values (dict): Diccionario con los valores actuales.
+
+        Return:
+            str: Valor validado.
         """
         while True:
             self._show_fields(values)
@@ -42,8 +45,11 @@ class EnvironmentConfig:
     def _show_fields(self, values):
         """
         Muestra en pantalla los campos actuales de configuración.
-        parm values: Diccionario con los valores actuales.
+
+        Args:
+            values (dict): Diccionario con los valores actuales.
         """
+
         clear_terminal()
         self.menu_utils.main_menu()
         print("Enter the database connection details:\n")
@@ -68,7 +74,7 @@ class EnvironmentConfig:
 
         values = {}
         for name, default, validate, error in fields:
-            # Para validar la base de datos, primero se deben tener los otros campos
+            # Para validar la base de datos, primero se deben tener los otros campos.
             if name == "Database":
                 self.host = values["Host"]
                 self.port = values["Port"]
@@ -81,17 +87,19 @@ class EnvironmentConfig:
         self.port = values["Port"]
         self.user = values["User"]
         self.password = values["Password"]
-        self.db = values["Database"]
+        self.db_name = values["Database"]
 
         self._show_fields(values)
-        # input(f"Conexión a la base de datos '{self.db}' establecida con éxito. Presiona Enter para continuar...")
 
     def _validate_database(self, db_name):
         """
         Valida si la base de datos existe en el servidor PostgreSQL.
-        parm db_name: Nombre de la base de datos.
 
-        return: True si existe, False en caso contrario.
+        Args:
+            db_name (str): Nombre de la base de datos.
+
+        Return:
+            bool: True si existe, False en caso contrario.
         """
         return self.db_utils.check_db_exists(
             self.host,
@@ -104,6 +112,9 @@ class EnvironmentConfig:
     def __str__(self):
         """
         Devuelve una representación en texto plano de la configuración de entorno.
+
+        Return:
+            str: Representación de la configuración.
         """
         return (
             f"Host: {self.host}\n"

@@ -5,12 +5,34 @@ from bs4 import BeautifulSoup
 from typing import Dict, Any
 
 class RegionManager:
+    """
+    Clase para gestionar la extracción y procesamiento de datos de regiones desde Transfermarkt.
+    Permite crear regiones, extraer países, ligas y calcular estadísticas agregadas.
+    """
     def __init__(self, http_client, league_manager, team_manager):
+        """
+        Inicializa el RegionManager con los gestores necesarios.
+
+        Args:
+            http_client: Cliente HTTP para las peticiones web.
+            league_manager: Gestor de ligas.
+            team_manager: Gestor de equipos.
+        """
         self.http_client = http_client
         self.league_manager = league_manager
         self.team_manager = team_manager
 
     def create_region(self, region_key: str, region_data: Dict[str, Any]) -> Region:
+        """
+        Crea una instancia de Region con los datos básicos y estadísticas inicializadas en cero.
+
+        Args:
+            region_key (str): ID de la región.
+            region_data (dict): Diccionario con los datos de la región.
+
+        Return:
+            Region: Instancia de la región creada.
+        """
         logging.info(f"Creando región: {region_key}")
 
         region_stats = RegionStats(
@@ -34,6 +56,14 @@ class RegionManager:
         )
 
     def process_region(self, region: Region, region_data: Dict[str, Any]) -> None:
+        """
+        Procesa una región extrayendo países, ligas y calculando estadísticas agregadas.
+
+        Args:
+            region (Region): Instancia de la región a procesar.
+            region_data (dict): Diccionario con los datos de la región.
+        """
+
         for page_number, url in enumerate(region_data["url_region"], start=1):
             response = self.http_client.make_request(url)
 

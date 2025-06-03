@@ -6,6 +6,9 @@ import logging
 
 @dataclass
 class PlayerStats:
+    """
+    Representa las estadísticas individuales de un jugador.
+    """
     birth_date: str
     player_age: int
     player_height: float
@@ -15,21 +18,39 @@ class PlayerStats:
     market_value: float
 
     def to_dict(self) -> Dict:
+        """
+        Convierte el objeto PlayerStats a un diccionario.
+
+        Return:
+            dict: Representación en diccionario de las estadísticas del jugador.
+        """
         return asdict(self)
 
 
 @dataclass
 class PlayerImgInfo:
+    """
+    Contiene información de la imagen de un jugador.
+    """
     fk_player: str
     id_img: str
     img_player: str
 
     def to_dict(self) -> Dict:
+        """
+        Convierte el objeto PlayerImgInfo a un diccionario.
+
+        Return:
+            dict: Representación en diccionario de la información de imagen.
+        """
         return asdict(self)
 
 
 @dataclass
 class Player:
+    """
+    Representa un jugador, incluyendo sus datos, imagen y estadísticas.
+    """
     fk_region: str
     fk_league: str
     id_player: str
@@ -45,6 +66,12 @@ class Player:
 
 
     def add_player_img_info(self, img_info: Dict[str, str]) -> None:
+        """
+        Añade información de imagen al jugador.
+
+        Args:
+            img_info (dict): Diccionario con información de imagen.
+        """
         if not img_info:
             logging.warning(f"No se proporcionó información de imagen para el jugador {self.player_name}.")
             return
@@ -57,6 +84,12 @@ class Player:
 
 
     def to_dict(self) -> Dict:
+        """
+        Convierte el objeto Player a un diccionario.
+
+        Return:
+            dict: Representación en diccionario del jugador.
+        """
         return {
             "fk_region": self.fk_region,
             "fk_league": self.fk_league,
@@ -77,6 +110,9 @@ class Player:
 
 @dataclass
 class TeamStats:
+    """
+    Estadísticas agregadas de un equipo.
+    """
     fk_team: str
     fk_league: str
     fk_region: str
@@ -89,11 +125,20 @@ class TeamStats:
 
 
     def to_dict(self) -> Dict:
+        """
+        Convierte el objeto TeamStats a un diccionario.
+
+        Return:
+            dict: Representación en diccionario de las estadísticas del equipo.
+        """
         return asdict(self)
 
 
 @dataclass
 class Team:
+    """
+    Representa un equipo, incluyendo sus estadísticas y jugadores.
+    """
     id_team: str
     fk_region: str
     fk_league: str
@@ -104,11 +149,20 @@ class Team:
     players: Dict[str, Player] = field(default_factory=dict)
 
     def __post_init__(self):
+        """
+        Inicializa los jugadores del equipo a partir de diccionarios si es necesario.
+        """
         for player_id, player in self.players.items():
             if isinstance(player, dict):
                 self.players[player_id] = Player(**player)
 
     def to_dict(self) -> Dict:
+        """
+        Convierte el objeto Team a un diccionario.
+
+        Return:
+            dict: Representación en diccionario del equipo.
+        """
         return {
             "id_team": self.id_team,
             "fk_region": self.fk_region,
@@ -123,12 +177,21 @@ class Team:
         }
 
     def add_player(self, player: Player) -> None:
+        """
+        Añade un jugador al equipo y le asigna la temporada actual.
+
+        Args:
+            player (Player): Jugador a añadir.
+        """
         player.season = self.season
         self.players[player.id_player] = player
 
 
 @dataclass
 class LeagueStats:
+    """
+    Estadísticas agregadas de una liga.
+    """
     fk_league: str
     fk_region: str
     season: int
@@ -142,11 +205,20 @@ class LeagueStats:
     total_value: float
 
     def to_dict(self) -> Dict:
+        """
+        Convierte el objeto LeagueStats a un diccionario.
+
+        Return:
+            dict: Representación en diccionario de las estadísticas de la liga.
+        """
         return asdict(self)
 
 
 @dataclass
 class League:
+    """
+    Representa una liga, incluyendo sus equipos, estadísticas y temporadas.
+    """
     id_league: str
     competition: str
     season: int
@@ -158,6 +230,9 @@ class League:
     seasons: Dict[str, Dict] = field(default_factory=dict)
 
     def __post_init__(self):
+        """
+        Inicializa los equipos y estadísticas de la liga a partir de diccionarios si es necesario.
+        """
         if isinstance(self.stats, dict):
             self.stats = LeagueStats(**self.stats)
 
@@ -166,6 +241,12 @@ class League:
                 self.teams[id_team] = Team(**team)
 
     def to_dict(self) -> Dict:
+        """
+        Convierte el objeto League a un diccionario, incluyendo temporadas y equipos.
+
+        Return:
+            dict: Representación en diccionario de la liga.
+        """
         seasons_dict = {
             season_key: {
                 "teams": {
@@ -190,12 +271,25 @@ class League:
         }
 
     def add_country(self, region_countries: Dict[str, "Country"]) -> None:
+        """
+        Asigna el id de país a la liga si coincide el nombre.
+
+        Args:
+            region_countries (dict): Diccionario de países de la región.
+        """
         for country_id, country in region_countries.items():
             if country.country_name.strip().lower() == self.country.strip().lower():
                 self.fk_country = country_id
                 break
 
     def add_team_to_season(self, season_key: str, team: Team) -> None:
+        """
+        Añade un equipo a una temporada específica de la liga.
+
+        Args:
+            season_key (str): Clave de la temporada.
+            team (Team): Equipo a añadir.
+        """
         if season_key not in self.seasons:
             self.seasons[season_key] = {"teams": {}}
 
@@ -207,6 +301,9 @@ class League:
 
 @dataclass
 class RegionStats:
+    """
+    Estadísticas agregadas de una región.
+    """
     fk_region: str
     avg_age: float
     avg_height: float
@@ -216,23 +313,43 @@ class RegionStats:
     total_value: float
 
     def to_dict(self) -> Dict:
+        """
+        Convierte el objeto RegionStats a un diccionario.
+
+        Return:
+            dict: Representación en diccionario de las estadísticas de la región.
+        """
         return asdict(self)
+
 
 @dataclass
 class Country:
+    """
+    Representa un país con su información básica.
+    """
     id_country: str
     country_name: str
     country_flag: str
 
     def to_dict(self) -> Dict:
+        """
+        Convierte el objeto Country a un diccionario.
+
+        Return:
+            dict: Representación en diccionario del país.
+        """
         return {
             "id_country": self.id_country,
             "country_name": self.country_name,
             "country_flag": self.country_flag
         }
 
+
 @dataclass
 class Region:
+    """
+    Representa una región, incluyendo países, ligas y estadísticas.
+    """
     id_region: str
     region_name: str
     url_region: str
@@ -241,6 +358,9 @@ class Region:
     leagues: Dict[str, Dict[str, League]] = field(default_factory=dict)
 
     def __post_init__(self):
+        """
+        Inicializa países, estadísticas y ligas a partir de diccionarios si es necesario.
+        """
         if not isinstance(self.stats, RegionStats):
             if isinstance(self.stats, dict):
                 self.stats = RegionStats(**self.stats)
@@ -255,6 +375,12 @@ class Region:
                     self.leagues[tier][league_id] = League(**league)
 
     def to_dict(self) -> Dict:
+        """
+        Convierte el objeto Region a un diccionario, incluyendo países y ligas.
+
+        Return:
+            dict: Representación en diccionario de la región.
+        """
         region_dict = {
             "id_region":self.id_region,
             "region_name": self.region_name,
@@ -262,11 +388,13 @@ class Region:
             "countries": {
                 country_id: country.to_dict() for country_id, country in self.countries.items()
             },
+
             "stats": self.stats.to_dict() if isinstance(self.stats, RegionStats) else self.stats,
             "leagues": {
                 tier: {
                     league_id: league.to_dict() for league_id, league in leagues.items()
                 }
+
                 for tier, leagues in self.leagues.items()
             }
         }
@@ -274,6 +402,12 @@ class Region:
         return region_dict
 
     def add_country(self, country: Country) -> None:
+        """
+        Añade un país a la región si no existe previamente.
+
+        Args:
+            country (Country): País a añadir.
+        """
         if not isinstance(country, Country):
             raise TypeError(f"Se esperaba una instancia de Country, pero se recibió {type(country)}")
 
@@ -284,6 +418,13 @@ class Region:
         self.countries[country.id_country] = country
 
     def add_league(self, tier: str, league: League) -> None:
+        """
+        Añade una liga a un tier específico de la región.
+
+        Args:
+            tier (str): Nivel o división.
+            league (League): Liga a añadir.
+        """
         if tier not in self.leagues:
             self.leagues[tier] = {}
 
@@ -299,11 +440,20 @@ class TransferMarket:
     regions:  Dict[str, Region] = field(default_factory=dict)
 
     def __post_init__(self):
+        """
+        Inicializa las regiones a partir de diccionarios si es necesario.
+        """
         for region_id, region in self.regions.items():
             if isinstance(region, dict):
                 self.regions[region_id] = Region(**region)
 
     def to_dict(self) -> Dict:
+        """
+        Convierte el objeto TransferMarket a un diccionario.
+
+        Return:
+            dict: Representación en diccionario de todas las regiones.
+        """
         return {
             "regions": {
                 rkey: r.to_dict() for rkey, r in self.regions.items()
@@ -311,6 +461,12 @@ class TransferMarket:
         }
 
     def add_region(self, region: Region) -> None:
+        """
+        Añade una región al objeto TransferMarket.
+
+        Args:
+            region (Region): Región a añadir.
+        """
         if not isinstance(region, Region):
             raise TypeError(f"Se esperaba una instancia de Region, pero se recibió {type(region)}")
 

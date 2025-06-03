@@ -11,6 +11,10 @@ from pprint import pprint
 
 
 class PlayerManager:
+    """
+    Clase para gestionar la extracción y procesamiento de datos de jugadores desde Transfermarkt.
+    Permite obtener información de jugadores y extraer valores de celdas.
+    """
     base_url = "https://www.transfermarkt.com"
 
     base_config = {
@@ -20,6 +24,13 @@ class PlayerManager:
     }
 
     def __init__(self, scraping_engine: ScrapingEngine):
+        """
+        Inicializa el PlayerManager con el motor de scraping.
+
+        Args:
+            scraping_engine (ScrapingEngine): Motor de scraping.
+        """
+
         self.scraping_engine = scraping_engine
 
         self.player_field_config = {
@@ -149,7 +160,22 @@ class PlayerManager:
             offset: int = 0,
             default=None,
             transform=lambda x: x
-    ):
+        ):
+        """
+        Extrae y transforma el valor de una celda de la tabla según la configuración.
+
+        Args:
+            headers (dict): Diccionario de encabezados de la tabla.
+            col (list): Lista de celdas de la fila.
+            key (str): Clave del encabezado.
+            offset (int): Desplazamiento para la columna.
+            default: Valor por defecto si falla la extracción.
+            transform (callable): Función de transformación para el valor.
+
+        Return:
+            Valor extraído y transformado, o el valor por defecto.
+        """
+
         try:
             index = headers[key] + offset if headers.get(key) is not None else None
             cell = col[index] if index is not None and index < len(col) else None
@@ -169,6 +195,19 @@ class PlayerManager:
             team: Team,
 
     ) -> List[Player]:
+        """
+        Extrae los datos de los jugadores de una tabla HTML y devuelve una lista de objetos Player.
+
+        Args:
+            table (BeautifulSoup): Tabla HTML con los datos de los jugadores.
+            min_columns (int): Número mínimo de columnas requeridas por fila.
+            fk_region (str): ID de la región.
+            fk_league (str): ID de la liga.
+            team (Team): Equipo al que pertenecen los jugadores.
+
+        Return:
+            List[Player]: Lista de objetos Player extraídos de la tabla.
+        """
 
         player_img_info_dict = self.scraping_engine.get_player_img_info(table)
 

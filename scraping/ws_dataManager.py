@@ -12,11 +12,25 @@ class DataManager:
     Permite generar un JSON con la estructura completa de datos.
     """
     def __init__(self, http_client):
+        """
+        Inicializa el DataManager con un cliente HTTP y el motor de scraping.
+
+        Args:
+            http_client: Cliente HTTP para las peticiones web.
+        """
         self.transfer_market = TransferMarket()
         self.scraping_engine = ScrapingEngine(http_client)
 
 
     def add_region(self, region: Region) -> None:
+        """
+        Añade una región al objeto TransferMarket.
+
+        Args:
+            region (Region): Instancia de la clase Region a añadir.
+        """
+
+        # Validamos que la región sea una instancia de la clase Region:
         logging.debug(f"Añadiendo región: {region}, tipo: {type(region)}")
 
         if not isinstance(region, Region):
@@ -28,6 +42,12 @@ class DataManager:
 
 
     def to_dict(self) -> Dict:
+        """
+        Convierte los datos de TransferMarket a un diccionario.
+
+        Return:
+            dict: Estructura de datos en formato diccionario.
+        """
         try:
             data = self.transfer_market.to_dict()
             logging.info("Datos convertidos a diccionario correctamente.")
@@ -39,6 +59,12 @@ class DataManager:
 
 
     def to_json(self, file_name: str) -> None:
+        """
+        Guarda los datos de TransferMarket en un archivo JSON.
+
+        Args:
+            file_name (str): Nombre del archivo JSON a crear.
+        """
         try:
             # Construimos la ruta para guardar el json con la data:
             output_dir = os.path.join(os.getcwd(), "Data output")

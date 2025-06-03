@@ -10,6 +10,10 @@ from typing import List
 
 
 class TeamManager:
+    """
+    Clase para gestionar la extracción y procesamiento de datos de equipos desde Transfermarkt.
+    Permite obtener información de equipos, procesar jugadores y extraer valores de celdas.
+    """
     base_url = "https://www.transfermarkt.com"
     url_plus = "/plus/1"
 
@@ -85,12 +89,26 @@ class TeamManager:
             data_manager: DataManager,
 
         ):
+        """
+        Inicializa el TeamManager con el motor de scraping y el gestor de datos.
+
+        Args:
+            scraping_engine (ScrapingEngine): Motor de scraping.
+            data_manager (DataManager): Gestor de datos.
+        """
         self.scraping_engine = scraping_engine
         self.data_manager = data_manager
         self.player_manager = PlayerManager(scraping_engine)
 
 
     def process_team_players(self, team: Team) -> None:
+        """
+        Procesa los jugadores de un equipo, extrayendo su información y agregándolos al equipo.
+
+        Args:
+            team (Team): Instancia del equipo a procesar.
+        """
+
         response = self.scraping_engine.http_client.make_request(team.url_team)
         if not response:
             logging.error(f"No se pudo obtener el HTML del equipo: {team.url_team}")
@@ -122,7 +140,22 @@ class TeamManager:
             offset: int = 1,
             default=None,
             transform=lambda x: x
-    ):
+        ):
+        """
+        Extrae y transforma el valor de una celda de la tabla según la configuración.
+
+        Args:
+            headers (dict): Diccionario de encabezados de la tabla.
+            col (list): Lista de celdas de la fila.
+            key (str): Clave del encabezado.
+            offset (int): Desplazamiento para la columna.
+            default: Valor por defecto si falla la extracción.
+            transform (callable): Función de transformación para el valor.
+
+        Return:
+            Valor extraído y transformado, o el valor por defecto.
+        """
+
         try:
             cell = col[headers[key] + offset] if headers.get(key) is not None else None
             return transform(cell) if cell else default
@@ -139,7 +172,19 @@ class TeamManager:
             region: Region,
             league: League
 
-    ) -> List[Team]:
+        ) -> List[Team]:
+        """
+        Extrae los datos de los equipos de una tabla HTML y devuelve una lista de objetos Team.
+
+        Args:
+            table (BeautifulSoup): Tabla HTML con los datos de los equipos.
+            min_columns (int): Número mínimo de columnas requeridas por fila.
+            region (Region): Región a la que pertenece el equipo.
+            league (League): Liga a la que pertenece el equipo.
+
+        Return:
+            List[Team]: Lista de objetos Team extraídos de la tabla.
+        """
 
         headers = self.scraping_engine.get_table_headers(table)
         if not headers:

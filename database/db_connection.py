@@ -3,7 +3,7 @@ import time
 from psycopg2 import OperationalError
 from config.config import EnvironmentConfig
 from interactive.menu_engine import MenuUtils
-from database.db_engine import DBUtils
+from database.db_engine import DBManager
 
 # Nota general:
 # Esta clase centraliza la lógica de conexión y desconexión a PostgreSQL.
@@ -17,7 +17,9 @@ class DBConnection:
     def __init__(self, env):
         """
         Inicializa la conexión con los parámetros del entorno.
-        param env: Objeto EnvironmentConfig con los datos de conexión.
+
+        Args:
+            env (EnvironmentConfig): Objeto con los datos de conexión.
         """
         self.menu_utils = MenuUtils()
         self.env = env
@@ -30,15 +32,15 @@ class DBConnection:
         """
         self.menu_utils.main_menu()
         try:
-            print("Connecting with:\n")
+            print("Enter the database connection details:\n")
             print(f"Host: {self.env.host}")
             print(f"Port: {self.env.port}")
             print(f"User: {self.env.user}")
             print(f"Password: {self.env.password}")
             print(f"Database: {self.env.db}")
 
-            # Comprobar si la base de datos existe antes de conectar
-            db_utils = DBUtils()
+            # Comprobamos si la base de datos existe antes de conectar
+            db_utils = DBManager()
             if not db_utils.check_db_exists(
                 self.env.host,
                 self.env.port,
@@ -62,11 +64,15 @@ class DBConnection:
             )
 
             self.connection.autocommit = True
-            print("Connecting...")
-            time.sleep(2)
+
             self.menu_utils.main_menu()
-            print(f"Connection established successfully to database: {self.env.db}!")
-            print("\n\n")
+            print("Connecting...\n\n")
+            self.menu_utils.separator()
+
+            time.sleep(2)
+
+            self.menu_utils.main_menu()
+            print(f"Connection established successfully to database: {self.env.db}!\n\n")
             self.menu_utils.separator()
             input("Press Enter to continue...")
 
@@ -79,8 +85,10 @@ class DBConnection:
     @classmethod
     def connect_postgres(cls):
         """
-        Método de clase para crear una instancia de DBConnection y conectarse usando EnvironmentConfig.
-        return: Tupla (db_conn, env) con la conexión y la configuración de entorno.
+        Crea una instancia de DBConnection y conecta usando EnvironmentConfig.
+
+        Return:
+            tuple: (db_conn, env) con la conexión y la configuración de entorno.
         """
         env = EnvironmentConfig()
         db_conn = cls(env)

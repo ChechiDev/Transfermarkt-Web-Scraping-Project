@@ -12,6 +12,10 @@ from config.exceptions import (
 )
 
 class HTTPClient:
+    """
+    Cliente HTTP para gestionar solicitudes web con reintentos, validación y manejo de errores.
+    Permite obtener HTML y JSON de páginas web, así como asignar un gestor de URLs.
+    """
     def __init__(
             self,
             base_headers = None,
@@ -19,7 +23,15 @@ class HTTPClient:
             retries = 10,
             delay = 6
         ):
+        """
+        Inicializa el cliente HTTP con parámetros de conexión y reintentos.
 
+        Args:
+            base_headers (dict, opcional): Cabeceras base para las solicitudes.
+            timeout (int, opcional): Tiempo de espera para la conexión.
+            retries (int, opcional): Número de reintentos.
+            delay (int, opcional): Segundos entre reintentos.
+        """
         self.headers = base_headers
         self.timeout = timeout # Tiempo de espera para la conexión
         self.retries = retries # Número de reintentos
@@ -30,6 +42,9 @@ class HTTPClient:
     def set_url_manager(self, url_manager):
         """
         Asigna un gestor de URL al cliente HTTP.
+
+        Args:
+            url_manager: Instancia de URLManager.
         """
         from scraping.ws_urls import URLManager
         from scraping.ws_engine import ScrapingEngine
@@ -41,6 +56,17 @@ class HTTPClient:
 
 
     def make_request(self, url, method="GET", **kwargs):
+        """
+        Realiza una solicitud HTTP con reintentos y manejo de errores.
+
+        Args:
+            url (str): URL a la que se realiza la solicitud.
+            method (str): Método HTTP (por defecto "GET").
+            **kwargs: Argumentos adicionales para requests.
+
+        Return:
+            Response: Objeto de respuesta de requests si es exitosa.
+        """
         if not validators.url(url):
             raise ValueError(f"URL no válida: {url}")
 
@@ -64,14 +90,12 @@ class HTTPClient:
                     logging.warning(f"HTTP: {response.status_code} para {url}")
 
             except requests.Timeout:
-                # logging.warning(f"Timeout: Fallo en intento {attempt + 1}/{self.retries} para la url: {url}")
                 logging.warning(f"Timeout: Fallo en intento {attempt + 1}/{self.retries}")
 
                 if attempt == self.retries - 1:
                     raise HTTPTimeoutError(f"Error: Timeout al acceder a la URL {url} después de {self.retries} intentos.")
 
             except requests.RequestException as e:
-                # logging.warning(f"Error: Fallo en intento {attempt + 1}/{self.retries} para la url: {url}. \nDetalle: {e}")
                 logging.warning(f"Timeout: Fallo en intento {attempt + 1}/{self.retries}")
 
                 if attempt == self.retries - 1:
@@ -86,6 +110,14 @@ class HTTPClient:
     def retry_request(self, func, *args, **kwargs):
         """
         Método para realizar una solicitud HTTP con reintentos.
+
+        Args:
+            func: Función a ejecutar.
+            *args: Argumentos posicionales para la función.
+            **kwargs: Argumentos adicionales para la función.
+
+        Return:
+            Resultado de la función si es exitosa.
         """
         for attempt in range(self.retries):
             try:
@@ -101,6 +133,12 @@ class HTTPClient:
     def get_html(self, url: str, **kwargs):
         """
         Realiza una solicitud GET y devuelve el contenido HTML de la página como un objeto BeautifulSoup.
+
+        Args:
+            url (str): URL de la página a obtener.
+
+        Return:
+            BeautifulSoup | None: Objeto BeautifulSoup con el HTML o None si falla.
         """
         if not validators.url(url):
             logging.error(f"URL no válida: {url}")
@@ -121,6 +159,15 @@ class HTTPClient:
 
 
     def get_json(self, url, **kwargs):
+        """
+        Realiza una solicitud GET y devuelve la respuesta en formato JSON.
+
+        Args:
+            url (str): URL de la API o recurso JSON.
+
+        Return:
+            dict | None: Diccionario con la respuesta JSON o None si falla.
+        """
         try:
             response = self.make_request(url, **kwargs)
             return response.json()

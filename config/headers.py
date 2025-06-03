@@ -9,6 +9,13 @@ user_agents = [
 
 # Función para obtener headers dinámicos
 def get_headers():
+    """
+    Genera un diccionario de cabeceras HTTP dinámicas para realizar peticiones web,
+    seleccionando aleatoriamente un User-Agent de la lista.
+
+    Return:
+        dict: Diccionario con las cabeceras HTTP.
+    """
     return {
         "User-Agent": random.choice(user_agents),
         "Accept-Language": "es-ES,es;q=0.9,en;q=0.8",

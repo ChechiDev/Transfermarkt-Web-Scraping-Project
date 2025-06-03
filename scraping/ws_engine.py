@@ -10,19 +10,34 @@ from scraping.ws_entities import League, LeagueStats, RegionStats, TransferMarke
 from pprint import pprint
 
 def clear_terminal():
+    """
+    Limpia la terminal según el sistema operativo.
+    """
     os.system("cls" if os.name == "nt" else "clear")
 
 
 class ScrapingEngine:
+    """
+    Motor principal para realizar operaciones de scraping sobre Transfermarkt.
+    Proporciona utilidades para procesar tablas, extraer datos y limpiar HTML.
+    """
     def __init__(self, http_client: HTTPClient):
+        """
+        Inicializa el motor de scraping con un cliente HTTP.
+
+        Args:
+            http_client (HTTPClient): Cliente HTTP para realizar peticiones web.
+        """
         self.http_client = http_client
 
 
-    def get_terminal_clean(self):
-        os.system("cls" if os.name == "nt" else "clear")
-
-
     def expand_collpased_cells(self, table: BeautifulSoup):
+        """
+        Expande las celdas colapsadas de una tabla HTML, reemplazando su contenido por el expandido.
+
+        Args:
+            table (BeautifulSoup): Tabla HTML a procesar.
+        """
         try:
             for cell in table.find_all("td", {"class": "collapsed-cell"}):
                 expanded_content = cell.get("data-content")
@@ -37,6 +52,16 @@ class ScrapingEngine:
 
 
     def get_total_pages(self, url: str) -> int:
+        """
+        Obtiene el número total de páginas de una tabla paginada en Transfermarkt.
+
+        Args:
+            url (str): URL de la página a analizar.
+
+        Return:
+            int: Número total de páginas.
+        """
+
         # Realizamos la solicitud HTTP para obtener el HTML de la página:
         try:
             response = self.http_client.make_request(url)
@@ -82,6 +107,16 @@ class ScrapingEngine:
 
 
     def get_table_headers(self, table: BeautifulSoup, header_type: str = "default") -> dict:
+        """
+        Extrae los encabezados de una tabla HTML y los formatea según el tipo de tabla.
+
+        Args:
+            table (BeautifulSoup): Tabla HTML a analizar.
+            header_type (str): Tipo de encabezado para personalizar el nombre.
+
+        Return:
+            dict: Diccionario con los encabezados y su índice.
+        """
         try:
             headers = {}
 
@@ -119,6 +154,15 @@ class ScrapingEngine:
 
 
     def measure_row_lengths(self, table: BeautifulSoup) -> tuple:
+        """
+        Calcula la frecuencia de longitudes de filas en una tabla y la longitud máxima.
+
+        Args:
+            table (BeautifulSoup): Tabla HTML a analizar.
+
+        Return:
+            tuple: (dict con frecuencias, int longitud máxima)
+        """
         try:
             # Extraer las filas de la tabla
             rows = table.find("tbody").find_all("tr")
@@ -145,6 +189,15 @@ class ScrapingEngine:
 
 
     def get_country_info(self, table: BeautifulSoup) -> dict:
+        """
+        Extrae información de países (id, nombre, bandera) de una tabla HTML.
+
+        Args:
+            table (BeautifulSoup): Tabla HTML a analizar.
+
+        Return:
+            dict: Diccionario con información de países.
+        """
         try:
             country_info = {}
             rows = table.find("tbody").find_all("tr")
@@ -192,6 +245,15 @@ class ScrapingEngine:
 
 
     def get_player_img_info(self, table: BeautifulSoup) -> dict:
+        """
+        Extrae información de imágenes de jugadores de una tabla HTML.
+
+        Args:
+            table (BeautifulSoup): Tabla HTML a analizar.
+
+        Return:
+            dict: Diccionario con información de imágenes de jugadores.
+        """
         try:
             player_info = {}
             rows = table.find("tbody").find_all("tr")
@@ -229,6 +291,7 @@ class ScrapingEngine:
                 if id_cell:
                     player_url = id_cell.find("a")["href"]
                     player_id_match = re.search(r"spieler/(\d+)", player_url)
+
                     if player_id_match:
                         player_id = player_id_match.group(1)
                         player_info[player_id] = {
@@ -244,6 +307,15 @@ class ScrapingEngine:
 
 
     def get_date(self, element: Tag) -> str:
+        """
+        Extrae y formatea una fecha desde un elemento HTML.
+
+        Args:
+            element (Tag): Elemento HTML con la fecha.
+
+        Return:
+            str: Fecha en formato SQL o None.
+        """
         if element:
             text = element.get_text(strip=True)
 
@@ -258,6 +330,15 @@ class ScrapingEngine:
 
 
     def get_nationality_id(self, cell: Tag) -> str | None:
+        """
+        Extrae el ID de nacionalidad de un elemento de celda HTML.
+
+        Args:
+            cell (Tag): Celda HTML con la bandera.
+
+        Return:
+            str | None: ID de nacionalidad o None.
+        """
         if cell:
             img = cell.find("img", {"class": "flaggenrahmen"})
 
@@ -271,6 +352,15 @@ class ScrapingEngine:
 
 
     def get_team_signed_from_id(self, cell: Tag) -> str | None:
+        """
+        Extrae el ID del equipo de procedencia de un jugador desde una celda HTML.
+
+        Args:
+            cell (Tag): Celda HTML con la imagen del equipo.
+
+        Return:
+            str | None: ID del equipo o None.
+        """
         if cell:
             img = cell.find("img")
 
@@ -285,6 +375,15 @@ class ScrapingEngine:
 
 
     def get_player_height(self, cell: Tag) -> float:
+        """
+        Extrae la altura de un jugador desde una celda HTML.
+
+        Args:
+            cell (Tag): Celda HTML con la altura.
+
+        Return:
+            float: Altura del jugador en metros.
+        """
         if isinstance(cell, str):
             text = cell
         else:
@@ -298,6 +397,15 @@ class ScrapingEngine:
 
 
     def get_league_tier(self, table: BeautifulSoup) -> Dict[str, str]:
+        """
+        Extrae el nivel (tier) de cada liga de una tabla HTML.
+
+        Args:
+            table (BeautifulSoup): Tabla HTML a analizar.
+
+        Return:
+            dict: Diccionario con el nombre de la liga y su tier.
+        """
         try:
             competition_to_tier = {}
             rows = table.find("tbody").find_all("tr")
@@ -328,6 +436,15 @@ class ScrapingEngine:
 
 
     def get_seasons(self, url: str) -> list[int]:
+        """
+        Extrae la lista de temporadas disponibles desde una URL de Transfermarkt.
+
+        Args:
+            url (str): URL de la página a analizar.
+
+        Return:
+            list[int]: Lista de temporadas disponibles.
+        """
         try:
             respponse = self.http_client.make_request(url)
             if not respponse:
@@ -358,6 +475,16 @@ class ScrapingEngine:
 
     @staticmethod
     def int_validation(value, default) -> int:
+        """
+        Convierte un valor a entero, devolviendo un valor por defecto si falla.
+
+        Args:
+            value: Valor a convertir.
+            default: Valor por defecto si la conversión falla.
+
+        Return:
+            int: Valor convertido o valor por defecto.
+        """
         try:
             return int(value)
 
@@ -366,6 +493,15 @@ class ScrapingEngine:
 
     @staticmethod
     def float_validation(value: str) -> float:
+        """
+        Convierte un string a float, adaptando formatos europeos y eliminando caracteres no numéricos.
+
+        Args:
+            value (str): Valor a convertir.
+
+        Return:
+            float: Valor convertido o 0.0 si falla.
+        """
         try:
             return float(
                 value
@@ -379,6 +515,15 @@ class ScrapingEngine:
 
     @staticmethod
     def parse_currency_to_float(value: str) -> float:
+        """
+        Convierte un string de moneda de Transfermarkt a float.
+
+        Args:
+            value (str): Valor de moneda a convertir.
+
+        Return:
+            float: Valor numérico convertido.
+        """
         try:
             value = value.replace("€", "").replace(" ", "").strip().lower()
 
@@ -416,7 +561,19 @@ class ScrapingEngine:
         stat_name: str
 
     ) -> float:
-        # Validar que region_stats sea una instancia de RegionStats
+        """
+        Calcula el valor promedio de una estadística para todas las ligas de una región.
+
+        Args:
+            leagues (Dict[str, League]): Diccionario de ligas.
+            region_stats (RegionStats): Objeto de estadísticas de la región.
+            stat_name (str): Nombre de la estadística a promediar.
+
+        Return:
+            float: Valor promedio calculado.
+        """
+
+        # Validamos que region_stats sea una instancia de RegionStats
         if not isinstance(region_stats, RegionStats):
             raise TypeError(f"Se esperaba una instancia de RegionStats, pero se recibió {type(region_stats)}")
 
@@ -424,12 +581,12 @@ class ScrapingEngine:
 
         for tier, leagues_in_tier in leagues.items():
             for league_id, league in leagues_in_tier.items():
-                # Validar que league sea una instancia de League
+                # Validamos que league sea una instancia de League
                 if not isinstance(league, League):
                     logging.warning(f"La liga {league_id} no es una instancia de League. Tipo recibido: {type(league)}")
                     continue
 
-                # Validar que league.stats sea una instancia de LeagueStats
+                # Validamos que league.stats sea una instancia de LeagueStats
                 if not isinstance(league.stats, LeagueStats):
                     logging.warning(f"La liga {league_id} tiene un atributo 'stats' inválido. Tipo recibido: {type(league.stats)}")
                     continue
@@ -439,7 +596,7 @@ class ScrapingEngine:
                 if value is not None:
                     valid_values.append(value)
 
-        # Calcular el promedio
+        # Calcula el promedio
         if not valid_values:
             setattr(region_stats, stat_name, 0.0)
             return 0.0
@@ -452,6 +609,15 @@ class ScrapingEngine:
 
     @staticmethod
     def format_date_to_sql(date_str: str) -> date | None:
+        """
+        Convierte un string de fecha a formato date compatible con SQL.
+
+        Args:
+            date_str (str): Fecha en formato string.
+
+        Return:
+            date | None: Fecha en formato date o None si falla.
+        """
         try:
             # Detectamos el formato de fecha:
             date_formats = ["%b %d, %Y", "%d %b %Y", "%Y-%m-%d"]

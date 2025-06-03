@@ -1,5 +1,4 @@
 from scraping.ws_engine import clear_terminal
-# from database.db_engine import DBUtils
 
 # Nota general:
 # Este archivo contiene utilidades y validaciones para la construcción de menús interactivos en consola.
@@ -15,8 +14,10 @@ class BaseMenu:
         """
         clear_terminal()
         self.menu_utils.main_menu()
+
         for key, desc in self.menu_options.items():
             print(f"{key}. {desc}")
+
         print()
 
     def run_menu(self):
@@ -54,7 +55,13 @@ class MenuUtils:
     Utilidades para mostrar menús y formatear texto en consola.
     Permite centrar texto, mostrar separadores y menús principales.
     """
-    def __init__(self, width=60):
+    def __init__(self, width=100):
+        """
+        Inicializa la utilidad de menús con un ancho específico para formateo.
+
+        Args:
+            width (int): Ancho de la consola para centrar texto y separadores.
+        """
         self.width = width
 
     def separator(self):
@@ -66,9 +73,13 @@ class MenuUtils:
     def center_text(self, text, fill_char=" "):
         """
         Centra el texto dado en la consola.
-        param text: Texto a centrar.
-        param fill_char: Carácter de relleno.
-        return: Texto centrado.
+
+        Args:
+            text (str): Texto a centrar.
+            fill_char (str): Carácter de relleno.
+
+        Return:
+            str: Texto centrado.
         """
         return text.center(self.width, fill_char)
 
@@ -85,7 +96,10 @@ class MenuUtils:
         """
         Muestra un mensaje de opción inválida.
         """
-        print("Invalid option. Please try again.")
+        self.main_menu()
+        print("Invalid option. Please try again.\n\n\n")
+        self.separator()
+        input("Press Enter to continue...")
 
 class MenuValidation:
     """
@@ -96,17 +110,24 @@ class MenuValidation:
     def validate_host(host):
         """
         Valida que el host sea 'localhost' o una dirección IP válida.
-        param host: Host a validar.
-        return: True si es válido, False en caso contrario.
+
+        Args:
+            host (str): Host a validar.
+
+        Return:
+            bool: True si es válido, False en caso contrario.
         """
         import re
+
         if host == "localhost":
             return True
         ip_pattern = r"^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$"
+
         if re.match(ip_pattern, host):
             parts = host.split('.')
             if all(0 <= int(part) <= 255 for part in parts):
                 return True
+
         print("Host inválido. Usa 'localhost' o una dirección IP válida.")
         return False
 
@@ -114,18 +135,24 @@ class MenuValidation:
     def validate_port(port):
         """
         Valida que el puerto sea un número entero entre 1 y 65535 y tenga al menos 4 dígitos.
-        param port: Puerto a validar.
-        return: True si es válido, False en caso contrario.
+
+        Args:
+            port (str): Puerto a validar.
+
+        Return:
+            bool: True si es válido, False en caso contrario.
         """
         try:
             port_num = int(port)
             if not (1 <= port_num <= 65535):
                 print("El puerto debe estar entre 1 y 65535.")
                 return False
+
             if len(str(port)) < 4:
                 print("El puerto debe tener al menos 4 dígitos.")
                 return False
             return True
+
         except ValueError:
             print("El puerto debe ser un número entero.")
             return False
@@ -134,37 +161,68 @@ class MenuValidation:
     def validate_user(user):
         """
         Valida que el usuario no esté vacío, no contenga espacios, números ni caracteres especiales.
-        param user: Usuario a validar.
-        return: True si es válido, False en caso contrario.
+
+        Args:
+            user (str): Usuario a validar.
+
+        Return:
+            bool: True si es válido, False en caso contrario.
         """
         import re
         if not user.strip():
             print("El usuario no puede estar vacío.")
             return False
+
         if " " in user:
             print("El usuario no puede contener espacios.")
             return False
+
         if not re.match(r'^[A-Za-z]+$', user):
             print("El usuario solo puede contener letras (sin números ni caracteres especiales).")
             return False
+
         return True
 
     @staticmethod
     def validate_password(password):
         """
         Valida que la contraseña tenga al menos 8 caracteres.
-        param password: Contraseña a validar.
-        return: True si es válida, False en caso contrario.
+
+        Args:
+            password (str): Contraseña a validar.
+
+        Return:
+            bool: True si es válida, False en caso contrario.
         """
         if len(password) < 8:
             print("La contraseña debe tener al menos 8 caracteres.")
             return False
         return True
 
+def run_webscraping_menu(env, db_utils):
+    """
+    Ejecuta el menú de web scraping.
+
+    Args:
+        env: Configuración de entorno.
+        db_utils: Utilidad de base de datos.
+    """
+    from interactive.menu import WebScrapingMenu  # importo desde aquí para evitar posibles dependencias circulares
+    menu_utils = MenuUtils()
+    menu_utils.main_menu()
+    print("Loading regions from Transfermarkt, please wait...\n\n\n")
+    menu_utils.separator()
+    ws_menu = WebScrapingMenu(env, db_utils)
+    ws_menu.run_menu()
+
 def run_settings_menu(env, db_utils):
     """
     Ejecuta el menú de configuración de la base de datos.
+
+    Args:
+        env: Configuración de entorno.
+        db_utils: Utilidad de base de datos.
     """
-    from interactive.menu import SettingsMenu  # Importación local para evitar dependencias circulares
+    from interactive.menu import SettingsMenu  # importo desde aquí para evitar posibles dependencias circulares
     settings_menu = SettingsMenu(env, db_utils)
     settings_menu.run_menu()
